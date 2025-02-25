@@ -1,0 +1,196 @@
+[gd_scene load_steps=6 format=3 uid="uid://637nae12nn2l"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_fylk0"]
+[ext_resource type="Script" path="res://objects/user_interface/user_interface.gd" id="2_y7cka"]
+[ext_resource type="Script" path="res://objects/user_interface/main_panel.gd" id="3_0cofv"]
+[ext_resource type="PackedScene" uid="uid://clmr7xi56pejk" path="res://objects/user_interface/research_panel.tscn" id="4_jdleu"]
+[ext_resource type="PackedScene" uid="uid://dh04gkrx3kn7e" path="res://objects/user_interface/upgrades_panel.tscn" id="5_5jaop"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_fylk0")
+
+[node name="UserInterface" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_y7cka")
+
+[node name="MainPanel" type="Control" parent="UserInterface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_0cofv")
+
+[node name="ColorRect" type="ColorRect" parent="UserInterface/MainPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.209, 0.214867, 0.22, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="UserInterface/MainPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/MainPanel/CenterContainer"]
+layout_mode = 2
+
+[node name="WeaponPowerLabel" type="Label" parent="UserInterface/MainPanel/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="WeaponPowerButton" type="Button" parent="UserInterface/MainPanel/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "+1 weapon power"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/MainPanel"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Spacer" type="Control" parent="UserInterface/MainPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UserInterface/MainPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_right = 4
+
+[node name="SplitContainer" type="SplitContainer" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Spacer" type="Control" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="ReferenceRect" type="ReferenceRect" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/HBoxContainer/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ProgressBar" type="ProgressBar" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+fill_mode = 3
+
+[node name="ReferenceRect" type="ReferenceRect" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+border_color = Color(0, 0.866667, 1, 1)
+editor_only = false
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/HBoxContainer/ReferenceRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/HBoxContainer/ReferenceRect/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(2, 540)
+size_2d_override = Vector2i(500, 540)
+render_target_update_mode = 4
+
+[node name="ResearchPanelContainer" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/HBoxContainer/ReferenceRect/SubViewportContainer/SubViewport" instance=ExtResource("4_jdleu")]
+anchors_preset = 15
+anchor_right = 1.0
+offset_right = 0.0
+grow_horizontal = 2
+
+[node name="Spacer2" type="Control" parent="UserInterface/MainPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UserInterface/MainPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_right = 108
+
+[node name="VSplitContainer" type="VSplitContainer" parent="UserInterface/MainPanel/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Spacer" type="Control" parent="UserInterface/MainPanel/MarginContainer/VSplitContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/MainPanel/MarginContainer/VSplitContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="UserInterface/MainPanel/MarginContainer/VSplitContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="UpgradesPanelContainer" parent="UserInterface/MainPanel/MarginContainer/VSplitContainer/VBoxContainer" instance=ExtResource("5_5jaop")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="Button" type="Button" parent="UserInterface/MainPanel"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/outline_size = 4
+text = "Settings"
+
+[node name="Control2" type="Control" parent="UserInterface"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="pressed" from="UserInterface/MainPanel/CenterContainer/VBoxContainer/WeaponPowerButton" to="UserInterface/MainPanel" method="_on_button_pressed"]

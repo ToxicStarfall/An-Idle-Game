@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=7 format=3 uid="uid://wkqw0nbs2y0y"]
+
+[ext_resource type="Script" path="res://objects/items/item_cost.gd" id="1_qhc5j"]
+[ext_resource type="Script" path="res://objects/items/item_effect.gd" id="2_2bajo"]
+[ext_resource type="Script" path="res://objects/items/item_requirement.gd" id="3_l8snk"]
+[ext_resource type="Script" path="res://objects/items/upgrades/upgrade.gd" id="4_cril8"]
+
+[sub_resource type="Resource" id="Resource_446qx"]
+script = ExtResource("1_qhc5j")
+type = ""
+value = 0
+
+[sub_resource type="Resource" id="Resource_u7d1u"]
+script = ExtResource("3_l8snk")
+type = ""
+value = 0
+
+[resource]
+script = ExtResource("4_cril8")
+name = "Upgrade 1"
+description = "I am a description."
+costs = Array[ExtResource("1_qhc5j")]([SubResource("Resource_446qx")])
+requirements = Array[ExtResource("3_l8snk")]([SubResource("Resource_u7d1u")])
+effects = Array[ExtResource("2_2bajo")]([])

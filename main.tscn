@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://637nae12nn2l"]
+[gd_scene load_steps=7 format=3 uid="uid://637nae12nn2l"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_fylk0"]
 [ext_resource type="Script" path="res://objects/user_interface/user_interface.gd" id="2_y7cka"]
 [ext_resource type="Script" path="res://objects/user_interface/main_panel.gd" id="3_0cofv"]
 [ext_resource type="PackedScene" uid="uid://clmr7xi56pejk" path="res://objects/user_interface/research_panel.tscn" id="4_jdleu"]
+[ext_resource type="Script" path="res://objects/user_interface/split_container.gd" id="4_wgf88"]
 [ext_resource type="PackedScene" uid="uid://dh04gkrx3kn7e" path="res://objects/user_interface/upgrades_panel.tscn" id="5_5jaop"]
 
 [node name="Main" type="Node"]
@@ -75,65 +76,58 @@ mouse_filter = 2
 [node name="MarginContainer" type="MarginContainer" parent="UserInterface/MainPanel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/margin_left = 4
 theme_override_constants/margin_right = 4
 
-[node name="SplitContainer" type="SplitContainer" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer"]
+[node name="SplitContainer" type="SplitContainer" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer" node_paths=PackedStringArray("PanelContainerNode")]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
+split_offset = 540
+script = ExtResource("4_wgf88")
+PanelContainerNode = NodePath("Control/HBoxContainer/ResearchPanelContainer")
 
 [node name="Spacer" type="Control" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Control" type="Control" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/HBoxContainer"]
-visible = false
-layout_mode = 2
-
-[node name="ReferenceRect" type="ReferenceRect" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/HBoxContainer/Control"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="ProgressBar" type="ProgressBar" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/HBoxContainer"]
+[node name="Control" type="Control" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer"]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 1
-fill_mode = 3
-
-[node name="ReferenceRect" type="ReferenceRect" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/HBoxContainer"]
-layout_mode = 2
 size_flags_horizontal = 3
-border_color = Color(0, 0.866667, 1, 1)
-editor_only = false
+mouse_filter = 2
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/HBoxContainer/ReferenceRect"]
+[node name="ReferenceRect" type="ReferenceRect" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-stretch = true
+mouse_filter = 2
+editor_only = false
 
-[node name="SubViewport" type="SubViewport" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/HBoxContainer/ReferenceRect/SubViewportContainer"]
-handle_input_locally = false
-size = Vector2i(2, 540)
-size_2d_override = Vector2i(500, 540)
-render_target_update_mode = 4
-
-[node name="ResearchPanelContainer" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/HBoxContainer/ReferenceRect/SubViewportContainer/SubViewport" instance=ExtResource("4_jdleu")]
-anchors_preset = 15
+[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/Control"]
+layout_mode = 1
+anchors_preset = -1
 anchor_right = 1.0
-offset_right = 0.0
-grow_horizontal = 2
+anchor_bottom = 1.0
+grow_horizontal = 0
+size_flags_vertical = 3
+
+[node name="ProgressBar" type="ProgressBar" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+fill_mode = 3
+
+[node name="ResearchPanelContainer" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/Control/HBoxContainer" node_paths=PackedStringArray("toggled_content") instance=ExtResource("4_jdleu")]
+visible = false
+layout_mode = 2
+toggled_content = [NodePath(".")]
 
 [node name="Spacer2" type="Control" parent="UserInterface/MainPanel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
@@ -187,10 +181,5 @@ grow_vertical = 0
 theme_override_constants/outline_size = 4
 text = "Settings"
 
-[node name="Control2" type="Control" parent="UserInterface"]
-visible = false
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
 [connection signal="pressed" from="UserInterface/MainPanel/CenterContainer/VBoxContainer/WeaponPowerButton" to="UserInterface/MainPanel" method="_on_button_pressed"]
+[connection signal="gui_input" from="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/Control/HBoxContainer/ProgressBar" to="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/Control/HBoxContainer/ResearchPanelContainer" method="_on_progress_bar_gui_input"]

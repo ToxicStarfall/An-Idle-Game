@@ -1,0 +1,37 @@
+extends PanelContainer
+
+
+@export var toggled_content: Array[Control] = []
+var state: bool = false# : set = _toggle_state
+
+
+
+func _ready() -> void:
+	_toggle_state(false)
+	pass
+
+func _process(delta: float) -> void:
+	pass
+
+
+
+# Hides & shows certain control nodes when set to true/false
+func _toggle_state(value):
+	if value == true:
+		for i in toggled_content:
+			i.show()
+			get_parent().get_parent().custom_minimum_size.x = 380
+
+	if value == false:
+		for i in toggled_content:
+			i.hide()
+			get_parent().get_parent().custom_minimum_size.x = 40
+			get_parent().get_parent().get_parent().split_offset = 540
+
+
+func _on_progress_bar_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed == true:
+			state = bool((int(state)- 1) * -1)
+			_toggle_state(state)
+			pass

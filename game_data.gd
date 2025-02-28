@@ -8,7 +8,7 @@ var sessionPlaytime: int = 0
 var longestSessionPlaytime: int = 0
 var totalPlaytime: int = 0
 
-
+#region - - Resources - - -
 var weapons: int = 0  # number of weapons produced
 var weaponPower: float = 0
 var weaponsPC: float = 0 : get = _update_weaponsPC
@@ -22,14 +22,19 @@ var baseResearchPC: int = 0
 var researchPS: float = 0 #: set = _set_weaponsPC
 var baseResearchPS: int = 0
 
+#var currentResearchProject = null
+#var currentResearchProgress = 0
+#endregion
 
+#region - - Items - - -
 var upgrades = {
 	"item": "owned",
 }
-
+#endregion
 
 func _ready() -> void:
 	pass
+
 
 
 #region - - SETTERS & GETTERS - - -

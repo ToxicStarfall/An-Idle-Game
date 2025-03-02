@@ -84,6 +84,7 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 split_offset = 540
+dragger_visibility = 1
 script = ExtResource("4_wgf88")
 PanelContainerNode = NodePath("Control/HBoxContainer/ResearchPanelContainer")
 
@@ -117,7 +118,8 @@ anchor_bottom = 1.0
 grow_horizontal = 0
 size_flags_vertical = 3
 
-[node name="ProgressBar" type="ProgressBar" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/Control/HBoxContainer"]
+[node name="ResearchProgress" type="ProgressBar" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/Control/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -182,4 +184,4 @@ theme_override_constants/outline_size = 4
 text = "Settings"
 
 [connection signal="pressed" from="UserInterface/MainPanel/CenterContainer/VBoxContainer/WeaponPowerButton" to="UserInterface/MainPanel" method="_on_button_pressed"]
-[connection signal="gui_input" from="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/Control/HBoxContainer/ProgressBar" to="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/Control/HBoxContainer/ResearchPanelContainer" method="_on_progress_bar_gui_input"]
+[connection signal="gui_input" from="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/Control/HBoxContainer/ResearchProgress" to="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/Control/HBoxContainer/ResearchPanelContainer" method="_on_progress_bar_gui_input"]

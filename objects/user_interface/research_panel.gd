@@ -21,12 +21,14 @@ func _toggle_state(value):
 		for i in toggled_content:
 			i.show()
 			get_parent().get_parent().custom_minimum_size.x = 380
+			get_parent().get_parent().get_parent().dragger_visibility = SplitContainer.DRAGGER_VISIBLE
 
 	if value == false:
 		for i in toggled_content:
 			i.hide()
 			get_parent().get_parent().custom_minimum_size.x = 40
 			get_parent().get_parent().get_parent().split_offset = 540
+			get_parent().get_parent().get_parent().dragger_visibility = SplitContainer.DRAGGER_HIDDEN
 
 
 func _on_progress_bar_gui_input(event: InputEvent) -> void:

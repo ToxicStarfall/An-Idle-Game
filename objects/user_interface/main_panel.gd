@@ -10,6 +10,7 @@ func _ready() -> void:
 
 func _update_counter():
 	%WeaponPowerLabel.text = "%s weapon power" % [GameData.weaponPower]
+	#%ResearchProgress.value = # update research progress value
 	pass
 
 

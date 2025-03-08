@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://637nae12nn2l"]
+[gd_scene load_steps=8 format=3 uid="uid://637nae12nn2l"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_fylk0"]
 [ext_resource type="Script" path="res://objects/user_interface/user_interface.gd" id="2_y7cka"]
-[ext_resource type="Script" path="res://objects/user_interface/main_panel.gd" id="3_0cofv"]
-[ext_resource type="PackedScene" uid="uid://clmr7xi56pejk" path="res://objects/user_interface/research_panel.tscn" id="4_jdleu"]
+[ext_resource type="Script" path="res://objects/user_interface/panels/main_panel.gd" id="3_0cofv"]
+[ext_resource type="PackedScene" uid="uid://clmr7xi56pejk" path="res://objects/user_interface/panels/research_panel.tscn" id="4_jdleu"]
 [ext_resource type="Script" path="res://objects/user_interface/split_container.gd" id="4_wgf88"]
-[ext_resource type="PackedScene" uid="uid://dh04gkrx3kn7e" path="res://objects/user_interface/upgrades_panel.tscn" id="5_5jaop"]
+[ext_resource type="PackedScene" uid="uid://dh04gkrx3kn7e" path="res://objects/user_interface/panels/upgrades_panel.tscn" id="5_5jaop"]
+[ext_resource type="Script" path="res://objects/user_interface/panels/upgrades_panel.gd" id="7_ixnyr"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_fylk0")
@@ -127,6 +128,7 @@ size_flags_vertical = 1
 fill_mode = 3
 
 [node name="ResearchPanelContainer" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/Control/HBoxContainer" node_paths=PackedStringArray("toggled_content") instance=ExtResource("4_jdleu")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 toggled_content = [NodePath(".")]
@@ -167,6 +169,7 @@ layout_mode = 2
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
+script = ExtResource("7_ixnyr")
 
 [node name="Button" type="Button" parent="UserInterface/MainPanel"]
 custom_minimum_size = Vector2(100, 100)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://clmr7xi56pejk"]
 
-[ext_resource type="Script" path="res://objects/user_interface/research_panel.gd" id="1_st1l2"]
+[ext_resource type="Script" path="res://objects/user_interface/panels/research_panel.gd" id="1_st1l2"]
 
 [node name="ResearchPanelContainer" type="PanelContainer" node_paths=PackedStringArray("toggled_content")]
 anchors_preset = 9

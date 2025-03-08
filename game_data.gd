@@ -28,7 +28,7 @@ var baseResearchPS: int = 0
 
 #region - - Items - - -
 var upgrades = {
-	"item": "owned",
+	#"item": "owned",
 }
 #endregion
 

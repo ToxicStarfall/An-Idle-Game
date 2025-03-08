@@ -22,3 +22,4 @@ description = "I am a description."
 costs = Array[ExtResource("1_qhc5j")]([SubResource("Resource_446qx")])
 requirements = Array[ExtResource("3_l8snk")]([SubResource("Resource_u7d1u")])
 effects = Array[ExtResource("2_2bajo")]([])
+owned = false

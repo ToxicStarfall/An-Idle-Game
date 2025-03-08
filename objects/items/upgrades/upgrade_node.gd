@@ -1,11 +1,14 @@
-extends Node
+extends ItemNode
+class_name UpgradeNode
 
 
-# Called when the node enters the scene tree for the first time.
+var upgrade_resource: Upgrade
+
+
+
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

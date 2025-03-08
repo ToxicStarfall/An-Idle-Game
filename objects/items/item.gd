@@ -6,24 +6,12 @@ class_name Item
 @export_placeholder("Item Name") var name: String = ""
 @export_multiline var description: String = "I am a description."
 
-
-@export var costs: Array[ItemCost] = [] :
-	get():
-		return check_validity()
+@export var costs: Array[ItemCost] = [] #:
+	#get():
+		#return check_validity()
 @export var requirements: Array[ItemRequirement] = []
 @export var effects: Array[ItemEffect] = []
-
-
-# Autofills the cost and requiremnets arrays with their respective sub-resource
-#  UNUSED
-func _init() -> void:
-	if Engine.is_editor_hint():
-		if costs.is_empty():
-			costs.append( ItemCost.new() )
-		if requirements.is_empty():
-			requirements.append( ItemRequirement.new() )
-		pass
-
+@export var owned = false
 
 
 func check_validity():

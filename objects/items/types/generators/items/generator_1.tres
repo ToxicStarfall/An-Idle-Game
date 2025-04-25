@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Generator" load_steps=5 format=3 uid="uid://rhvwbks77u3g"]
+
+[ext_resource type="Script" uid="uid://ch31xejfebo7f" path="res://objects/items/components/requirements/cost_currency.gd" id="1_7rwve"]
+[ext_resource type="Script" uid="uid://cqjg2ef8x7ix7" path="res://objects/items/components/item_effect.gd" id="2_6i28f"]
+[ext_resource type="Script" uid="uid://caj5o56x4i7td" path="res://objects/items/components/requirements/requirement.gd" id="3_m677j"]
+[ext_resource type="Script" uid="uid://r4isqaddmp4v" path="res://objects/items/types/generators/generator.gd" id="4_ey1p2"]
+
+[resource]
+script = ExtResource("4_ey1p2")
+burst_mode = false
+generate_currencies = []
+generate_time = 1.0
+disabled = false
+name = ""
+description = "I am a description."
+costs = Array[ExtResource("1_7rwve")]([])
+requirements = Array[ExtResource("3_m677j")]([])
+effects = Array[ExtResource("2_6i28f")]([])
+owned = false
+unlocked = false
+tags = []
+metadata/_custom_type_script = "uid://r4isqaddmp4v"

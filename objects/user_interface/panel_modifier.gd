@@ -1,35 +1,63 @@
-extends Node
+extends PanelContainer
+class_name PanelModifier
 
 
+@export var ToggleButton: Control
 @export var toggled_content: Array[Control] = []
+
+@export_group("control_parent")
+@export var ControlParent: Control
+@export var control_min_size_shown: Vector2
+@export var control_min_size_hidden: Vector2
+
+@export_group("split_container")
 @export var SplitContainerNode: SplitContainer
-var state: bool = false# : set = _toggle_state
+@export var split_offset = 0
 
 
-func _ready() -> void:
-	_toggle_state(false)
+var collapse_state: bool = false
+var state_locked: bool
+
+var _size: float
+
+
+@onready var on_ready = _on_ready()
+
+func _on_ready():
+	ToggleButton.gui_input.connect( _on_toggle_button_gui_input )
+	toggle_state(false)
+	print(ToggleButton)
+	pass
+
+
+func _ready():
+	#ToggleButton.gui_input.connect( _on_toggle_button_gui_input )
+	#toggle_state(false)
+	#print(ToggleButton)
 	pass
 
 
 # Hides & shows certain control nodes when set to true/false
-func _toggle_state(value):
+func toggle_state(value):
 	if value == true:
 		for i in toggled_content:
 			i.show()
-			get_parent().get_parent().custom_minimum_size.x = 380
-			get_parent().get_parent().get_parent().dragger_visibility = SplitContainer.DRAGGER_VISIBLE
+			ControlParent.custom_minimum_size = control_min_size_shown
+			SplitContainerNode.dragging_enabled = true
 
 	if value == false:
 		for i in toggled_content:
 			i.hide()
-			get_parent().get_parent().custom_minimum_size.x = 40
-			get_parent().get_parent().get_parent().split_offset = 540
-			get_parent().get_parent().get_parent().dragger_visibility = SplitContainer.DRAGGER_HIDDEN
+			ControlParent.custom_minimum_size = control_min_size_hidden
+			SplitContainerNode.split_offset = split_offset
+			SplitContainerNode.dragging_enabled = false
 
 
-func _on_progress_bar_gui_input(event: InputEvent) -> void:
+func _on_toggle_button_gui_input(event: InputEvent) -> void:
+	#print("button hovered")
 	if event is InputEventMouseButton:
+		#print("button toggled")
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed == true:
-			state = bool((int(state)- 1) * -1)
-			_toggle_state(state)
+			collapse_state = bool((int(collapse_state)- 1) * -1)
+			toggle_state(collapse_state)
 			pass

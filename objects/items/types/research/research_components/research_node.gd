@@ -1,0 +1,2 @@
+extends ItemNode
+class_name ResearchNode

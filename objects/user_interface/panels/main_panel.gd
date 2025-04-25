@@ -9,7 +9,7 @@ func _ready() -> void:
 
 
 func _update_counter():
-	%WeaponPowerLabel.text = "%s weapon power" % [GameData.weaponPower]
+	%WeaponPowerLabel.text = "%s weapon power" % [Game.find_property("weaponPower")]#[GameData.weaponPower]
 	#%ResearchProgress.value = # update research progress value
 	pass
 
@@ -19,6 +19,8 @@ func _update_labels():
 
 
 func _on_button_pressed() -> void:
-	Game.add_resource( "weaponPower", GameData.weaponsPC )
-	#print(GameData.weaponPower)
+	Game.add_resource( "weaponPower", Game.find_property("weaponsPC"))
+
+	#print("baseWeaponPC: ", Game.find_property("baseWeaponsPC") )
+	#print(Game.game_data.weaponPower)
 	pass

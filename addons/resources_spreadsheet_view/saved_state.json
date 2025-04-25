@@ -2,50 +2,74 @@
   "column_properties": {
     "": {
       "resource_local_to_scene": {
-        "visibility": 0
+        "visibility": 0.0
       },
       "resource_name": {
-        "visibility": 0
+        "visibility": 0.0
       }
     },
     "res://objects/": {
       "resource_local_to_scene": {
-        "visibility": 0
+        "visibility": 0.0
       },
       "resource_name": {
-        "visibility": 0
+        "visibility": 0.0
+      }
+    },
+    "res://objects/items/types/": {
+      "burst_mode": {
+        "visibility": 0.0
+      },
+      "disabled": {
+        "visibility": 0.0
+      },
+      "generate_currencies": {
+        "visibility": 0.0
+      },
+      "generate_time": {
+        "visibility": 0.0
+      },
+      "metadata/_custom_type_script": {
+        "visibility": 0.0
+      },
+      "resource_local_to_scene": {
+        "visibility": 0.0
+      },
+      "resource_name": {
+        "visibility": 0.0
       }
     },
     "res://objects/items/upgrades/": {
       "resource_local_to_scene": {
-        "visibility": 0
+        "visibility": 0.0
       },
       "resource_name": {
-        "visibility": 0
+        "visibility": 0.0
       }
     },
     "res://objects/upgrades/": {
       "cost": {
-        "visibility": 1
+        "visibility": 1.0
       },
       "resource_local_to_scene": {
-        "visibility": 0
+        "visibility": 0.0
       },
       "resource_name": {
-        "visibility": 0
+        "visibility": 0.0
       }
     },
     "res://objects/upgrades::cost/": {
       "resource_local_to_scene": {
-        "visibility": 0
+        "visibility": 0.0
       },
       "resource_name": {
-        "visibility": 0
+        "visibility": 0.0
       }
     }
   },
   "recent_paths": [
-    "res://objects/items/upgrades/"
+    "res://objects/items/upgrades/",
+    "res://objects/items/types/"
   ],
   "table_functions": {
     "filter": [

@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=11 format=3 uid="uid://wkqw0nbs2y0y"]
+
+[ext_resource type="Script" uid="uid://cqjg2ef8x7ix7" path="res://objects/items/components/item_effect.gd" id="2_nbt5b"]
+[ext_resource type="Script" uid="uid://ch31xejfebo7f" path="res://objects/items/components/requirements/cost_currency.gd" id="2_ypfyw"]
+[ext_resource type="Script" uid="uid://caj5o56x4i7td" path="res://objects/items/components/requirements/requirement.gd" id="3_xa1dg"]
+[ext_resource type="Script" uid="uid://b8fmjf1faoqkc" path="res://objects/items/types/upgrades/upgrade.gd" id="4_cril8"]
+[ext_resource type="Script" uid="uid://biidro61l5bon" path="res://objects/items/components/requirements/requirement_currency.gd" id="4_nbt5b"]
+[ext_resource type="Script" uid="uid://jrivr4k7xxyp" path="res://objects/items/components/item_tag.gd" id="6_tppyg"]
+
+[sub_resource type="Resource" id="Resource_6j5vi"]
+script = ExtResource("2_ypfyw")
+currency = "weaponPower"
+value = 2
+metadata/_custom_type_script = "uid://ch31xejfebo7f"
+
+[sub_resource type="Resource" id="Resource_jlkhb"]
+script = ExtResource("2_nbt5b")
+type = "weaponPC"
+value = 1
+modifier = "Add"
+metadata/_custom_type_script = "uid://cqjg2ef8x7ix7"
+
+[sub_resource type="Resource" id="Resource_ypfyw"]
+script = ExtResource("4_nbt5b")
+currency = "weaponPower"
+value = 1
+metadata/_custom_type_script = "uid://biidro61l5bon"
+
+[sub_resource type="Resource" id="Resource_g6c2t"]
+script = ExtResource("6_tppyg")
+taglist = Array[int]([0])
+metadata/_custom_type_script = "uid://jrivr4k7xxyp"
+
+[resource]
+script = ExtResource("4_cril8")
+disabled = false
+name = "Upgrade 1"
+description = "I am a description."
+flair = "I am descriptive flair."
+costs = Array[ExtResource("2_ypfyw")]([SubResource("Resource_6j5vi")])
+requirements = Array[ExtResource("3_xa1dg")]([SubResource("Resource_ypfyw")])
+unlockRequirements = Array[ExtResource("3_xa1dg")]([])
+effects = Array[ExtResource("2_nbt5b")]([SubResource("Resource_jlkhb")])
+state = 0
+tags = SubResource("Resource_g6c2t")

@@ -1,18 +1,16 @@
-[gd_resource type="Resource" script_class="Upgrade" load_steps=14 format=3 uid="uid://cg4olx7cpdhnd"]
+[gd_resource type="Resource" script_class="Upgrade" load_steps=11 format=3 uid="uid://cg4olx7cpdhnd"]
 
 [ext_resource type="Script" uid="uid://ch31xejfebo7f" path="res://objects/items/components/requirements/cost_currency.gd" id="1_vf4nb"]
 [ext_resource type="Script" uid="uid://cqjg2ef8x7ix7" path="res://objects/items/components/item_effect.gd" id="2_rw5ul"]
 [ext_resource type="Script" uid="uid://caj5o56x4i7td" path="res://objects/items/components/requirements/requirement.gd" id="3_vf4nb"]
-[ext_resource type="Resource" uid="uid://wkqw0nbs2y0y" path="res://objects/items/types/upgrades/upgrade_items/upgrade_1.tres" id="4_70qfl"]
-[ext_resource type="Script" uid="uid://b8fmjf1faoqkc" path="res://objects/items/types/upgrades/upgrade.gd" id="4_ccdav"]
-[ext_resource type="Script" uid="uid://qwq52mbhtqgk" path="res://objects/items/components/requirements/requirement_item.gd" id="5_vg3ow"]
+[ext_resource type="Script" uid="uid://b8fmjf1faoqkc" path="res://objects/items/types/upgrades/upgrade_components/upgrade.gd" id="4_ccdav"]
 [ext_resource type="Script" uid="uid://biidro61l5bon" path="res://objects/items/components/requirements/requirement_currency.gd" id="6_kjm0f"]
 [ext_resource type="Script" uid="uid://jrivr4k7xxyp" path="res://objects/items/components/item_tag.gd" id="7_vg3ow"]
 
 [sub_resource type="Resource" id="Resource_rlp4c"]
 script = ExtResource("1_vf4nb")
 currency = "weaponPower"
-value = 6
+value = 20
 metadata/_custom_type_script = "uid://ch31xejfebo7f"
 
 [sub_resource type="Resource" id="Resource_vf4nb"]
@@ -22,16 +20,10 @@ value = 1
 modifier = "Add"
 metadata/_custom_type_script = "uid://cqjg2ef8x7ix7"
 
-[sub_resource type="Resource" id="Resource_kjm0f"]
-script = ExtResource("5_vg3ow")
-item = ExtResource("4_70qfl")
-state = 2
-metadata/_custom_type_script = "uid://qwq52mbhtqgk"
-
 [sub_resource type="Resource" id="Resource_p8aro"]
 script = ExtResource("6_kjm0f")
-currency = "weaponPower"
-value = 4
+currency = "weaponPowerE"
+value = 5
 metadata/_custom_type_script = "uid://biidro61l5bon"
 
 [sub_resource type="Resource" id="Resource_tfphm"]
@@ -46,7 +38,7 @@ name = "Upgrade 2"
 description = "I am a description."
 flair = "I am descriptive flair."
 costs = Array[ExtResource("1_vf4nb")]([SubResource("Resource_rlp4c")])
-requirements = Array[ExtResource("3_vf4nb")]([SubResource("Resource_kjm0f"), SubResource("Resource_p8aro")])
+requirements = Array[ExtResource("3_vf4nb")]([SubResource("Resource_p8aro")])
 unlockRequirements = Array[ExtResource("3_vf4nb")]([])
 effects = Array[ExtResource("2_rw5ul")]([SubResource("Resource_vf4nb")])
 state = 0

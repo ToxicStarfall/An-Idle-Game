@@ -1,5 +1,5 @@
 extends Requirement
-class_name ItemRequirement
+class_name RequirementItem
 
 #@export var currency: Currency
 ## The target item to check.

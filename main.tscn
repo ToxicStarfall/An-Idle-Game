@@ -1,10 +1,82 @@
-[gd_scene load_steps=6 format=3 uid="uid://637nae12nn2l"]
+[gd_scene load_steps=22 format=3 uid="uid://637nae12nn2l"]
 
 [ext_resource type="Script" uid="uid://dws7sgjrhbcom" path="res://objects/user_interface/user_interface.gd" id="2_y7cka"]
 [ext_resource type="Script" uid="uid://de766355n883h" path="res://objects/user_interface/panels/main_panel.gd" id="3_0cofv"]
-[ext_resource type="PackedScene" uid="uid://clmr7xi56pejk" path="res://objects/user_interface/panels/research_panel.tscn" id="4_jdleu"]
-[ext_resource type="Script" uid="uid://xpx2qyjf7dwl" path="res://objects/user_interface/split_container.gd" id="4_wgf88"]
-[ext_resource type="PackedScene" uid="uid://dh04gkrx3kn7e" path="res://objects/user_interface/panels/upgrades_panel.tscn" id="5_5jaop"]
+[ext_resource type="PackedScene" uid="uid://bl2vpst08yjsq" path="res://objects/user_interface/panels/upgrades_panel/generators_panel.tscn" id="3_7mycd"]
+[ext_resource type="PackedScene" uid="uid://bv0tsah8evq3b" path="res://objects/user_interface/panels/upgrades_panel/upgrades_panel.tscn" id="3_lquwl"]
+[ext_resource type="PackedScene" uid="uid://clmr7xi56pejk" path="res://objects/user_interface/panels/research_panel/research_panel.tscn" id="4_jdleu"]
+[ext_resource type="Texture2D" uid="uid://d0m0hkawl82e1" path="res://textures/sample spritesheet.png" id="5_lquwl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7mycd"]
+
+[sub_resource type="Gradient" id="Gradient_7mycd"]
+colors = PackedColorArray(0.398902, 0.539336, 0.756338, 1, 0.634857, 0.419865, 0.819937, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0i7t3"]
+gradient = SubResource("Gradient_7mycd")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_272bh"]
+texture = SubResource("GradientTexture1D_0i7t3")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5vw27"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_272bh"]
+bg_color = Color(0.23, 0.23, 0.23, 1)
+border_width_left = 12
+border_width_top = 12
+border_color = Color(0.4, 0.4, 0.4, 1)
+corner_radius_top_left = 48
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
+bg_color = Color(0.2156, 0.24304, 0.49, 1)
+border_width_left = 4
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lquwl"]
+bg_color = Color(0.216, 0.3528, 0.9, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_272bh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lquwl"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7mycd"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_lquwl"]
+offsets = PackedFloat32Array(0.390244, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_lquwl"]
+_data = [Vector2(0.253219, 1), 0.0, -0.223486, 0, 0, Vector2(0.67382, 0.685393), -1.32977, -1.32977, 0, 0, Vector2(1, 0), -3.09397, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_7mycd"]
+curve = SubResource("Curve_lquwl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_272bh"]
+particle_flag_disable_z = true
+angle_min = -180.0
+angle_max = 180.0
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 400.0
+angular_velocity_min = -210.0
+angular_velocity_max = 210.0
+gravity = Vector3(0, 350, 0)
+tangential_accel_min = -100.0
+tangential_accel_max = 100.0
+damping_min = 20.0
+damping_max = 100.0
+attractor_interaction_enabled = false
+scale_min = 0.5
+scale_max = 0.5
+alpha_curve = SubResource("CurveTexture_7mycd")
+anim_offset_max = 1.0
 
 [node name="Main" type="Node"]
 
@@ -41,7 +113,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.209, 0.214867, 0.22, 1)
 
-[node name="CenterContainer" type="CenterContainer" parent="UserInterface/MainPanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/MainPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -49,144 +121,75 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/MainPanel/CenterContainer"]
+[node name="GeneratorsPanel" parent="UserInterface/MainPanel/HBoxContainer" instance=ExtResource("3_7mycd")]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="UserInterface/MainPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_7mycd")
+
+[node name="CenterContainer" type="CenterContainer" parent="UserInterface/MainPanel/HBoxContainer/PanelContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="UserInterface/MainPanel/HBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/MainPanel/HBoxContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="WeaponPowerLabel" type="Label" parent="UserInterface/MainPanel/CenterContainer/VBoxContainer"]
+[node name="ThoughtProgressBar" type="ProgressBar" parent="UserInterface/MainPanel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/fill = SubResource("StyleBoxTexture_272bh")
+show_percentage = false
+
+[node name="ThoughtButton" type="Button" parent="UserInterface/MainPanel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/ThoughtProgressBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5vw27")
+text = "Think"
+
+[node name="KnowledgeLabel" type="Label" parent="UserInterface/MainPanel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+text = "0 knowledge"
+horizontal_alignment = 1
 
-[node name="WeaponPowerButton" type="Button" parent="UserInterface/MainPanel/CenterContainer/VBoxContainer"]
+[node name="WeaponPowerLabel" type="Label" parent="UserInterface/MainPanel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "0 weapons"
+horizontal_alignment = 1
+
+[node name="WeaponPowerButton" type="Button" parent="UserInterface/MainPanel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 2
 text = "+1 weapon power"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/MainPanel"]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Spacer" type="Control" parent="UserInterface/MainPanel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="UserInterface/MainPanel/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-theme_override_constants/margin_right = 4
-
-[node name="SplitContainer" type="SplitContainer" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer" node_paths=PackedStringArray("PanelContainerNode")]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-split_offset = 540
-dragger_visibility = 1
-script = ExtResource("4_wgf88")
-PanelContainerNode = NodePath("Control/HBoxContainer/ResearchPanel")
-
-[node name="Spacer" type="Control" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 2
-
-[node name="Control" type="Control" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer"]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 2
-
-[node name="ReferenceRect" type="ReferenceRect" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/Control"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-editor_only = false
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/Control"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 0
-size_flags_vertical = 3
-
-[node name="ResearchProgress" type="ProgressBar" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/Control/HBoxContainer"]
+[node name="UpgradesPanel" parent="UserInterface/MainPanel/HBoxContainer" instance=ExtResource("3_lquwl")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 1
-mouse_default_cursor_shape = 2
-fill_mode = 3
 
-[node name="ResearchPanel" parent="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/Control/HBoxContainer" node_paths=PackedStringArray("ToggleButton", "toggled_content", "ControlParent", "SplitContainerNode") instance=ExtResource("4_jdleu")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-ToggleButton = NodePath("../ResearchProgress")
-toggled_content = [NodePath(".")]
-ControlParent = NodePath("../..")
-control_min_size_shown = Vector2(380, 0)
-control_min_size_hidden = Vector2(40, 0)
-SplitContainerNode = NodePath("../../..")
-split_offset = 540
-
-[node name="Spacer2" type="Control" parent="UserInterface/MainPanel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="UserInterface/MainPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_right = 108
-
-[node name="VSplitContainer" type="VSplitContainer" parent="UserInterface/MainPanel/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Spacer" type="Control" parent="UserInterface/MainPanel/MarginContainer/VSplitContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/MainPanel/MarginContainer/VSplitContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Button" type="Button" parent="UserInterface/MainPanel/MarginContainer/VSplitContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-mouse_default_cursor_shape = 2
-
-[node name="UpgradesPanel" parent="UserInterface/MainPanel/MarginContainer/VSplitContainer/VBoxContainer" node_paths=PackedStringArray("ToggleButton", "toggled_content", "ControlParent", "SplitContainerNode") instance=ExtResource("5_5jaop")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-ToggleButton = NodePath("../Button")
-toggled_content = [NodePath(".")]
-ControlParent = NodePath("..")
-control_min_size_shown = Vector2(0, 200)
-SplitContainerNode = NodePath("../..")
-
-[node name="Button" type="Button" parent="UserInterface/MainPanel"]
+[node name="SettingsButton" type="Button" parent="UserInterface/MainPanel"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 1
 anchors_preset = 3
@@ -198,8 +201,122 @@ offset_left = -8.0
 offset_top = -8.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_constants/outline_size = 4
+theme_override_styles/normal = SubResource("StyleBoxFlat_272bh")
 text = "Settings"
 
-[connection signal="pressed" from="UserInterface/MainPanel/CenterContainer/VBoxContainer/WeaponPowerButton" to="UserInterface/MainPanel" method="_on_button_pressed"]
-[connection signal="gui_input" from="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/Control/HBoxContainer/ResearchProgress" to="UserInterface/MainPanel/VBoxContainer/MarginContainer/SplitContainer/Control/HBoxContainer/ResearchPanel" method="_on_progress_bar_gui_input"]
+[node name="ResearchPanelWrapper" type="HBoxContainer" parent="UserInterface/MainPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HSpacer" type="Control" parent="UserInterface/MainPanel/ResearchPanelWrapper"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/MainPanel/ResearchPanelWrapper"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.6
+mouse_filter = 2
+
+[node name="VSpacer" type="Control" parent="UserInterface/MainPanel/ResearchPanelWrapper/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/MainPanel/ResearchPanelWrapper/VBoxContainer"]
+custom_minimum_size = Vector2(0, 480)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+alignment = 2
+
+[node name="ResearchPanel" parent="UserInterface/MainPanel/ResearchPanelWrapper/VBoxContainer/HBoxContainer" instance=ExtResource("4_jdleu")]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(300, 480)
+layout_mode = 2
+
+[node name="ResearchProgress" type="ProgressBar" parent="UserInterface/MainPanel/ResearchPanelWrapper/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 480)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_1bvp3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lquwl")
+fill_mode = 3
+
+[node name="Button" type="Button" parent="UserInterface/MainPanel/ResearchPanelWrapper/VBoxContainer/HBoxContainer/ResearchProgress"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/hover = SubResource("StyleBoxEmpty_272bh")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_lquwl")
+
+[node name="VSpacer2" type="Control" parent="UserInterface/MainPanel/ResearchPanelWrapper/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ConstantParticles" type="CPUParticles2D" parent="."]
+visible = false
+material = SubResource("CanvasItemMaterial_7mycd")
+position = Vector2(336, 392)
+texture = ExtResource("5_lquwl")
+lifetime = 2.5
+direction = Vector2(0, -1)
+gravity = Vector2(0, 500)
+initial_velocity_min = 100.0
+initial_velocity_max = 400.0
+angular_velocity_min = -210.0
+angular_velocity_max = 210.0
+tangential_accel_min = -100.0
+tangential_accel_max = 100.0
+damping_min = 20.0
+damping_max = 100.0
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.4
+scale_amount_max = 0.4
+color_ramp = SubResource("Gradient_lquwl")
+anim_offset_max = 1.0
+
+[node name="ConstantParticles2" type="GPUParticles2D" parent="."]
+visible = false
+material = SubResource("CanvasItemMaterial_7mycd")
+position = Vector2(336, 392)
+emitting = false
+amount = 100
+amount_ratio = 0.025
+texture = ExtResource("5_lquwl")
+lifetime = 2.5
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_272bh")
+
+[node name="ClickParticles" type="GPUParticles2D" parent="."]
+visible = false
+material = SubResource("CanvasItemMaterial_7mycd")
+position = Vector2(336, 392)
+emitting = false
+amount = 100
+amount_ratio = 0.025
+texture = ExtResource("5_lquwl")
+lifetime = 2.5
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_272bh")
+
+[connection signal="pressed" from="UserInterface/MainPanel/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/WeaponPowerButton" to="UserInterface/MainPanel" method="_on_button_pressed"]

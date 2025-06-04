@@ -1,0 +1,100 @@
+[gd_scene load_steps=4 format=3 uid="uid://clmr7xi56pejk"]
+
+[ext_resource type="Script" uid="uid://ducwcague6iqa" path="res://objects/user_interface/panels/research_panel/research_panel.gd" id="1_x6vd8"]
+[ext_resource type="PackedScene" uid="uid://tpjp1bn0frkv" path="res://objects/items/types/research/research_components/research_placeholder.tscn" id="2_r4vlp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lvyhc"]
+bg_color = Color(0.1617, 0.22341, 0.33, 1)
+border_width_top = 8
+border_color = Color(0.3234, 0.44682, 0.66, 1)
+
+[node name="ResearchPanel" type="PanelContainer"]
+custom_minimum_size = Vector2(300, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lvyhc")
+script = ExtResource("1_x6vd8")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 128
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 128
+
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/ScrollContainer/MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="TechTreeContainer" type="Control" parent="HBoxContainer/ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="ReferenceRect" type="ReferenceRect" parent="HBoxContainer/ScrollContainer/MarginContainer/TechTreeContainer"]
+layout_mode = 2
+offset_right = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="start" parent="HBoxContainer/ScrollContainer/MarginContainer/TechTreeContainer" instance=ExtResource("2_r4vlp")]
+layout_mode = 2
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="research_2" parent="HBoxContainer/ScrollContainer/MarginContainer/TechTreeContainer" instance=ExtResource("2_r4vlp")]
+layout_mode = 2
+offset_left = 104.0
+offset_top = -40.0
+offset_right = 184.0
+offset_bottom = 40.0
+
+[node name="research_3" parent="HBoxContainer/ScrollContainer/MarginContainer/TechTreeContainer" instance=ExtResource("2_r4vlp")]
+layout_mode = 2
+offset_left = 256.0
+offset_top = 120.0
+offset_right = 336.0
+offset_bottom = 200.0
+
+[node name="ReferenceRect" type="ReferenceRect" parent="HBoxContainer/ScrollContainer/MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/ScrollContainer/MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/ScrollContainer/MarginContainer/SubViewportContainer"]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Research Info"

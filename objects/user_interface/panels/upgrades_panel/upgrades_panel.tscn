@@ -1,0 +1,136 @@
+[gd_scene load_steps=10 format=3 uid="uid://bv0tsah8evq3b"]
+
+[ext_resource type="Script" uid="uid://bqxhkr6sbatew" path="res://objects/user_interface/panels/upgrades_panel/upgrades_panel.gd" id="1_cp705"]
+[ext_resource type="PackedScene" uid="uid://bl2vpst08yjsq" path="res://objects/user_interface/panels/upgrades_panel/generators_panel.tscn" id="2_lvyhc"]
+[ext_resource type="PackedScene" uid="uid://desdwvbur1ukf" path="res://objects/user_interface/panels/upgrades_panel/tooltip_panel.tscn" id="3_fmjcx"]
+[ext_resource type="PackedScene" uid="uid://b3vwaamsshdxt" path="res://objects/user_interface/panels/upgrades_panel/engineering_panel.tscn" id="4_fyah6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lquwl"]
+bg_color = Color(0.16674, 0.1566, 0.18, 1)
+border_width_left = 16
+border_color = Color(0.29, 0.203725, 0.1421, 1)
+
+[sub_resource type="Gradient" id="Gradient_lquwl"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.290196, 0.203922, 0.141176, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7mycd"]
+gradient = SubResource("Gradient_lquwl")
+width = 16
+
+[sub_resource type="Gradient" id="Gradient_272bh"]
+offsets = PackedFloat32Array(0, 0.295359, 0.400844, 0.50211, 0.708861, 1)
+colors = PackedColorArray(0.521569, 0.364706, 0, 1, 0.639216, 0.447059, 0, 1, 0.698039, 0.490196, 0, 1, 0.681892, 0.478354, 0, 1, 0.639216, 0.447059, 0, 1, 0.521569, 0.364706, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5vw27"]
+gradient = SubResource("Gradient_272bh")
+width = 4
+fill_to = Vector2(0, 1)
+
+[node name="UpgradesPanel" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lquwl")
+script = ExtResource("1_cp705")
+
+[node name="BorderLeft" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 16.0
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_7mycd")
+
+[node name="BorderLeft1" type="TextureRect" parent="BorderLeft"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 4.0
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_5vw27")
+
+[node name="BorderMargins" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BorderMargins"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BorderMargins/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BorderMargins/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="BorderMargins/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Main"
+
+[node name="Button2" type="Button" parent="BorderMargins/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Production"
+
+[node name="Button3" type="Button" parent="BorderMargins/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Database"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="BorderMargins/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="BorderMargins/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 8
+
+[node name="ScrollContainer" type="ScrollContainer" parent="BorderMargins/HBoxContainer/VBoxContainer/HBoxContainer2/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+
+[node name="ItemContainer" type="FlowContainer" parent="BorderMargins/HBoxContainer/VBoxContainer/HBoxContainer2/MarginContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+
+[node name="GeneratorsPanel" parent="BorderMargins/HBoxContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("2_lvyhc")]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(320, 350)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TooltipPanel" parent="BorderMargins/HBoxContainer/VBoxContainer" instance=ExtResource("3_fmjcx")]
+unique_name_in_owner = true
+visible = false
+z_index = 1
+layout_mode = 2
+
+[node name="EngineeringPanel" parent="BorderMargins/HBoxContainer/VBoxContainer" instance=ExtResource("4_fyah6")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HSpacer" type="Control" parent="BorderMargins/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2

@@ -4,6 +4,7 @@ class_name Requirement
 
 
 func _init() -> void:
+	_validate()
 	pass
 
 
@@ -13,5 +14,5 @@ func check():
 
 
 ## Checks if this requirement is valid ( no null info ).
-func validate():
+func _validate():
 	pass

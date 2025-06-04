@@ -1,22 +1,36 @@
-[gd_resource type="Resource" script_class="Generator" load_steps=5 format=3 uid="uid://rhvwbks77u3g"]
+[gd_resource type="Resource" script_class="Generator" load_steps=8 format=3 uid="uid://rhvwbks77u3g"]
 
 [ext_resource type="Script" uid="uid://ch31xejfebo7f" path="res://objects/items/components/requirements/cost_currency.gd" id="1_7rwve"]
 [ext_resource type="Script" uid="uid://cqjg2ef8x7ix7" path="res://objects/items/components/item_effect.gd" id="2_6i28f"]
+[ext_resource type="Script" uid="uid://biidro61l5bon" path="res://objects/items/components/requirements/requirement_currency.gd" id="3_6i28f"]
 [ext_resource type="Script" uid="uid://caj5o56x4i7td" path="res://objects/items/components/requirements/requirement.gd" id="3_m677j"]
 [ext_resource type="Script" uid="uid://r4isqaddmp4v" path="res://objects/items/types/generators/generator.gd" id="4_ey1p2"]
 
+[sub_resource type="Resource" id="Resource_6i28f"]
+script = ExtResource("2_6i28f")
+type = ""
+value = 0
+modifier = ""
+metadata/_custom_type_script = "uid://cqjg2ef8x7ix7"
+
+[sub_resource type="Resource" id="Resource_m677j"]
+script = ExtResource("3_6i28f")
+currency = ""
+value = 0
+metadata/_custom_type_script = "uid://biidro61l5bon"
+
 [resource]
 script = ExtResource("4_ey1p2")
-burst_mode = false
-generate_currencies = []
-generate_time = 1.0
+quantity = 1
+generate_currencies = [SubResource("Resource_m677j")]
+generate_time = 10.0
 disabled = false
-name = ""
+name = "Worker"
 description = "I am a description."
+flair = "I am descriptive flair."
 costs = Array[ExtResource("1_7rwve")]([])
 requirements = Array[ExtResource("3_m677j")]([])
-effects = Array[ExtResource("2_6i28f")]([])
-owned = false
-unlocked = false
-tags = []
+unlockRequirements = Array[ExtResource("3_m677j")]([])
+effects = Array[ExtResource("2_6i28f")]([SubResource("Resource_6i28f")])
+state = 0
 metadata/_custom_type_script = "uid://r4isqaddmp4v"

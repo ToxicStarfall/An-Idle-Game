@@ -3,7 +3,7 @@ class_name ItemTags
 
 
 #@export_flags("a", "b") var tags
-enum Tags { WEAPONS, WEAPONPOWER, WEAPONPOWERE, UPGRADE, RESEARCH }
+enum Tags { WEAPONS, WEAPONPOWER, WEAPONPOWERE, UPGRADE, RESEARCH, KNOWLEDGE }
 #enum { WEAPONSPOWER, WEAPONS, UPGRADE }
 enum InternalTags {}
 

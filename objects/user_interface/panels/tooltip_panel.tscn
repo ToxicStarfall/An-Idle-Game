@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://desdwvbur1ukf"]
 
-[ext_resource type="Script" uid="uid://qsiovim2f0mr" path="res://objects/user_interface/panels/upgrades_panel/tooltip_panel.gd" id="1_ii8dd"]
+[ext_resource type="Script" uid="uid://qsiovim2f0mr" path="res://objects/user_interface/panels/tooltip_panel.gd" id="1_ii8dd"]
 
 [node name="TooltipPanel" type="PanelContainer"]
 offset_right = 444.0
@@ -60,6 +60,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
 text = "Costs"
 fit_content = true
 

@@ -1,0 +1,51 @@
+[gd_resource type="Resource" script_class="Research" load_steps=13 format=3 uid="uid://by4mif4i3xhga"]
+
+[ext_resource type="Script" uid="uid://ch31xejfebo7f" path="res://objects/items/components/requirements/cost_currency.gd" id="1_u20us"]
+[ext_resource type="Script" uid="uid://cqjg2ef8x7ix7" path="res://objects/items/components/item_effect.gd" id="2_1vc3w"]
+[ext_resource type="Texture2D" uid="uid://cgu4gs0s0kk5y" path="res://icon.svg" id="3_u20us"]
+[ext_resource type="Script" uid="uid://caj5o56x4i7td" path="res://objects/items/components/requirements/requirement.gd" id="3_u26l2"]
+[ext_resource type="Script" uid="uid://qwq52mbhtqgk" path="res://objects/items/components/requirements/requirement_item.gd" id="5_frer7"]
+[ext_resource type="Resource" uid="uid://bw7jovi2amqn8" path="res://objects/items/types/research/research_items/origin.tres" id="5_u20us"]
+[ext_resource type="Script" uid="uid://cr5y4u1asoj50" path="res://objects/items/types/research/research_components/research.gd" id="7_lpnfa"]
+[ext_resource type="Script" uid="uid://jrivr4k7xxyp" path="res://objects/items/components/item_tag.gd" id="8_1vc3w"]
+
+[sub_resource type="Resource" id="Resource_hjvue"]
+script = ExtResource("1_u20us")
+currency = "knowledge"
+value = 5
+metadata/_custom_type_script = "uid://ch31xejfebo7f"
+
+[sub_resource type="Resource" id="Resource_nv8od"]
+script = ExtResource("2_1vc3w")
+type = "thoughtPowerBase"
+value = 1
+modifier = 0
+metadata/_custom_type_script = "uid://cqjg2ef8x7ix7"
+
+[sub_resource type="Resource" id="Resource_7jwoe"]
+script = ExtResource("5_frer7")
+item = ExtResource("5_u20us")
+state = 2
+metadata/_custom_type_script = "uid://qwq52mbhtqgk"
+
+[sub_resource type="Resource" id="Resource_u26l2"]
+script = ExtResource("8_1vc3w")
+taglist = Array[int]([])
+metadata/_custom_type_script = "uid://jrivr4k7xxyp"
+
+[resource]
+script = ExtResource("7_lpnfa")
+time = 0
+position_overide = Vector2(0, 0)
+disabled = false
+icon = ExtResource("3_u20us")
+name = "First Thought"
+description = "I am a description."
+flair = "I am descriptive flair."
+costs = Array[ExtResource("1_u20us")]([SubResource("Resource_hjvue")])
+requirements = Array[ExtResource("3_u26l2")]([SubResource("Resource_7jwoe")])
+unlockRequirements = Array[ExtResource("3_u26l2")]([])
+effects = Array[ExtResource("2_1vc3w")]([SubResource("Resource_nv8od")])
+state = 0
+tags = SubResource("Resource_u26l2")
+metadata/_custom_type_script = "uid://cr5y4u1asoj50"

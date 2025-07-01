@@ -1,0 +1,124 @@
+[gd_scene load_steps=8 format=3 uid="uid://cma38yo78x0do"]
+
+[ext_resource type="Script" uid="uid://byahp2tvo0j5r" path="res://objects/user_interface/panels/generator_panel/generators_panel.gd" id="1_f3sqg"]
+[ext_resource type="ButtonGroup" uid="uid://uffvlt0vlua4" path="res://objects/user_interface/panels/generator_panel/generator_actions_button_group.tres" id="2_yp335"]
+[ext_resource type="PackedScene" uid="uid://uuuw0cnt4nw2" path="res://objects/items/types/generators/components/generator_node.tscn" id="3_huyki"]
+[ext_resource type="Resource" uid="uid://rhvwbks77u3g" path="res://objects/items/types/generators/items/generator_1.tres" id="4_hyxd5"]
+[ext_resource type="Resource" uid="uid://cuvhgxghs8y5" path="res://objects/items/types/generators/items/generator_2.tres" id="5_nuacf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0odxb"]
+bg_color = Color(0.145098, 0.145098, 0.14902, 1)
+border_width_right = 4
+border_width_bottom = 6
+corner_radius_bottom_right = 40
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a6jrf"]
+draw_center = false
+border_width_bottom = 2
+
+[node name="PanelContainer" type="Panel"]
+custom_minimum_size = Vector2(400, 0)
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_0odxb")
+script = ExtResource("1_f3sqg")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HSpacer" type="Control" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_a6jrf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Generators"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="AllowSellCheckBox" type="CheckBox" parent="HBoxContainer/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Allow Sell"
+
+[node name="Purchase10Button" type="Button" parent="HBoxContainer/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("2_yp335")
+text = "x10"
+
+[node name="Purchase100Button" type="Button" parent="HBoxContainer/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+toggle_mode = true
+button_group = ExtResource("2_yp335")
+text = "x100"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Production"
+
+[node name="Label2" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Research"
+
+[node name="ItemContainer" type="FlowContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Worker" parent="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/ItemContainer" instance=ExtResource("3_huyki")]
+layout_mode = 2
+item_resource = ExtResource("4_hyxd5")
+
+[node name="GeneratorNode" parent="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/ItemContainer" instance=ExtResource("3_huyki")]
+layout_mode = 2
+item_resource = ExtResource("5_nuacf")
+
+[node name="ToggleButton" type="Button" parent="HBoxContainer/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "▲  |  ▼"

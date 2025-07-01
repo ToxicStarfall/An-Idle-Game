@@ -1,14 +1,9 @@
 extends Panel
 
 
-@onready var EngineeringPanel = %EngineeringPanel
-#@onready var GeneratorsPanel = %GeneratorsPanel
-
+#@onready var EngineeringPanel = %EngineeringPanel
 
 #var selected_node: UpgradeNode  # replace with engineering specific upgrade type item
-
-#var generator_action_multiplier: int = 1
-#var generator_allow_sell: bool = true
 
 
 func _ready() -> void:

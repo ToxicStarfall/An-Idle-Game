@@ -1,0 +1,78 @@
+[gd_scene load_steps=3 format=3 uid="uid://t5uopevp7250"]
+
+[sub_resource type="Gradient" id="Gradient_eexyo"]
+offsets = PackedFloat32Array(0, 0.3, 0.7, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6qofw"]
+gradient = SubResource("Gradient_eexyo")
+
+[node name="DatabasePanel" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+metadata/_tab_index = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "DATABASE"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = SubResource("GradientTexture1D_6qofw")
+
+[node name="HFlowContainer" type="HFlowContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="CheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/HFlowContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Select/De-select"
+
+[node name="CheckBox2" type="CheckBox" parent="MarginContainer/VBoxContainer/HFlowContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Upgrades"
+
+[node name="CheckBox3" type="CheckBox" parent="MarginContainer/VBoxContainer/HFlowContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Reserach"
+
+[node name="CheckBox4" type="CheckBox" parent="MarginContainer/VBoxContainer/HFlowContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Achievments"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="FlowContainer" type="FlowContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2

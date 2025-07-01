@@ -1,37 +1,33 @@
 extends Resource
 class_name ItemEffect
 
-#enum Modifiers { ADD, SUBTRACT }
+enum Modifier { ADD, SUBTRACT }
+
 @export var type: String
 @export var value: int
-@export_enum("Add", "Subtract") var modifier: String
+@export var modifier: Modifier = Modifier.ADD
 
 
 func _init() -> void:
 	_validate()
-	pass
 
 
-func apply():
+func apply():  # generator passes quantity on each cycle  NEED FIXING
 	_custom_effect()
 	pass
 
 
 func _custom_effect():
-	var property = Game.find_property(type)
+	#var value = self.value * multiplier
 
 	match modifier:
-		"Add":
-			property += value
-		"Subtract":
-			property -= value
-
-	Game.add_resource(type, value)
-	pass
+		Modifier.ADD:
+			Events.resource_added.emit(type, value)
+		Modifier.SUBTRACT:
+			Events.resource_removed.emit(type, value)
 
 
 func _validate():
 	if value != 0:  # if there is a specified value, then make sure "type" is a existing property.
-		if Game.find_property(type) == null:
+		if Game.get_property(type) == null:
 			push_error("[WARNING] - Cannot find property \"%s\" in GameData." % [type])
-	pass

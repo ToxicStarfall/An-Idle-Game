@@ -1,0 +1,54 @@
+[gd_resource type="Resource" script_class="Research" load_steps=14 format=3 uid="uid://d0x4450m17lck"]
+
+[ext_resource type="Script" uid="uid://ch31xejfebo7f" path="res://objects/items/components/requirements/cost_currency.gd" id="1_df4li"]
+[ext_resource type="Script" uid="uid://cqjg2ef8x7ix7" path="res://objects/items/components/item_effect.gd" id="2_subqd"]
+[ext_resource type="Script" uid="uid://8doq8qqvdxbq" path="res://objects/items/components/effects/function_unlock.gd" id="3_mkhdt"]
+[ext_resource type="Texture2D" uid="uid://cgu4gs0s0kk5y" path="res://icon.svg" id="3_thjd8"]
+[ext_resource type="Script" uid="uid://caj5o56x4i7td" path="res://objects/items/components/requirements/requirement.gd" id="4_mkhdt"]
+[ext_resource type="Script" uid="uid://cr5y4u1asoj50" path="res://objects/items/types/research/research_components/research.gd" id="5_q2p3s"]
+[ext_resource type="Resource" uid="uid://by4mif4i3xhga" path="res://objects/items/types/research/research_items/research_1.tres" id="5_thjd8"]
+[ext_resource type="Script" uid="uid://qwq52mbhtqgk" path="res://objects/items/components/requirements/requirement_item.gd" id="6_mkhdt"]
+[ext_resource type="Script" uid="uid://jrivr4k7xxyp" path="res://objects/items/components/item_tag.gd" id="9_q2p3s"]
+
+[sub_resource type="Resource" id="Resource_q2p3s"]
+script = ExtResource("1_df4li")
+currency = "knowledge"
+value = 45
+metadata/_custom_type_script = "uid://ch31xejfebo7f"
+
+[sub_resource type="Resource" id="Resource_mkhdt"]
+script = ExtResource("3_mkhdt")
+unlocked = false
+node_name = "MeditateButton"
+type = ""
+value = 0
+modifier = 0
+metadata/_custom_type_script = "uid://8doq8qqvdxbq"
+
+[sub_resource type="Resource" id="Resource_ue6fx"]
+script = ExtResource("6_mkhdt")
+item = ExtResource("5_thjd8")
+state = 2
+metadata/_custom_type_script = "uid://qwq52mbhtqgk"
+
+[sub_resource type="Resource" id="Resource_auvg0"]
+script = ExtResource("9_q2p3s")
+taglist = Array[int]([])
+metadata/_custom_type_script = "uid://jrivr4k7xxyp"
+
+[resource]
+script = ExtResource("5_q2p3s")
+time = 0
+position_overide = Vector2(0, 0)
+disabled = false
+icon = ExtResource("3_thjd8")
+name = "Meditation"
+description = "I am a description."
+flair = "I am descriptive flair."
+costs = Array[ExtResource("1_df4li")]([SubResource("Resource_q2p3s")])
+requirements = Array[ExtResource("4_mkhdt")]([SubResource("Resource_ue6fx")])
+unlockRequirements = Array[ExtResource("4_mkhdt")]([])
+effects = Array[ExtResource("2_subqd")]([SubResource("Resource_mkhdt")])
+state = 0
+tags = SubResource("Resource_auvg0")
+metadata/_custom_type_script = "uid://cr5y4u1asoj50"

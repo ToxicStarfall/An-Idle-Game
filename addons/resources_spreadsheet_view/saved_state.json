@@ -39,6 +39,22 @@
         "visibility": 0.0
       }
     },
+    "res://objects/items/types/research/": {
+      "resource_local_to_scene": {
+        "visibility": 0.0
+      },
+      "resource_name": {
+        "visibility": 0.0
+      }
+    },
+    "res://objects/items/types::costs/": {
+      "resource_local_to_scene": {
+        "visibility": 0.0
+      },
+      "resource_name": {
+        "visibility": 0.0
+      }
+    },
     "res://objects/items/upgrades/": {
       "resource_local_to_scene": {
         "visibility": 0.0
@@ -69,7 +85,8 @@
   },
   "recent_paths": [
     "res://objects/items/upgrades/",
-    "res://objects/items/types/"
+    "res://objects/items/types/",
+    "res://objects/items/types/research/"
   ],
   "table_functions": {
     "filter": [

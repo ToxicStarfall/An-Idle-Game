@@ -8,15 +8,12 @@ var scenes = []
 #var panels = [ %ResearchPanelContainer, %UpgradesPanelContainer ]
 
 
-signal update_counters
-signal update_labels
-signal update_content
-
+#signal update_counters
 
 func _ready() -> void:
 	pass
 
 
 func _process(_delta: float) -> void:
-	update_counters.emit()
+	#update_counters.emit()
 	pass

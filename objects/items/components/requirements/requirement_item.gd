@@ -5,7 +5,7 @@ class_name RequirementItem
 ## The target item to check.
 @export var item: Item
 ## The desired item state to check for. If the item is in this state, this Requirment is passed.
-@export var state: Item.State
+@export var state: Item.State = Item.State.OWNED
 
 
 func check():

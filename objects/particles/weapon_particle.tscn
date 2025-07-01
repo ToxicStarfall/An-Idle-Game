@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ccowb36wgxv7g"]
 
-[ext_resource type="Texture2D" uid="uid://d0m0hkawl82e1" path="res://textures/sample spritesheet.png" id="1_6mh7q"]
+[ext_resource type="Texture2D" uid="uid://d0m0hkawl82e1" path="res://textures/icons/sample spritesheet.png" id="1_6mh7q"]
 [ext_resource type="Script" uid="uid://djvdv7njug088" path="res://objects/particles/weapon_particle.gd" id="2_xdfns"]
 
 [node name="WeaponParticle" type="Sprite2D"]

@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="Upgrade" load_steps=11 format=3 uid="uid://cg4olx7cpdhnd"]
+[gd_resource type="Resource" script_class="Upgrade" load_steps=12 format=3 uid="uid://cg4olx7cpdhnd"]
 
 [ext_resource type="Script" uid="uid://ch31xejfebo7f" path="res://objects/items/components/requirements/cost_currency.gd" id="1_vf4nb"]
 [ext_resource type="Script" uid="uid://cqjg2ef8x7ix7" path="res://objects/items/components/item_effect.gd" id="2_rw5ul"]
 [ext_resource type="Script" uid="uid://caj5o56x4i7td" path="res://objects/items/components/requirements/requirement.gd" id="3_vf4nb"]
+[ext_resource type="Texture2D" uid="uid://cgu4gs0s0kk5y" path="res://icon.svg" id="3_vg3ow"]
 [ext_resource type="Script" uid="uid://b8fmjf1faoqkc" path="res://objects/items/types/upgrades/upgrade_components/upgrade.gd" id="4_ccdav"]
 [ext_resource type="Script" uid="uid://biidro61l5bon" path="res://objects/items/components/requirements/requirement_currency.gd" id="6_kjm0f"]
 [ext_resource type="Script" uid="uid://jrivr4k7xxyp" path="res://objects/items/components/item_tag.gd" id="7_vg3ow"]
@@ -17,7 +18,7 @@ metadata/_custom_type_script = "uid://ch31xejfebo7f"
 script = ExtResource("2_rw5ul")
 type = "weaponsBasePC"
 value = 1
-modifier = "Add"
+modifier = 0
 metadata/_custom_type_script = "uid://cqjg2ef8x7ix7"
 
 [sub_resource type="Resource" id="Resource_p8aro"]
@@ -34,6 +35,7 @@ metadata/_custom_type_script = "uid://jrivr4k7xxyp"
 [resource]
 script = ExtResource("4_ccdav")
 disabled = false
+icon = ExtResource("3_vg3ow")
 name = "Upgrade 2"
 description = "I am a description."
 flair = "I am descriptive flair."

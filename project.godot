@@ -29,8 +29,10 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Game="*res://game.gd"
 Events="*res://events.gd"
+Game="*res://game.gd"
+GameData="*res://game_data.gd"
+EventManager="*res://objects/events/event_manager.gd"
 
 [display]
 
@@ -44,7 +46,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/resources_spreadsheet_view/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg", "res://addons/resources_spreadsheet_view/plugin.cfg")
 
 [file_customization]
 

@@ -17,10 +17,11 @@ func _init() -> void: #_on_ready():
 
 func _ready() -> void:
 	item_resource.update_state.connect( _update_state )
-	#self.name = item_resource.resource_name  # Already set when loading resources( Game.initialize_game_resources() ).
-	self.text = item_resource.name
-	#_update_state( Item.State.LOCKED )
-	_update_state( item_resource.state )
+
+	if self is Button:  self.icon = item_resource.icon
+	#self.name = item_resource.raw_name  # Already set when loading resources( Game.initialize_game_resources() ).
+	#self.text = item_resource.name
+	_update_state( item_resource.state )  # updates state to the default state set within this item's resource
 	pass
 
 
@@ -30,23 +31,21 @@ func _on_pressed():
 
 func _on_mouse_entered():
 	hovered = true
-	Game.update_tooltip.emit( self, true )
-	pass
+	Events.request_tooltip.emit( self, item_resource, true )
 
 func _on_mouse_exited():
 	hovered = false
-	Game.update_tooltip.emit( self, false )
-	pass
+	Events.request_tooltip.emit( self, item_resource, false )
 
 
 func _update_state(state: Item.State):
-	#print("state updated, visuals update")
 	const State = Item.State
-	match state: #item_resource.state:
+	match state:
 		State.LOCKED:
 			self.modulate = Color(0, 0, 0)
-			#print("ASd")
+			self.hide()
 		State.UNLOCKED:
 			self.modulate = Color(0.7, 0.7, 0.7)
+			self.show()
 		State.OWNED:
 			self.modulate = Color(1, 1, 1)

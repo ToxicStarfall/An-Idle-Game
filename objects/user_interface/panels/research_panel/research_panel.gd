@@ -1,9 +1,55 @@
 extends PanelContainer
 
 
-#@onready var TechTree = get_node("%TechTreeContainer")
+var selected_item
+
+var is_dragging: bool = false
+var drag_origin: Vector2
+var drag_offset: Vector2
+var scroll_pos: Vector2
+
+@onready var ViewportScroll = %ViewportScrollContainer
+@onready var TechTree = get_node("%TechTreeContainer")
+
+
 func _ready() -> void:
+	#%TechTreeContainer.gui_input.connect( _on_tech_tree_gui_input )
+	%ViewportMargin.gui_input.connect( _on_tech_tree_gui_input )
+	#%SubViewport.size = %ViewportMargin.size #%SubViewportContainer.size
 	pass
+
+
+func _process(_delta: float) -> void:
+	#if is_dragging:
+		#drag_offset = drag_origin - get_local_mouse_position()
+		##print("origin:", drag_origin, "  offset", drag_offset)
+		#ViewportScroll.scroll_horizontal = scroll_pos.x + drag_offset.x
+		#ViewportScroll.scroll_vertical = scroll_pos.y + drag_offset.y
+	pass
+
+
+func _on_tech_tree_gui_input(event: InputEventMouse) -> void:
+	if event is InputEventMouseButton:
+		#match event.button_index:
+			#1:  # Left Click
+				#pass
+			#2:  # Right Click
+				#pass
+			#3:  # Middle Click
+				#pass
+		is_dragging = event.pressed  ## general mousebutton(1,2,or 3)  pressed state
+		if is_dragging:
+			drag_origin = get_local_mouse_position()
+			## The current scroll position
+			scroll_pos = Vector2( ViewportScroll.scroll_horizontal, ViewportScroll.scroll_vertical )
+			#%ViewportMargin.mouse_default_cursor_shape = CURSOR_DRAG
+		#else:
+			#%ViewportMargin.mouse_default_cursor_shape = CURSOR_ARROW
+
+	if is_dragging:
+		drag_offset = drag_origin - get_local_mouse_position() # offset is difference between new & old pos
+		ViewportScroll.scroll_horizontal = scroll_pos.x + drag_offset.x
+		ViewportScroll.scroll_vertical = scroll_pos.y + drag_offset.y
 
 
 func generate_connectors(research_node):

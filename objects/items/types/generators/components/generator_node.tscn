@@ -1,25 +1,28 @@
 [gd_scene load_steps=4 format=3 uid="uid://uuuw0cnt4nw2"]
 
-[ext_resource type="Script" uid="uid://cdys2qa2buuct" path="res://objects/items/types/generators/generator_node.gd" id="1_mw66h"]
+[ext_resource type="Script" uid="uid://cdys2qa2buuct" path="res://objects/items/types/generators/components/generator_node.gd" id="1_mw66h"]
 [ext_resource type="Texture2D" uid="uid://cgu4gs0s0kk5y" path="res://icon.svg" id="2_ndb0s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m6i4n"]
 bg_color = Color(0.1488, 0.8649, 0.93, 1)
 
 [node name="GeneratorNode" type="Button"]
-custom_minimum_size = Vector2(0, 60)
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 70.0
-grow_horizontal = 2
-size_flags_horizontal = 3
+custom_minimum_size = Vector2(260, 60)
+offset_right = 250.0
+offset_bottom = 8.0
 script = ExtResource("1_mw66h")
 
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 2
-offset_left = 4.0
-offset_right = 1280.0
-offset_bottom = 66.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -68,6 +71,7 @@ text = "Generator Name"
 autowrap_mode = 3
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -106,8 +110,7 @@ text = "Buy"
 
 [node name="GenerateProgress" type="ProgressBar" parent="VBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
-size_flags_vertical = 8
 theme_override_styles/fill = SubResource("StyleBoxFlat_m6i4n")
-value = 100.0
 show_percentage = false

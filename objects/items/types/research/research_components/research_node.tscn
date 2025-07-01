@@ -4,10 +4,12 @@
 
 [node name="ResearchNode" type="Button"]
 z_index = 1
-custom_minimum_size = Vector2(68, 68)
-offset_right = 64.0
-offset_bottom = 64.0
+custom_minimum_size = Vector2(52, 52)
+offset_right = 52.0
+offset_bottom = 52.0
 autowrap_mode = 3
 clip_text = true
+icon_alignment = 1
+expand_icon = true
 script = ExtResource("1_fp105")
 metadata/_custom_type_script = "uid://bmimo4f4i7irm"

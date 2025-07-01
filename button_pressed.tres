@@ -1,0 +1,7 @@
+[gd_resource type="StyleBoxFlat" format=3 uid="uid://oacdhskkex2f"]
+
+[resource]
+content_margin_top = 4.0
+draw_center = false
+border_width_top = 4
+border_color = Color(0.8, 0.8, 0.8, 0)

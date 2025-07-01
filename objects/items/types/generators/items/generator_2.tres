@@ -1,0 +1,53 @@
+[gd_resource type="Resource" script_class="Generator" load_steps=13 format=3 uid="uid://cuvhgxghs8y5"]
+
+[ext_resource type="Script" uid="uid://ch31xejfebo7f" path="res://objects/items/components/requirements/cost_currency.gd" id="1_pu4gs"]
+[ext_resource type="Script" uid="uid://cqjg2ef8x7ix7" path="res://objects/items/components/item_effect.gd" id="2_qvjxo"]
+[ext_resource type="Texture2D" uid="uid://cgu4gs0s0kk5y" path="res://icon.svg" id="3_gxifn"]
+[ext_resource type="Script" uid="uid://btb6n7ooepo2o" path="res://objects/items/components/effects/generator_effect.gd" id="3_qvjxo"]
+[ext_resource type="Script" uid="uid://caj5o56x4i7td" path="res://objects/items/components/requirements/requirement.gd" id="4_ns00k"]
+[ext_resource type="Script" uid="uid://biidro61l5bon" path="res://objects/items/components/requirements/requirement_currency.gd" id="5_sfwrk"]
+[ext_resource type="Script" uid="uid://r4isqaddmp4v" path="res://objects/items/types/generators/components/generator.gd" id="7_gxifn"]
+[ext_resource type="Script" uid="uid://jrivr4k7xxyp" path="res://objects/items/components/item_tag.gd" id="8_gxifn"]
+
+[sub_resource type="Resource" id="Resource_m677j"]
+script = ExtResource("1_pu4gs")
+currency = "knowledge"
+value = 100
+metadata/_custom_type_script = "uid://ch31xejfebo7f"
+
+[sub_resource type="Resource" id="Resource_ns00k"]
+script = ExtResource("3_qvjxo")
+type = "knowledge"
+value = 4
+modifier = 0
+metadata/_custom_type_script = "uid://btb6n7ooepo2o"
+
+[sub_resource type="Resource" id="Resource_6i28f"]
+script = ExtResource("5_sfwrk")
+currency = "knowledge"
+value = 30
+metadata/_custom_type_script = "uid://biidro61l5bon"
+
+[sub_resource type="Resource" id="Resource_sfwrk"]
+script = ExtResource("8_gxifn")
+taglist = Array[int]([])
+metadata/_custom_type_script = "uid://jrivr4k7xxyp"
+
+[resource]
+script = ExtResource("7_gxifn")
+quantity = 0
+progress = 0.0
+generate_time = 5.0
+generate_currencies = Array[ExtResource("3_qvjxo")]([SubResource("Resource_ns00k")])
+disabled = false
+icon = ExtResource("3_gxifn")
+name = "Gen 2"
+description = "I am a description."
+flair = "I am descriptive flair."
+costs = Array[ExtResource("1_pu4gs")]([SubResource("Resource_m677j")])
+requirements = Array[ExtResource("4_ns00k")]([SubResource("Resource_6i28f")])
+unlockRequirements = Array[ExtResource("4_ns00k")]([])
+effects = Array[ExtResource("2_qvjxo")]([])
+state = 0
+tags = SubResource("Resource_sfwrk")
+metadata/_custom_type_script = "uid://r4isqaddmp4v"

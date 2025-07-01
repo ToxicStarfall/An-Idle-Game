@@ -3,11 +3,13 @@ class_name Item
 
 
 signal update_state(state)
+signal update_content
 
 #@export_category("Debug")
 @export var disabled = false  ## For debug purposes
 
 @export_category("Properties")
+@export var icon: Texture2D = preload("res://icon.svg")
 @export_placeholder("Item Name") var name: String = ""
 @export_multiline var description: String = "I am a description."
 @export_multiline var flair: String = "I am descriptive flair."
@@ -23,11 +25,13 @@ signal update_state(state)
 ##
 @export var state: State = State.LOCKED
 ## Tags for sorting and filters.  INCLUDES INTERNAL TAGS
-@export var tags: ItemTags = ItemTags.new()
+#@export var tags: ItemTags = ItemTags.new()
+@export var tags := ItemTags.new()
 #@export var tags: Array[Tags] = []
 #@export_flags("a", "b") var tags
 
 var raw_name # plain file name
+# resource_path.split("/")[-1].split(".")[0]
 
 enum Tags { WEAPONS, UPGRADE }
 #enum InternalTags {}
@@ -64,7 +68,7 @@ func buy():
 	if state == State.LOCKED: print("This item is LOCKED.")
 	if state == State.OWNED: #owned:
 		print("You already own \"%s\"" % [self.name])
-	if state == State.UNLOCKED: #not owned
+	if state == State.UNLOCKED:  # If not alerady owned
 		var valid = true
 		for requirement in requirements:
 			# Cancel purchase if a requirement is not met
@@ -81,10 +85,11 @@ func buy():
 			_apply_effects()
 			# tween pop/unlock effect,
 			# remove node and move to database
-
-			print("Bought \"%s\" for {stuff}" % [self.name])
+			#Events.message_logged.emit()
+			Events.trigger_event.emit( EventMessage.new("Item bought [url]%s[/url]" % [self.name], self) )
+			print("Bought \"%s\" for %s" % [self.name, get_costs()])
 		else:
-			print("Cannot buy. \"%s\" requires %s" % [self.name, _get_costs()])
+			print("Cannot buy. \"%s\" requires %s" % [self.name, get_costs()])
 
 
 func _apply_costs():
@@ -98,15 +103,14 @@ func _apply_effects():
 
 
 # Returns costs as "current/total" in a Array format.
-func _get_costs():
+func get_costs():
 	var array = []
 	for requirement in costs:
-		var string
-		#var str = "%s/%s %s" % [Game.find_property(requirement.currency), requirement.value, requirement.currency]
-		match typeof(requirement):
-			CostCurrency:
-				string = "%s / %s %s" % [Game.find_property(requirement.currency), requirement.value, requirement.currency]
-				array.append( string )
+		var string = "%s/%s %s" % [Game.get_property(requirement.currency), requirement.value, requirement.currency]
+		array.append( string )
+
+	if costs.is_empty():
+		array.append("free")
 	return array
 
 
@@ -117,7 +121,7 @@ func _get_requirements():
 		var string
 		match typeof(requirement):
 			RequirementCurrency:
-				string = "%s / %s %s" % [Game.find_property(requirement.currency), requirement.value, requirement.currency]
+				string = "%s / %s %s" % [Game.get_property(requirement.currency), requirement.value, requirement.currency]
 				array.append( string )
 			RequirementItem:
 				string = "item:%s - state:%s" % [requirement.item.name, requirement.state]
@@ -133,7 +137,8 @@ func _set_state(new_state: Item.State):
 	self.state = new_state
 	#print("state set to ", new_state)
 	update_state.emit( new_state )
-	Game._update_items( get_script().get_global_name()) # clean this up later
+	#Game.update_items( get_script().get_global_name()) # clean this up later
+	Events.item_state_changed.emit( get_script().get_global_name() )
 	pass
 
 

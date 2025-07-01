@@ -1,12 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://clmr7xi56pejk"]
+[gd_scene load_steps=9 format=3 uid="uid://clmr7xi56pejk"]
 
 [ext_resource type="Script" uid="uid://ducwcague6iqa" path="res://objects/user_interface/panels/research_panel/research_panel.gd" id="1_x6vd8"]
 [ext_resource type="PackedScene" uid="uid://tpjp1bn0frkv" path="res://objects/items/types/research/research_components/research_placeholder.tscn" id="2_r4vlp"]
+[ext_resource type="Texture2D" uid="uid://cgu4gs0s0kk5y" path="res://icon.svg" id="3_hfmy7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lvyhc"]
 bg_color = Color(0.1617, 0.22341, 0.33, 1)
 border_width_top = 8
 border_color = Color(0.3234, 0.44682, 0.66, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r4vlp"]
+bg_color = Color(0.0666667, 0.0784314, 0.0901961, 1)
+border_width_top = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oyw5d"]
+bg_color = Color(0.529067, 0.529067, 0.529067, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hfmy7"]
+bg_color = Color(0.377919, 0.377919, 0.377919, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ld2xf"]
 
 [node name="ResearchPanel" type="PanelContainer"]
 custom_minimum_size = Vector2(300, 0)
@@ -19,82 +32,207 @@ size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_lvyhc")
 script = ExtResource("1_x6vd8")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 128
-theme_override_constants/margin_top = 128
-theme_override_constants/margin_right = 128
-theme_override_constants/margin_bottom = 128
-
-[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/ScrollContainer/MarginContainer"]
-visible = false
-layout_mode = 2
-
-[node name="TechTreeContainer" type="Control" parent="HBoxContainer/ScrollContainer/MarginContainer"]
+[node name="ViewportScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(1000, 0)
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 3
 
-[node name="ReferenceRect" type="ReferenceRect" parent="HBoxContainer/ScrollContainer/MarginContainer/TechTreeContainer"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer/HBoxContainer/ViewportScrollContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1600, 1000)
 layout_mode = 2
-offset_right = 80.0
-grow_horizontal = 2
-grow_vertical = 2
+stretch = true
 
-[node name="start" parent="HBoxContainer/ScrollContainer/MarginContainer/TechTreeContainer" instance=ExtResource("2_r4vlp")]
-layout_mode = 2
-offset_left = -40.0
-offset_top = -40.0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="research_2" parent="HBoxContainer/ScrollContainer/MarginContainer/TechTreeContainer" instance=ExtResource("2_r4vlp")]
-layout_mode = 2
-offset_left = 104.0
-offset_top = -40.0
-offset_right = 184.0
-offset_bottom = 40.0
-
-[node name="research_3" parent="HBoxContainer/ScrollContainer/MarginContainer/TechTreeContainer" instance=ExtResource("2_r4vlp")]
-layout_mode = 2
-offset_left = 256.0
-offset_top = 120.0
-offset_right = 336.0
-offset_bottom = 200.0
-
-[node name="ReferenceRect" type="ReferenceRect" parent="HBoxContainer/ScrollContainer/MarginContainer"]
-visible = false
-layout_mode = 2
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/ScrollContainer/MarginContainer"]
-visible = false
-layout_mode = 2
-
-[node name="SubViewport" type="SubViewport" parent="HBoxContainer/ScrollContainer/MarginContainer/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="VBoxContainer/HBoxContainer/ViewportScrollContainer/SubViewportContainer"]
+unique_name_in_owner = true
 disable_3d = true
 transparent_bg = true
 handle_input_locally = false
-render_target_update_mode = 0
+size = Vector2i(1600, 1000)
+render_target_update_mode = 4
 
-[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
+[node name="ViewportMargin" type="MarginContainer" parent="VBoxContainer/HBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -6.0
+offset_right = 6.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.4
+theme_override_constants/margin_left = 256
+theme_override_constants/margin_top = 256
+theme_override_constants/margin_right = 256
+theme_override_constants/margin_bottom = 256
 
-[node name="Label" type="Label" parent="HBoxContainer/PanelContainer"]
+[node name="ReferenceRect" type="ReferenceRect" parent="VBoxContainer/HBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin"]
+layout_mode = 2
+mouse_filter = 2
+border_width = 2.0
+
+[node name="TechTreeContainer" type="Control" parent="VBoxContainer/HBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="origin" parent="VBoxContainer/HBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_r4vlp")]
+layout_mode = 0
+offset_left = -2.0
+offset_right = 50.0
+offset_bottom = 52.0
+icon_alignment = 1
+expand_icon = true
+
+[node name="research_1" parent="VBoxContainer/HBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_r4vlp")]
+layout_mode = 2
+offset_left = 126.0
+offset_right = 178.0
+offset_bottom = 52.0
+
+[node name="research_2" parent="VBoxContainer/HBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_r4vlp")]
+layout_mode = 2
+offset_left = 254.0
+offset_right = 306.0
+offset_bottom = 52.0
+
+[node name="meditation" parent="VBoxContainer/HBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_r4vlp")]
+layout_mode = 0
+offset_left = 254.0
+offset_top = 128.0
+offset_right = 306.0
+offset_bottom = 180.0
+
+[node name="research_3" parent="VBoxContainer/HBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_r4vlp")]
+layout_mode = 2
+offset_left = 382.0
+offset_right = 434.0
+offset_bottom = 52.0
+
+[node name="Panel" type="Panel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_r4vlp")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Panel"]
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -204.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Panel/MarginContainer"]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Panel/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Panel/VBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Panel/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
-text = "Research Info"
+text = "Research Info (WIP)"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Panel/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Panel/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+texture = ExtResource("3_hfmy7")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="VBoxContainer/Panel/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Item Name"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/Panel/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Panel/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("3_hfmy7")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="VBoxContainer/Panel/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "a"
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/Panel/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+show_percentage = false
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/Panel/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Button" type="Button" parent="VBoxContainer/Panel/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 12
+theme_override_styles/hover = SubResource("StyleBoxFlat_oyw5d")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hfmy7")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ld2xf")
+text = "Research"
+
+[node name="Button" type="Button" parent="VBoxContainer/Panel/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/hover = SubResource("StyleBoxFlat_oyw5d")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hfmy7")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ld2xf")
+text = "Research All"
+
+[node name="ResearchQueue" type="HBoxContainer" parent="VBoxContainer/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[connection signal="gui_input" from="VBoxContainer/HBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" to="." method="_on_tech_tree_container_gui_input"]

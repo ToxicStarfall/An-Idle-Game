@@ -87,18 +87,14 @@ func _initialize_game_resources():
 
 
 func _initialize_upgrades():
-	var upgrades_folder_path = "res://objects/items/types/upgrades/upgrade_items/"#"res://objects/items/upgrades/upgrade_items/"
-	var upgrades_folder = DirAccess.open( upgrades_folder_path )
+	const upgrades_folder_path = "res://objects/items/types/upgrades/upgrade_items/"
+	var upgrades_folder = ResourceLoader.list_directory( upgrades_folder_path )
 	if upgrades_folder == null:
 		push_error("An error occured while accessing folder \"%s\"" % [upgrades_folder_path])
-		DirAccess.get_open_error()
 	else:
-		var upgrade_files = upgrades_folder.get_files()
-		for file_name in upgrade_files:
-			if file_name.ends_with(".remap"):  # TEMPROARY FIX FOR WEB EXPORT
-				file_name = file_name.replace(".remap", "")
-			var item = load("%s/%s" % [upgrades_folder_path, file_name])
-			var raw_name = file_name.split(".")[0]
+		for file in upgrades_folder:
+			var item = ResourceLoader.load(upgrades_folder_path + file)
+			var raw_name = file.split(".")[0]
 			item.raw_name = raw_name
 			item.resource_name = "upgrade:%s" % [raw_name]
 			item.tags.auto_tag(item)
@@ -115,18 +111,16 @@ func _initialize_upgrades():
 
 func _initialize_research():
 	const research_folder_path = "res://objects/items/types/research/research_items/"
+	var research_folder = ResourceLoader.list_directory( research_folder_path )
 
-	var research_folder = DirAccess.open( research_folder_path )
 	if research_folder == null:
 		push_error("An error occured while accessing folder \"%s\"" % [research_folder_path])
-		DirAccess.get_open_error()
 	else:
-		var research_files = research_folder.get_files()
-		for file_name in research_files:
-			if file_name.ends_with(".remap"):  # TEMPROARY FIX FOR WEB EXPORT
-				file_name = file_name.replace(".remap", "")
-			var item = load("%s/%s" % [research_folder_path, file_name])
-			var raw_name = file_name.split(".")[0]
+		for file in research_folder:
+			var item = ResourceLoader.load(research_folder + file)
+			# if file_name.ends_with(".remap"):  # TEMPROARY FIX FOR WEB EXPORT
+			# 	file_name = file_name.replace(".remap", "")
+			var raw_name = file.split(".")[0]
 			item.raw_name = raw_name
 			item.resource_name = "research:%s" % [raw_name]
 			GameData.research[ raw_name ] = item
@@ -168,18 +162,15 @@ func _initialize_research_tree():
 
 
 func _initialize_generators():
-	var generators_folder_path = "res://objects/items/types/generators/items/"
-	var generators_folder = DirAccess.open( generators_folder_path )
+	const generators_folder_path = "res://objects/items/types/generators/items/"
+	var generators_folder = ResourceLoader.list_directory( generators_folder_path )
+	
 	if generators_folder == null:
 		push_error("An error occured while accessing folder \"%s\"" % [generators_folder_path])
-		DirAccess.get_open_error()
 	else:
-		var generators_files = generators_folder.get_files()
-		for file_name in generators_files:
-			if file_name.ends_with(".remap"):  # TEMPROARY FIX FOR WEB EXPORT
-				file_name = file_name.replace(".remap", "")
-			var item = load("%s/%s" % [generators_folder_path, file_name])
-			var raw_name = file_name.split(".")[0]
+		for file in generators_folder:
+			var item = ResourceLoader.load( generators_folder + file)
+			var raw_name = file.split(".")[0]
 			item.raw_name = raw_name
 			item.resource_name = "generator:%s" % [raw_name]
 			item.tags.auto_tag(item)

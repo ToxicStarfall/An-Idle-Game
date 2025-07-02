@@ -96,6 +96,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Production"
 

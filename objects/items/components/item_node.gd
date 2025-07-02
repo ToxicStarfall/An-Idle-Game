@@ -32,10 +32,12 @@ func _on_pressed():
 func _on_mouse_entered():
 	hovered = true
 	Events.request_tooltip.emit( self, item_resource, true )
+	#print("a")
 
 func _on_mouse_exited():
 	hovered = false
 	Events.request_tooltip.emit( self, item_resource, false )
+	#print("b")
 
 
 func _update_state(state: Item.State):

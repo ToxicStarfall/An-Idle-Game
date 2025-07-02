@@ -991,9 +991,7 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="TooltipPanel" parent="UserInterface/MainPanel" instance=ExtResource("15_2cqfq")]
-unique_name_in_owner = true
 visible = false
-z_index = 1
 layout_mode = 1
 
 [node name="ConstantParticles" type="CPUParticles2D" parent="."]

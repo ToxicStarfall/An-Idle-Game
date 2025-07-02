@@ -117,7 +117,7 @@ func _initialize_research():
 		push_error("An error occured while accessing folder \"%s\"" % [research_folder_path])
 	else:
 		for file in research_folder:
-			var item = ResourceLoader.load(research_folder + file)
+			var item = ResourceLoader.load(research_folder_path + file)
 			# if file_name.ends_with(".remap"):  # TEMPROARY FIX FOR WEB EXPORT
 			# 	file_name = file_name.replace(".remap", "")
 			var raw_name = file.split(".")[0]
@@ -164,12 +164,12 @@ func _initialize_research_tree():
 func _initialize_generators():
 	const generators_folder_path = "res://objects/items/types/generators/items/"
 	var generators_folder = ResourceLoader.list_directory( generators_folder_path )
-	
+
 	if generators_folder == null:
 		push_error("An error occured while accessing folder \"%s\"" % [generators_folder_path])
 	else:
 		for file in generators_folder:
-			var item = ResourceLoader.load( generators_folder + file)
+			var item = ResourceLoader.load( generators_folder_path + file)
 			var raw_name = file.split(".")[0]
 			item.raw_name = raw_name
 			item.resource_name = "generator:%s" % [raw_name]

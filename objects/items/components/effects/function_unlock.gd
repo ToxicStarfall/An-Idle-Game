@@ -12,13 +12,12 @@ func _ready() -> void:
 	#get_node( node_path ).visibility = unlocked
 	#self.hide()
 	#Events.item_bought.connect( unlock )
-	#GameData.unlockables.set("0", self)
 	pass
 
 func apply():
 	#_custom_effect(multiplier)
 
-	Events.function_unlock.emit(node_name)
+	Events.function_unlocked.emit(node_name)
 	pass
 
 

@@ -1,16 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://desdwvbur1ukf"]
+[gd_scene load_steps=3 format=3 uid="uid://desdwvbur1ukf"]
 
 [ext_resource type="Script" uid="uid://qsiovim2f0mr" path="res://objects/user_interface/panels/tooltip_panel.gd" id="1_ii8dd"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y8asi"]
+bg_color = Color(0.0430392, 0.0430392, 0.0430391, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
 [node name="TooltipPanel" type="PanelContainer"]
-offset_right = 444.0
-offset_bottom = 81.0
-size_flags_horizontal = 3
-size_flags_vertical = 8
+z_index = 1
+z_as_relative = false
+custom_minimum_size = Vector2(400, 85)
+offset_right = 400.0
+offset_bottom = 85.0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_y8asi")
 script = ExtResource("1_ii8dd")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
+size_flags_vertical = 0
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
@@ -48,12 +59,12 @@ horizontal_alignment = 2
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
 text = "Hello, I am a tooltip description."
 fit_content = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="CostText" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true

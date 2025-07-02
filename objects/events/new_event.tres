@@ -5,11 +5,10 @@
 
 [resource]
 script = ExtResource("2_qci1p")
-icon = ExtResource("1_xbw7t")
 text = "A visitor arrives seeking somthing."
+icon = ExtResource("1_xbw7t")
 title = "Event Title."
 description = "Event details."
-event_duration_type = "None"
 event_duration = 0.0
-removeable = false
+dismissable = false
 metadata/_custom_type_script = "uid://dyac2wk5e0rxg"

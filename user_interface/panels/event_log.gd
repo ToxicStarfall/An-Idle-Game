@@ -13,6 +13,7 @@ func _ready() -> void:
 
 
 func _on_new_event(event):
+	#match event.get_script().get_global_name():
 	if event is EventMessage:
 		_new_message(event)
 		return

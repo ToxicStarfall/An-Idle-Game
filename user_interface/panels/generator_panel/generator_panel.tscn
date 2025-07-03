@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cma38yo78x0do"]
 
-[ext_resource type="Script" uid="uid://byahp2tvo0j5r" path="res://objects/user_interface/panels/generator_panel/generators_panel.gd" id="1_f3sqg"]
-[ext_resource type="ButtonGroup" uid="uid://uffvlt0vlua4" path="res://objects/user_interface/panels/generator_panel/generator_actions_button_group.tres" id="2_yp335"]
+[ext_resource type="Script" uid="uid://byahp2tvo0j5r" path="res://user_interface/panels/generator_panel/generators_panel.gd" id="1_f3sqg"]
+[ext_resource type="ButtonGroup" uid="uid://uffvlt0vlua4" path="res://user_interface/panels/generator_panel/generator_actions_button_group.tres" id="2_yp335"]
 [ext_resource type="PackedScene" uid="uid://uuuw0cnt4nw2" path="res://objects/items/types/generators/components/generator_node.tscn" id="3_huyki"]
 [ext_resource type="Resource" uid="uid://rhvwbks77u3g" path="res://objects/items/types/generators/items/generator_1.tres" id="4_hyxd5"]
 [ext_resource type="Resource" uid="uid://cuvhgxghs8y5" path="res://objects/items/types/generators/items/generator_2.tres" id="5_nuacf"]

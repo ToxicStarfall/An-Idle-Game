@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://desdwvbur1ukf"]
 
-[ext_resource type="Script" uid="uid://qsiovim2f0mr" path="res://objects/user_interface/panels/tooltip_panel.gd" id="1_ii8dd"]
+[ext_resource type="Script" uid="uid://qsiovim2f0mr" path="res://user_interface/panels/tooltip_panel.gd" id="1_ii8dd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y8asi"]
 bg_color = Color(0.0430392, 0.0430392, 0.0430391, 1)

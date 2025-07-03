@@ -1,12 +1,12 @@
 [gd_resource type="VisualShader" load_steps=38 format=3 uid="uid://cdj0mlx4bajiw"]
 
-[ext_resource type="Texture2D" uid="uid://cgu4gs0s0kk5y" path="res://icon.svg" id="1_7q1yf"]
+[ext_resource type="Texture2D" uid="uid://cgu4gs0s0kk5y" path="res://icon.svg" id="1_uyrhp"]
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_y41vj"]
 input_name = "color"
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_sr7a3"]
-texture = ExtResource("1_7q1yf")
+texture = ExtResource("1_uyrhp")
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_4d7oh"]
 input_name = "time"

@@ -1,21 +1,21 @@
-[gd_scene load_steps=68 format=3 uid="uid://637nae12nn2l"]
+[gd_scene load_steps=70 format=3 uid="uid://637nae12nn2l"]
 
-[ext_resource type="Script" uid="uid://dws7sgjrhbcom" path="res://objects/user_interface/user_interface.gd" id="2_y7cka"]
-[ext_resource type="Script" uid="uid://de766355n883h" path="res://objects/user_interface/panels/main_panel.gd" id="3_0cofv"]
+[ext_resource type="Script" uid="uid://dws7sgjrhbcom" path="res://user_interface/user_interface.gd" id="2_y7cka"]
+[ext_resource type="Script" uid="uid://de766355n883h" path="res://user_interface/panels/main_panel.gd" id="3_0cofv"]
 [ext_resource type="Texture2D" uid="uid://cgu4gs0s0kk5y" path="res://icon.svg" id="3_4c57u"]
-[ext_resource type="PackedScene" uid="uid://bv0tsah8evq3b" path="res://objects/user_interface/panels/upgrades_panel/upgrades_panel.tscn" id="3_lquwl"]
-[ext_resource type="Shader" uid="uid://dv3k1tx45d2rk" path="res://Vortex.gdshader" id="4_2cqfq"]
-[ext_resource type="Script" uid="uid://d13npokqdssnk" path="res://objects/user_interface/panels/main_bar.gd" id="4_272bh"]
-[ext_resource type="PackedScene" uid="uid://clmr7xi56pejk" path="res://objects/user_interface/panels/research_panel/research_panel.tscn" id="4_jdleu"]
+[ext_resource type="PackedScene" uid="uid://bv0tsah8evq3b" path="res://user_interface/panels/upgrades_panel/upgrades_panel.tscn" id="3_lquwl"]
+[ext_resource type="Shader" uid="uid://dv3k1tx45d2rk" path="res://vfx/Vortex.gdshader" id="4_2cqfq"]
+[ext_resource type="Script" uid="uid://d13npokqdssnk" path="res://user_interface/panels/main_bar.gd" id="4_272bh"]
+[ext_resource type="PackedScene" uid="uid://clmr7xi56pejk" path="res://user_interface/panels/research_panel/research_panel.tscn" id="4_jdleu"]
 [ext_resource type="Texture2D" uid="uid://big3qifsbuog0" path="res://textures/black_texture_1.jpg" id="4_w48qg"]
-[ext_resource type="Script" uid="uid://bqxhkr6sbatew" path="res://objects/user_interface/panels/upgrades_panel/upgrades_panel.gd" id="5_5vw27"]
-[ext_resource type="PackedScene" uid="uid://b4tmstps088mq" path="res://objects/user_interface/event_log.tscn" id="5_dg77c"]
+[ext_resource type="Script" uid="uid://bqxhkr6sbatew" path="res://user_interface/panels/upgrades_panel/upgrades_panel.gd" id="5_5vw27"]
+[ext_resource type="PackedScene" uid="uid://b4tmstps088mq" path="res://user_interface/panels/event_log.tscn" id="5_dg77c"]
 [ext_resource type="Texture2D" uid="uid://bmyat2qjelag7" path="res://textures/border-4px.png" id="5_efxa6"]
 [ext_resource type="Texture2D" uid="uid://d0m0hkawl82e1" path="res://textures/icons/sample spritesheet.png" id="5_lquwl"]
-[ext_resource type="PackedScene" uid="uid://cma38yo78x0do" path="res://objects/user_interface/panels/generator_panel/generator_panel.tscn" id="5_ycdy4"]
-[ext_resource type="Shader" uid="uid://cdj0mlx4bajiw" path="res://background_2.tres" id="6_vivmo"]
-[ext_resource type="PackedScene" uid="uid://t5uopevp7250" path="res://objects/user_interface/panels/database_panel.tscn" id="7_kek77"]
-[ext_resource type="PackedScene" uid="uid://desdwvbur1ukf" path="res://objects/user_interface/panels/tooltip_panel.tscn" id="15_2cqfq"]
+[ext_resource type="PackedScene" uid="uid://cma38yo78x0do" path="res://user_interface/panels/generator_panel/generator_panel.tscn" id="5_ycdy4"]
+[ext_resource type="Shader" uid="uid://cdj0mlx4bajiw" path="res://vfx/background_2.tres" id="6_vivmo"]
+[ext_resource type="PackedScene" uid="uid://t5uopevp7250" path="res://user_interface/panels/database_panel.tscn" id="7_kek77"]
+[ext_resource type="PackedScene" uid="uid://desdwvbur1ukf" path="res://user_interface/panels/tooltip_panel.tscn" id="15_2cqfq"]
 
 [sub_resource type="Gradient" id="Gradient_yaehf"]
 colors = PackedColorArray(0.5, 0.5, 0.5, 0, 1, 1, 1, 1)
@@ -263,7 +263,6 @@ tangential_accel_min = -100.0
 tangential_accel_max = 100.0
 damping_min = 20.0
 damping_max = 100.0
-attractor_interaction_enabled = false
 scale_min = 0.5
 scale_max = 0.5
 alpha_curve = SubResource("CurveTexture_7mycd")
@@ -304,6 +303,16 @@ angular_velocity_max = 90.0
 gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_ycdy4")
 alpha_curve = SubResource("CurveTexture_efxa6")
+
+[sub_resource type="Curve" id="Curve_2cqfq"]
+_limits = [10.0, 28.6567, 0.0, 1.0]
+_data = [Vector2(0, 10), 0.0, 0.0, 0, 0, Vector2(1, 28.6567), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_074og"]
+offsets = PackedFloat32Array(0, 0.4, 0.8, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.816733, 1, 1, 1, 1, 1, 1, 1, 0.8)
+metadata/_snap_enabled = true
 
 [node name="Main" type="Node"]
 
@@ -1091,8 +1100,24 @@ process_material = SubResource("ParticleProcessMaterial_w48qg")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 visible = false
+position = Vector2(712, 552)
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Marker2D"]
+amount = 20
+lifetime = 5.0
+draw_order = 1
+emission_shape = 4
+emission_points = PackedVector2Array(-100, -100, -100, 100, 100, 100, 100, -100)
+emission_colors = PackedColorArray()
+gravity = Vector2(0, 0)
+angular_velocity_min = 30.0
+angular_velocity_max = 90.0
+orbit_velocity_min = 0.1
+orbit_velocity_max = 0.1
+radial_accel_min = -81.01
+radial_accel_max = -81.01
+scale_amount_curve = SubResource("Curve_2cqfq")
+color_ramp = SubResource("Gradient_074og")
 
 [connection signal="pressed" from="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/ConversionPanel/MarginContainer/VBoxContainer/WeaponPowerButton" to="UserInterface/MainPanel" method="_on_button_pressed"]
 [connection signal="tab_changed" from="UserInterface/MainPanel/HBoxContainer/RightPanel/BorderMargins/HBoxContainer/VBoxContainer/TabBar" to="UserInterface/MainPanel" method="_on_tab_bar_tab_changed"]

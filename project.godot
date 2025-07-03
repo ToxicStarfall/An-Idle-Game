@@ -53,7 +53,7 @@ enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg", "res:/
 folder_colors={
 "res://addons/": "gray",
 "res://objects/items/upgrades/upgrade_items/upgrade_1.tres": "gray",
-"res://objects/user_interface/": "green"
+"res://user_interface/": "green"
 }
 
 [input]

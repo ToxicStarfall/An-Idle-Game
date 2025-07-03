@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bv0tsah8evq3b"]
 
-[ext_resource type="Script" uid="uid://bqxhkr6sbatew" path="res://objects/user_interface/panels/upgrades_panel/upgrades_panel.gd" id="1_cp705"]
-[ext_resource type="PackedScene" uid="uid://b3vwaamsshdxt" path="res://objects/user_interface/panels/upgrades_panel/engineering_panel.tscn" id="4_fyah6"]
+[ext_resource type="Script" uid="uid://bqxhkr6sbatew" path="res://user_interface/panels/upgrades_panel/upgrades_panel.gd" id="1_cp705"]
+[ext_resource type="PackedScene" uid="uid://b3vwaamsshdxt" path="res://user_interface/panels/upgrades_panel/engineering_panel.tscn" id="4_fyah6"]
 
 [sub_resource type="Gradient" id="Gradient_lquwl"]
 offsets = PackedFloat32Array(1)

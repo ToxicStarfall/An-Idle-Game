@@ -1,10 +1,10 @@
-[gd_scene load_steps=65 format=3 uid="uid://637nae12nn2l"]
+[gd_scene load_steps=68 format=3 uid="uid://637nae12nn2l"]
 
 [ext_resource type="Script" uid="uid://dws7sgjrhbcom" path="res://objects/user_interface/user_interface.gd" id="2_y7cka"]
 [ext_resource type="Script" uid="uid://de766355n883h" path="res://objects/user_interface/panels/main_panel.gd" id="3_0cofv"]
 [ext_resource type="Texture2D" uid="uid://cgu4gs0s0kk5y" path="res://icon.svg" id="3_4c57u"]
 [ext_resource type="PackedScene" uid="uid://bv0tsah8evq3b" path="res://objects/user_interface/panels/upgrades_panel/upgrades_panel.tscn" id="3_lquwl"]
-[ext_resource type="Shader" uid="uid://dg84f5gh7h5ew" path="res://background.gdshader" id="3_ycdy4"]
+[ext_resource type="Shader" uid="uid://dv3k1tx45d2rk" path="res://Vortex.gdshader" id="4_2cqfq"]
 [ext_resource type="Script" uid="uid://d13npokqdssnk" path="res://objects/user_interface/panels/main_bar.gd" id="4_272bh"]
 [ext_resource type="PackedScene" uid="uid://clmr7xi56pejk" path="res://objects/user_interface/panels/research_panel/research_panel.tscn" id="4_jdleu"]
 [ext_resource type="Texture2D" uid="uid://big3qifsbuog0" path="res://textures/black_texture_1.jpg" id="4_w48qg"]
@@ -17,9 +17,29 @@
 [ext_resource type="PackedScene" uid="uid://t5uopevp7250" path="res://objects/user_interface/panels/database_panel.tscn" id="7_kek77"]
 [ext_resource type="PackedScene" uid="uid://desdwvbur1ukf" path="res://objects/user_interface/panels/tooltip_panel.tscn" id="15_2cqfq"]
 
+[sub_resource type="Gradient" id="Gradient_yaehf"]
+colors = PackedColorArray(0.5, 0.5, 0.5, 0, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_074og"]
+frequency = 0.003
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cegan"]
+seamless = true
+color_ramp = SubResource("Gradient_yaehf")
+noise = SubResource("FastNoiseLite_074og")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vivmo"]
-shader = ExtResource("3_ycdy4")
-shader_parameter/a = 0.5
+shader = ExtResource("4_2cqfq")
+shader_parameter/portal_texture = SubResource("NoiseTexture2D_cegan")
+shader_parameter/portal_tint = Color(1, 1, 1, 1)
+shader_parameter/vortex_effect_radius = 0.5
+shader_parameter/twist_strength = 8.0
+shader_parameter/pulsation_speed = 0.15
+shader_parameter/breath_magnitude = -1.86265e-08
+shader_parameter/overall_rotation_speed = 2.0
+shader_parameter/texture_scroll_speed_x = 0.08
+shader_parameter/texture_scroll_speed_y = 0.03
+shader_parameter/edge_softness = 0.2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2cqfq"]
 shader = ExtResource("6_vivmo")
@@ -125,6 +145,13 @@ bg_color = Color(0.145098, 0.145098, 0.14902, 1)
 expand_margin_left = 4.0
 expand_margin_right = 4.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0odxb"]
+draw_center = false
+corner_radius_top_left = 256
+corner_radius_top_right = 256
+corner_radius_bottom_right = 256
+corner_radius_bottom_left = 256
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yaehf"]
 bg_color = Color(0.109804, 0.109804, 0.109804, 1)
 border_width_left = 6
@@ -162,8 +189,6 @@ border_width_bottom = 4
 border_blend = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2cqfq"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5vw27"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1u8w0"]
 bg_color = Color(0.145098, 0.145098, 0.14902, 1)
@@ -333,6 +358,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 128.0
+offset_bottom = 128.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_4c57u")
@@ -720,6 +749,46 @@ size_flags_vertical = 8
 size_flags_stretch_ratio = 3.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_d13ii")
 
+[node name="MarginContainer2" type="MarginContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -306.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 24
+
+[node name="CenterContainer" type="CenterContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle/MarginContainer2"]
+layout_mode = 2
+
+[node name="PortalTexture" type="TextureRect" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle/MarginContainer2/CenterContainer"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_vivmo")
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+texture = ExtResource("3_4c57u")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ThoughtButton2" type="Button" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle/MarginContainer2/CenterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(196, 196)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/hover = SubResource("StyleBoxFlat_0odxb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0odxb")
+theme_override_styles/normal = SubResource("StyleBoxFlat_0odxb")
+
+[node name="label" type="Label" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle/MarginContainer2/CenterContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Click Me!"
+
 [node name="MarginContainer" type="MarginContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle"]
 layout_mode = 1
 anchors_preset = 12
@@ -745,8 +814,9 @@ value = 1.0
 allow_greater = true
 show_percentage = false
 
-[node name="ThoughtButton2" type="Button" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle/MarginContainer/ThoughtProgressBar"]
+[node name="ThoughtButton" type="Button" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle/MarginContainer/ThoughtProgressBar"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_left = 280.0
@@ -761,36 +831,6 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_ycdy4")
 theme_override_styles/normal = SubResource("StyleBoxFlat_2cqfq")
 text = "clicker
 "
-
-[node name="ThoughtButton" type="Button" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle/MarginContainer/ThoughtProgressBar"]
-unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_default_cursor_shape = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_kek77")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_ycdy4")
-theme_override_styles/hover = SubResource("StyleBoxFlat_dg77c")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_ycdy4")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_5vw27")
-
-[node name="ThoughtEarnLabel" type="Label" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle/MarginContainer/ThoughtProgressBar/ThoughtButton"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -1.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.74978, 0.74978, 0.74978, 1)
-horizontal_alignment = 2
 
 [node name="KnowledgeLabel" type="Label" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle/MarginContainer/ThoughtProgressBar"]
 unique_name_in_owner = true
@@ -811,6 +851,7 @@ text = "0 knowledge"
 horizontal_alignment = 1
 
 [node name="ThoughtEarnLabel" type="Label" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle/MarginContainer/ThoughtProgressBar"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -1042,6 +1083,7 @@ one_shot = true
 process_material = SubResource("ParticleProcessMaterial_272bh")
 
 [node name="knowledge" type="GPUParticles2D" parent="."]
+visible = false
 position = Vector2(592, 640)
 amount = 4
 lifetime = 4.0

@@ -20,10 +20,11 @@ func _on_new_event(event):
 		_set_event_card(event)
 		return
 
-func _new_message(data):
+
+func _new_message(event):
 	var message = preload("res://objects/events/types/event_message_node.tscn").instantiate()
-	message.text = data.text
-	message.event_data = data
+	message.event = event
+	message.text = event.text
 	LogContainer.add_child(message)
 	LogContainer.move_child(message, 0)
 	pass

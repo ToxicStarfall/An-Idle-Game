@@ -1,6 +1,9 @@
 extends Control
 
 
+var current_panel: Control
+#var panels = [ %ResearchPanelContainer, %UpgradesPanelContainer ]
+
 
 func _ready() -> void:
 	%ResearchProgress/Button.pressed.connect( _toggle_research_panel )

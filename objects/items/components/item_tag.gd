@@ -33,5 +33,5 @@ func auto_tag(item: Item):
 
 	for i in internal_tags:
 		internal_tags[ internal_tags.find(i) ] = i.to_upper()
-	print(internal_tags)
+	#print(internal_tags)
 	pass

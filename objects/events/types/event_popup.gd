@@ -1,8 +1,6 @@
+class_name EventPopup
 extends Event
-class_name EventMessage
 
-
-#@export var tooltip
 
 func _init(message: String, tooltip_data: Resource = null, duration := 0.0) -> void:
 	self.text = message
@@ -12,4 +10,3 @@ func _init(message: String, tooltip_data: Resource = null, duration := 0.0) -> v
 
 func call_event():
 	super()
-	pass

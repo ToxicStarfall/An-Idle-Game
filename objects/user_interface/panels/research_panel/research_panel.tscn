@@ -65,7 +65,8 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -6.0
-offset_right = 6.0
+offset_right = -106.0
+offset_bottom = -200.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -82,7 +83,6 @@ border_width = 2.0
 
 [node name="TechTreeContainer" type="Control" parent="VBoxContainer/HBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(1000, 0)
 layout_mode = 2
 mouse_filter = 2
 

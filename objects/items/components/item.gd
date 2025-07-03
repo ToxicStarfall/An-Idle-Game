@@ -85,16 +85,18 @@ func buy():
 			_apply_effects()
 			# tween pop/unlock effect,
 			# remove node and move to database
-			#Events.message_logged.emit()
-			Events.trigger_event.emit( EventMessage.new("Item bought [url]%s[/url]" % [self.name], self) )
-			print("Bought \"%s\" for %s" % [self.name, get_costs()])
+			EventMessage.new("Item bought [url]%s[/url]" % [self.name], self).call_event()
+			#print("Bought \"%s\" for %s" % [self.name, get_costs()])
 		else:
-			print("Cannot buy. \"%s\" requires %s" % [self.name, get_costs()])
+			#Events.trigger_event.emit( EventMessage.new("Item bought [url]%s[/url]" % [self.name], self) )
+			EventMessage.new("Cannot buy %s." % [self.name], self, 3.0).call_event()
+			#print("Cannot buy. \"%s\" requires %s" % [self.name, get_costs()])
 
 
 func _apply_costs():
 	for cost in costs:
 		cost.apply()
+
 
 func _apply_effects():
 	for effect in effects:
@@ -129,8 +131,11 @@ func _get_requirements():
 	return array
 
 
-func _get_tags():
-	pass
+func get_tags():
+	var string: String
+	for tag in tags.internal_tags:
+		string += " [%s]" % [tag]
+	return string
 
 
 func _set_state(new_state: Item.State):

@@ -12,22 +12,14 @@ extends Control
 func _ready() -> void:
 	self.hide()  # Hide on start
 	Events.request_tooltip.connect( _on_update_tooltip )
-	#Events.request_tooltip.connect( _update_visibility )
 
 
 func _on_update_tooltip(target_node, data, visibility: bool):
-	#var global_mouse = get_global_mouse_position()
-	#var target_size = target_node.size
-	#var target_pos = target_node.get_screen_position()
-	#print(global_mouse, " - ", target_pos)
-	#if global_mouse.x > target_pos.x and global_mouse.x < target_pos.x + target_size.x \
-	#and global_mouse.y > target_pos.y and global_mouse.y < target_pos.y + target_size.y:
-		#visibility = true
-	#else: visibility = false
-
 	if visibility == true:
 		_update_info(data)
 		_update_position(target_node)
+
+	# PanelContainer is being funny. Force setting size to 85(minimum) for now.
 	_update_visibility(visibility)
 	self.size.y = 85
 
@@ -41,7 +33,7 @@ func _update_info(item):
 				Description.text = item.description
 				#State.text = ""
 				Costs.text = ""
-				Tags.text = str(item.tags)
+				Tags.text = item.get_tags()
 				Flair.text = item.flair
 				pass
 			Item.State.UNLOCKED:#, Item.State.OWNED:
@@ -56,8 +48,7 @@ func _update_info(item):
 						#color = "red"
 					#Costs.text += "[color=%s]%s[/%s]" % [ color, costs.pop_front(), color ]
 				Costs.text = "[color=green]%s[/color]" % [item.get_costs()]
-				Tags.text = str(item.tags.internal_tags)
-				#Tags.text = str(item.tags.taglist)
+				Tags.text = item.get_tags()
 				Flair.text = item.flair
 				pass
 			Item.State.LOCKED:

@@ -12,8 +12,9 @@ class_name Event
 
 @export_category("Event Config")
 #@export_enum("None", "Limited") var event_duration_type = "None"
-@export var event_duration: float = 0  ## How long this event should last in seconds.
+@export var duration: float = 0  ## How long this event should last in seconds.
 @export var dismissable: bool = false  ## Whether or not this event can be dissmissed and removed.
+
 
 
 func call_event():

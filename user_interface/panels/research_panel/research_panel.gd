@@ -13,7 +13,6 @@ var scroll_pos: Vector2
 
 
 func _ready() -> void:
-	#%TechTreeContainer.gui_input.connect( _on_tech_tree_gui_input )
 	%ViewportMargin.gui_input.connect( _on_tech_tree_gui_input )
 	#%SubViewport.size = %ViewportMargin.size #%SubViewportContainer.size
 	pass
@@ -42,7 +41,7 @@ func _on_tech_tree_gui_input(event: InputEventMouse) -> void:
 			drag_origin = get_local_mouse_position()
 			## The current scroll position
 			scroll_pos = Vector2( ViewportScroll.scroll_horizontal, ViewportScroll.scroll_vertical )
-			#%ViewportMargin.mouse_default_cursor_shape = CURSOR_DRAG
+			#%ViewportMargin.mouse_default_cursor_shape = CURSOR_POINTING_HAND
 		#else:
 			#%ViewportMargin.mouse_default_cursor_shape = CURSOR_ARROW
 
@@ -70,6 +69,7 @@ func generate_connectors(research_node):
 				requirement_node.position - research_node.position + (requirement_node.size/2)
 			]
 			research_node.add_child(Connector)
+			# Add an arrow pointing in direction of progression.
 			#var arrow = Connector.get_node("TextureRect")
 			#arrow.position = (Connector.points[1] - Connector.points[0]) /2 + arrow.size/2
 			#arrow.rotation = rotate

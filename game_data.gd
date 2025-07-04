@@ -22,7 +22,7 @@ var save_data = SaveData.new()
 #@export var weaponsBasePS: int = 0 #: set = _set_weaponsPS
 
 
-@export var power: float = 0.0 :            ## Total [Power] acumalated.
+@export var power: float = 0.0 :           ## Total [Power] acumalated.
 	set(value):
 		# If new value is higher than current value, add to total earnt.
 		if value>power: powerE += (value-power)
@@ -92,6 +92,10 @@ var _power_properties = {}
 #@export var thoughtEarnRandMax: float = 0.1  # Randomness maximum
 #@export var thoughtEarnScale: float = 1.2
 
+#@export var meditateEarnBase: float =
+@export var meditateBaseSpeed: float = 2.0     ## Each meditate increment takes this amount of time in seconds
+@export var meditateSpeedPercentMult: float = 1.0  ## Additive percent speed multiplier
+#@export var meditateSpeedMult: float = 1.0     ## Multiplicative speed multiplier
 #@export var currentResearch = null
 #@export var currentResearchProgress = 0
 
@@ -234,7 +238,9 @@ func _on_resource_removed( resource_type: String, amount: float ):
 
 
 
-func _on_thought_progressed():
+func _on_thought_progressed(meditate_active := false):
+	if meditate_active:
+		pass
 	thoughtProgress += thoughtPower
 	Events.ui_thought_progressed.emit( thoughtProgress )
 

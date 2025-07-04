@@ -39,7 +39,7 @@ func _update_info(item):
 			Item.State.UNLOCKED:#, Item.State.OWNED:
 				Title.text = item.name
 				Description.text = item.description
-				#State.text = ""
+				State.text = ""
 				#Costs.text = "" # reset
 				#var costs = item.get_costs()
 				#for req in costs:

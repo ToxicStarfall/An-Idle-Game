@@ -19,7 +19,7 @@ signal game_loaded
 #signal weapon_power_changed
 
 # Updates thought logic
-signal thought_progressed
+signal thought_progressed(meditate_active: bool)
 #signal thought_completed
 # Updates hought UI progress
 signal ui_thought_progressed( new_progress )  # Per click vfx

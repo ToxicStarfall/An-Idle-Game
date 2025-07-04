@@ -40,8 +40,9 @@ func _toggle_meditate(overide_state = null):
 
 	if meditate_active:
 		%MeditateButton.text = "MEDITATE: ON"
-		await get_tree().create_timer(1.0).timeout
-		Events.thought_progressed.emit()
+		var time = GameData.meditateBaseSpeed / GameData.meditateSpeedPercentMult
+		await get_tree().create_timer(time).timeout
+		Events.thought_progressed.emit(true)
 		_toggle_meditate()  # Restart timer
 	else:
 		%MeditateButton.text = "MEDITATE: OFF"

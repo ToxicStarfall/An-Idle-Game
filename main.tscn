@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://637nae12nn2l"]
+[gd_scene load_steps=72 format=3 uid="uid://637nae12nn2l"]
 
 [ext_resource type="Script" uid="uid://dws7sgjrhbcom" path="res://user_interface/user_interface.gd" id="2_y7cka"]
 [ext_resource type="Script" uid="uid://de766355n883h" path="res://user_interface/panels/main_panel.gd" id="3_0cofv"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://d13npokqdssnk" path="res://user_interface/panels/main_bar.gd" id="4_272bh"]
 [ext_resource type="PackedScene" uid="uid://clmr7xi56pejk" path="res://user_interface/panels/research_panel/research_panel.tscn" id="4_jdleu"]
 [ext_resource type="Texture2D" uid="uid://big3qifsbuog0" path="res://textures/black_texture_1.jpg" id="4_w48qg"]
+[ext_resource type="Shader" uid="uid://c8hxi1qe822sj" path="res://vfx/new_shader.gdshader" id="4_yaehf"]
 [ext_resource type="Script" uid="uid://bqxhkr6sbatew" path="res://user_interface/panels/upgrades_panel/upgrades_panel.gd" id="5_5vw27"]
 [ext_resource type="PackedScene" uid="uid://b4tmstps088mq" path="res://user_interface/panels/event_log.tscn" id="5_dg77c"]
 [ext_resource type="Texture2D" uid="uid://bmyat2qjelag7" path="res://textures/border-4px.png" id="5_efxa6"]
@@ -17,29 +18,8 @@
 [ext_resource type="PackedScene" uid="uid://t5uopevp7250" path="res://user_interface/panels/database_panel.tscn" id="7_kek77"]
 [ext_resource type="PackedScene" uid="uid://desdwvbur1ukf" path="res://user_interface/panels/tooltip_panel.tscn" id="15_2cqfq"]
 
-[sub_resource type="Gradient" id="Gradient_yaehf"]
-colors = PackedColorArray(0.5, 0.5, 0.5, 0, 1, 1, 1, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_074og"]
-frequency = 0.003
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cegan"]
-seamless = true
-color_ramp = SubResource("Gradient_yaehf")
-noise = SubResource("FastNoiseLite_074og")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vivmo"]
-shader = ExtResource("4_2cqfq")
-shader_parameter/portal_texture = SubResource("NoiseTexture2D_cegan")
-shader_parameter/portal_tint = Color(1, 1, 1, 1)
-shader_parameter/vortex_effect_radius = 0.5
-shader_parameter/twist_strength = 8.0
-shader_parameter/pulsation_speed = 0.15
-shader_parameter/breath_magnitude = -1.86265e-08
-shader_parameter/overall_rotation_speed = 2.0
-shader_parameter/texture_scroll_speed_x = 0.08
-shader_parameter/texture_scroll_speed_y = 0.03
-shader_parameter/edge_softness = 0.2
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_074og"]
+shader = ExtResource("4_yaehf")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2cqfq"]
 shader = ExtResource("6_vivmo")
@@ -144,6 +124,30 @@ corner_radius_bottom_left = 2
 bg_color = Color(0.145098, 0.145098, 0.14902, 1)
 expand_margin_left = 4.0
 expand_margin_right = 4.0
+
+[sub_resource type="Gradient" id="Gradient_yaehf"]
+colors = PackedColorArray(0.5, 0.5, 0.5, 0, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_074og"]
+frequency = 0.003
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cegan"]
+seamless = true
+color_ramp = SubResource("Gradient_yaehf")
+noise = SubResource("FastNoiseLite_074og")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vivmo"]
+shader = ExtResource("4_2cqfq")
+shader_parameter/portal_texture = SubResource("NoiseTexture2D_cegan")
+shader_parameter/portal_tint = Color(1, 1, 1, 1)
+shader_parameter/vortex_effect_radius = 0.5
+shader_parameter/twist_strength = 8.0
+shader_parameter/pulsation_speed = 0.15
+shader_parameter/breath_magnitude = -1.86265e-08
+shader_parameter/overall_rotation_speed = 2.0
+shader_parameter/texture_scroll_speed_x = 0.08
+shader_parameter/texture_scroll_speed_y = 0.03
+shader_parameter/edge_softness = 0.2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0odxb"]
 draw_center = false
@@ -359,20 +363,13 @@ expand_mode = 1
 
 [node name="TextureRect2" type="TextureRect" parent="UserInterface/MainPanel"]
 visible = false
-material = SubResource("ShaderMaterial_vivmo")
+material = SubResource("ShaderMaterial_074og")
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -64.0
-offset_right = 128.0
-offset_bottom = 128.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 880.0
+offset_top = 56.0
+offset_right = 1008.0
+offset_bottom = 184.0
 texture = ExtResource("3_4c57u")
 expand_mode = 1
 stretch_mode = 4

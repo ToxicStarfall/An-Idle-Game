@@ -13,3 +13,5 @@ icon_alignment = 1
 expand_icon = true
 script = ExtResource("1_fp105")
 metadata/_custom_type_script = "uid://bmimo4f4i7irm"
+
+[connection signal="property_list_changed" from="." to="." method="_on_property_list_changed"]

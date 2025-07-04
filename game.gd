@@ -139,25 +139,25 @@ func _initialize_research_tree():
 	const research_node_scene_path = "res://objects/items/types/research/research_components/research_node.tscn"
 	var TechTree = ResearchPanel.get_node("%TechTreeContainer")
 
-	for placeholder_node in TechTree.get_children():
-		var reference_key = placeholder_node.name
-		if GameData.research.has(reference_key) && placeholder_node is ResearchPlaceholder:
-			var item = GameData.research.get(reference_key)
+	for research_node in TechTree.get_children():
+		#var reference_key = placeholder_node.name
+		#if GameData.research.has(reference_key) && placeholder_node is ResearchPlaceholder:
+			#var item = GameData.research.get(reference_key)
 
-			var research_node = preload(research_node_scene_path).instantiate()
-			research_node.name = reference_key
-			research_node.item_resource = item
+			#var research_node = preload(research_node_scene_path).instantiate()
+			#research_node.name = reference_key
+			#research_node.item_resource = item
 			research_node.update_connector.connect(ResearchPanel.update_connector)
 			#reserach_node.update_state
 
-			research_node.position = placeholder_node.position
-			TechTree.remove_child(placeholder_node)  # Remove placeholder
-			placeholder_node.queue_free()            # Delete placholder
-			TechTree.add_child(research_node)        # Add research node
+			#research_node.position = placeholder_node.position
+			#TechTree.remove_child(placeholder_node)  # Remove placeholder
+			#placeholder_node.queue_free()            # Delete placholder
+			#TechTree.add_child(research_node)        # Add research node
 
 			ResearchPanel.generate_connectors(research_node)
-		else:
-			print("Cannot find reference key for research node: \"%s\"" % [reference_key])
+		#else:
+			#print("Cannot find reference key for research node: \"%s\"" % [reference_key])
 	print("Research tree created.")
 
 

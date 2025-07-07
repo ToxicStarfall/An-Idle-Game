@@ -1,14 +1,42 @@
-[gd_resource type="Resource" script_class="Event" load_steps=3 format=3 uid="uid://b0f1qiktus7x3"]
+[gd_resource type="Resource" script_class="InteractionEvent" load_steps=10 format=3 uid="uid://b0f1qiktus7x3"]
 
-[ext_resource type="Texture2D" uid="uid://w2y7b755pkgw" path="res://textures/icons/incognito_svgrepo_white.png" id="1_xbw7t"]
-[ext_resource type="Script" uid="uid://dyac2wk5e0rxg" path="res://objects/events/event.gd" id="2_qci1p"]
+[ext_resource type="Script" uid="uid://ct6l0uaa65s48" path="res://objects/events/types/interaction_event.gd" id="1_whs4x"]
+[ext_resource type="Texture2D" uid="uid://cgu4gs0s0kk5y" path="res://icon.svg" id="1_xbw7t"]
+[ext_resource type="Script" uid="uid://bknjsth4pem2q" path="res://objects/events/event_option.gd" id="2_6fw3w"]
+[ext_resource type="Script" uid="uid://ch31xejfebo7f" path="res://objects/items/components/requirements/cost_currency.gd" id="3_y3m20"]
+[ext_resource type="Script" uid="uid://cqjg2ef8x7ix7" path="res://objects/items/components/item_effect.gd" id="4_ttn21"]
+[ext_resource type="Script" uid="uid://caj5o56x4i7td" path="res://objects/items/components/requirements/requirement.gd" id="5_ruce4"]
+
+[sub_resource type="Resource" id="Resource_pbd03"]
+script = ExtResource("2_6fw3w")
+name = "Dismiss"
+tooltip = "Dismiss offer"
+requirements = Array[ExtResource("5_ruce4")]([])
+costs = Array[ExtResource("3_y3m20")]([])
+effects = Array[ExtResource("4_ttn21")]([])
+metadata/_custom_type_script = "uid://bknjsth4pem2q"
+
+[sub_resource type="Resource" id="Resource_j5lji"]
+script = ExtResource("4_ttn21")
+type = ""
+value = 0.0
+modifier = 0
+metadata/_custom_type_script = "uid://cqjg2ef8x7ix7"
+
+[sub_resource type="Resource" id="Resource_l5fcu"]
+script = ExtResource("2_6fw3w")
+name = "Accept"
+tooltip = "Accept offer"
+requirements = Array[ExtResource("5_ruce4")]([])
+costs = Array[ExtResource("3_y3m20")]([])
+effects = Array[ExtResource("4_ttn21")]([SubResource("Resource_j5lji")])
+metadata/_custom_type_script = "uid://bknjsth4pem2q"
 
 [resource]
-script = ExtResource("2_qci1p")
-text = "A visitor arrives seeking somthing."
+script = ExtResource("1_whs4x")
+duration = 0.0
 icon = ExtResource("1_xbw7t")
 title = "Event Title."
 description = "Event details."
-duration = 0.0
-dismissable = false
+options = Array[ExtResource("2_6fw3w")]([SubResource("Resource_pbd03"), SubResource("Resource_l5fcu")])
 metadata/_custom_type_script = "uid://dyac2wk5e0rxg"

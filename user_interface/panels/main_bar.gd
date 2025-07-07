@@ -15,7 +15,7 @@ var meditate_active = false
 func _ready() -> void:
 	ThoughtButton.pressed.connect( func():
 		Events.thought_progressed.emit()
-		#Events.trigger_event.emit( EventMessage.new("Somthing was clicked!") )
+		#Events.trigger_event.emit( MessageEvent.new("Somthing was clicked!") )
 		)
 	#%MeditateButton.pressed.connect( func(): meditate_active = !meditate_active ) # toggle meditate_active
 	%MeditateButton.pressed.connect( func(): _toggle_meditate(!meditate_active) ) # toggle meditate_active

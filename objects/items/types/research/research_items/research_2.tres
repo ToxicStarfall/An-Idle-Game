@@ -21,7 +21,7 @@ metadata/_custom_type_script = "uid://ch31xejfebo7f"
 script = ExtResource("4_yc0bg")
 event = ExtResource("3_suteo")
 type = ""
-value = 0
+value = 0.0
 modifier = 0
 metadata/_custom_type_script = "uid://c5j000278rbt5"
 

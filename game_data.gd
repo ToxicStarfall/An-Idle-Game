@@ -4,81 +4,87 @@ extends Node
 var save_data = SaveData.new()
 
 #region - - - Resources - - - - #
+
 #@export var weapons: int = 0  ## number of weapons produced
 #@export var weapons = Weapons.new()
 #@export var weaponsE: int = 0  ## highest number of weapons produced
-#@export var weaponPower: float = 0.0 : #set = _update_weaponsPC
+#@export var weaponPower: float = 0.0 : #set = _get_weaponsPC
 	#set(value):
 		#if value>weaponPower: weaponPowerE += (value-weaponPower)
 		##print("weaponPowerE: ",weaponPowerE)
 		#weaponPower = value
 #@export var weaponPowerE: float = 0.0
-#@export var weaponsPC: float = 0.0 #: get = _update_weaponsPC
+#@export var weaponsPC: float = 0.0 #: get = _get_weaponsPC
 #@export var weaponsPS: float = 0
-#@export var weaponsBasePC: int = 1 : #set = _update_weaponsPC
+#@export var weaponsBasePC: int = 1 : #set = _get_weaponsPC
 	#set(value):
 		#weaponsBasePC = value
-		#_update_weaponsPC()
+		#_get_weaponsPC()
 #@export var weaponsBasePS: int = 0 #: set = _set_weaponsPS
 
 
+#region Currency - Power
 @export var power: float = 0.0 :           ## Total [Power] acumalated.
 	set(value):
+		_set_currency("power", value)
 		# If new value is higher than current value, add to total earnt.
-		if value>power: powerE += (value-power)
-		power = value
+		#if value>power: powerE += (value-power)
+		#power = value
 		Events.update_power_counters.emit(power, powerE)
-	#get:
-		#_update_powerEarn()
-		#return power
-@export var powerE: float = 0.0            ## Total lifetime [Power] acumalated.
-# @export var powerPC: float = 0.0
-# @export var powerPCBase: float = 0.0
-# @export var powerPCMult: float = 0.
-@export var powerEarn: float = 0.0           ## Total [Power] earnt as part of [Thought] completion.
+	get: return _get_currency("power")
+	#set(value): _set_prop("power", value)
+	#get: return _get_prop("power")
+@export var powerE: float = 0.0 :          ## Total lifetime [Power] acumalated.
+	set(value): _set_prop("powerE", value)
+	get: return _get_prop("powerE")
+#var powerPC: float = 0.0
+#@export var powerPCBase: float = 0.0
+#@export var powerPCMult: float = 0.
+var powerEarn: float = 0.0 :          ## Total [Power] earnt as part of [Thought] completion.
+	get: return _get_powerEarn()
 @export var powerEarnBase: int = 1 :         ## Base [Power] earnt per [Thought]
-	#set(value): _set_power("powerEarnBase", value)
-	#get: return _get_power("powerEarnBase")
-	set(value):
-		powerEarnBase = value
-		_update_powerEarn()
+	set(value): _set_prop("powerEarnBase", value)
+	get: return _get_prop("powerEarnBase")
 @export var powerEarnBasePct: float = 0.2 :  ## [Power] earnt as a % of [Knowledge] from [Thought].
-	set(value): _set_power("powerEarnBasePct", value)
-	get: return _get_power("powerEarnBasePct")
-var _power_properties = {}
+	set(value): _set_prop("powerEarnBasePct", value)
+	get: return _get_prop("powerEarnBasePct")
+#endregion
 
 
+#region Knowledge & Research
 @export var insight: int = 0   # High level research resource used to unlock core technologies
 @export var knowledge: float = 0 :
 	set(value):
+		_set_currency("knowledge", value)
 		# If new value is higher than current value, add to total earnt.
-		if value>knowledge: knowledgeE += (value-knowledge)
+		#if value>knowledge: knowledgeE += (value-knowledge)
 		#print("knowledgeE: ",knowledge)
-		knowledge = value
-		Events.update_knowledge_counters.emit(knowledge, knowledgeE)
+		#knowledge = value
+		Events.update_knowledge_counters.emit( snappedf(knowledge, 1.0), snappedf(knowledgeE, 1.0))
+	get: return _get_currency("knowledge")
 @export var knowledgeE: float = 0
 #@export var knowledgePS: float = 0 #: set = _set_knowledgePS
 #@export var knowledgeBasePS: int = 0
 
-# Completing [Thoughts] grants [Knowledge].
-@export var thoughtE: int = 0            ## Number of Thoughts completed.
-@export var thoughtProgress: int = 0     ## Current completion progress of thought
+## Completing [Thoughts] grants [Knowledge].
+@export var thoughtE: int = 0            ## Number of [Thoughts] completed.
+@export var thoughtProgress: int = 0     ## Current completion progress of [Thought].
 @export var thoughtProgressReq: int = 0 :
 	set(value):
 		thoughtProgressReq = thoughtEarn
 		Events.thoughtProgressReq_changed.emit( thoughtProgressReq )
 		return thoughtEarn
 
-@export var thoughtPower: float = 0 #:        # Thought fill amount.
-	#get = _update_thoughtPower
+@export var thoughtPower: float = 0 #:        ## Thought fill amount.
+	#get = _get_thoughtPower
 @export var thoughtPowerBase: int = 1:
 	set(value):
 		thoughtPowerBase = value
-		_update_thoughtPower()
+		_get_thoughtPower()
 #@export var thoughtPowerMult: float = 1
 #@export var thoughtPowerRand: float = 0.25  # Randomness of thought fill amount.
 
-# Amount of earnt knowledge per Thought completed.
+## Amount of earnt knowledge per Thought completed.
 @export var thoughtEarn: float = 0:
 	set(value):
 		thoughtEarn = value
@@ -86,8 +92,8 @@ var _power_properties = {}
 @export var thoughtEarnBase: int = 3:
 	set(value):
 		thoughtEarnBase = value
-		_update_thoughtEarn()
-#@export var thoughtEarnMult: float = 1 #: set = _update_thoughtEarn
+		_get_thoughtEarn()
+#@export var thoughtEarnMult: float = 1 #: set = _get_thoughtEarn
 #@export var thoughtEarnRand: float = -0.25   # Randomness of earnt knowledge earnt per Thought
 #@export var thoughtEarnRandMax: float = 0.1  # Randomness maximum
 #@export var thoughtEarnScale: float = 1.2
@@ -96,8 +102,10 @@ var _power_properties = {}
 @export var meditateBaseSpeed: float = 2.0     ## Each meditate increment takes this amount of time in seconds
 @export var meditateSpeedPercentMult: float = 1.0  ## Additive percent speed multiplier
 #@export var meditateSpeedMult: float = 1.0     ## Multiplicative speed multiplier
+
 #@export var currentResearch = null
 #@export var currentResearchProgress = 0
+#endregion
 
 #endregion
 
@@ -117,23 +125,22 @@ var _power_properties = {}
 
 
 
-func _init() -> void:
-	#_update_weaponsPC()
+#func _init() -> void:
+	#pass
 
-	pass
-
+## Set the initial calculated values
 func initilize_values():
-	_update_thoughtPower()
-	_update_thoughtEarn()
+	_get_thoughtPower()
+	_get_thoughtEarn()
 	set("thoughtProgressReq", thoughtEarn)
 	#Events.ui_thought_progressed.emit()
 	#Events.thoughtProgressReq_changed.emit(thoughtProgressReq)
-	_update_powerEarn()
-	pass
+	_get_powerEarn()
 
 
 #region - - - SETTERS & GETTERS - - - - #
 
+# Setter for subresources.  (UNUSED currently)
 #func _set_resourcePC(resource_type):
 	#var resource = Game.get_property(resource_type)
 	#if resource:
@@ -144,38 +151,53 @@ func initilize_values():
 		#resource = Game.get_property("base%s" % [resource_type])
 	#return resource
 
-#func _update_weaponsPC():
-	##weaponsPC = weaponsBasePC
-	#pass
-#func _update_weaponsPS(_value):
-	#return
 
-
-func _set_power(key, value):
+## Generic data setter
+func _set_prop(key, value):
 	save_data.set(key, value)
-	#_power_properties[key] = value
-	_update_powerEarn()
 
-func _get_power(key):
-	#print(save_data.get(key))
+## Generic data getter
+func _get_prop(key):
 	return save_data.get(key)
-	#return _power_properties.get(key)
 
 
-func _update_powerEarn():
-	powerEarn = powerEarnBase
+# - - - CURRENCY SETTER - - - - #
+
+
+func _set_currency(currency: String, value):
+	# If new value is higher than current value, add to total earnt.
+	if value > get(currency):
+		var currencyE = currency + "E"
+		set(currencyE, get(currencyE) - get(currency))  # Add the difference
+		#powerE += (value - power)  # Add the difference
+		#power = value
+	save_data.set(currency, value)
+	# Currency update signals are emitted after calling this function in "set(value):"
+
+
+func _get_currency(key):
+	return save_data.get(key)
+
+
+
+#region - - - STAT CALCULATIONS - - - - #
+## Calculates [powerEarn] and returns the value.
+func _get_powerEarn() -> float:
+	#powerEarn = powerEarnBase
 	#powerEarn = powerEarnBasePct
+	var calculated_value  = powerEarnBase
+	return calculated_value#powerEarn
 
 
-func _update_thoughtPower(_value=0):
+func _get_thoughtPower(_value=0):
 	thoughtPower = thoughtPowerBase
 	#thoughtPower *= thoughtPowerMult
 	#thoughtPower += (thoughtPowerBase * randf_range(thoughtPowerRand, thoughtPowerRandMax))
 	#thoughtPower = float( int(thoughtPower * 100) ) / 100  # round to hundreths place
-	#return value
 	#return thoughtPower
 
-func _update_thoughtEarn(_value=0):
+
+func _get_thoughtEarn(_value=0):
 	#thoughtEarnBase = value
 	thoughtEarn = thoughtEarnBase
 	#thoughtEarn += (thoughtEarnBase * randf_range(thoughtEarnRand, thoughtEarnRandMax))

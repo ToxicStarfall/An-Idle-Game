@@ -25,7 +25,7 @@ func _ready() -> void:
 	await _initialize_game_resources()
 	await Game.load_game_data()
 	Game.save_game_data()
-	#unlock_ui("MeditateButton")
+
 	Events.function_unlocked.connect( _on_function_unlocked )
 	pass
 
@@ -136,7 +136,7 @@ func _initialize_research():
 
 
 func _initialize_research_tree():
-	const research_node_scene_path = "res://objects/items/types/research/research_components/research_node.tscn"
+	#const research_node_scene_path = "res://objects/items/types/research/research_components/research_node.tscn"
 	var TechTree = ResearchPanel.get_node("%TechTreeContainer")
 
 	for research_node in TechTree.get_children():

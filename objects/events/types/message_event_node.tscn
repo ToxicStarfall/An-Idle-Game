@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dedl4ujvmq1ti"]
 
-[ext_resource type="Script" uid="uid://cvukkmwejs7iu" path="res://objects/events/types/event_message_node.gd" id="1_68e22"]
+[ext_resource type="Script" uid="uid://cvukkmwejs7iu" path="res://objects/events/types/message_event_node.gd" id="1_68e22"]
 
 [node name="EventMessage" type="RichTextLabel"]
 offset_right = 1.0

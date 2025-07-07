@@ -1,34 +1,37 @@
 {
   "column_properties": {
-    "": {
+    "res://objects/items/types/research/": {
+      "metadata/_custom_type_script": {
+        "visibility": 0.0
+      },
       "resource_local_to_scene": {
         "visibility": 0.0
       },
       "resource_name": {
         "visibility": 0.0
+      },
+      "resource_path": {
+        "visibility": 0.0
+      },
+      "unlockRequirements": {
+        "visibility": 0.0
       }
     },
-    "res://objects/": {
+    "res://objects/items/types/research/research_items/": {
+      "metadata/_custom_type_script": {
+        "visibility": 0.0
+      },
       "resource_local_to_scene": {
         "visibility": 0.0
       },
       "resource_name": {
         "visibility": 0.0
+      },
+      "resource_path": {
+        "visibility": 0.0
       }
     },
-    "res://objects/items/types/": {
-      "burst_mode": {
-        "visibility": 0.0
-      },
-      "disabled": {
-        "visibility": 0.0
-      },
-      "generate_currencies": {
-        "visibility": 0.0
-      },
-      "generate_time": {
-        "visibility": 0.0
-      },
+    "res://objects/items/types/research::costs/": {
       "metadata/_custom_type_script": {
         "visibility": 0.0
       },
@@ -38,55 +41,12 @@
       "resource_name": {
         "visibility": 0.0
       }
-    },
-    "res://objects/items/types/research/": {
-      "resource_local_to_scene": {
-        "visibility": 0.0
-      },
-      "resource_name": {
-        "visibility": 0.0
-      }
-    },
-    "res://objects/items/types::costs/": {
-      "resource_local_to_scene": {
-        "visibility": 0.0
-      },
-      "resource_name": {
-        "visibility": 0.0
-      }
-    },
-    "res://objects/items/upgrades/": {
-      "resource_local_to_scene": {
-        "visibility": 0.0
-      },
-      "resource_name": {
-        "visibility": 0.0
-      }
-    },
-    "res://objects/upgrades/": {
-      "cost": {
-        "visibility": 1.0
-      },
-      "resource_local_to_scene": {
-        "visibility": 0.0
-      },
-      "resource_name": {
-        "visibility": 0.0
-      }
-    },
-    "res://objects/upgrades::cost/": {
-      "resource_local_to_scene": {
-        "visibility": 0.0
-      },
-      "resource_name": {
-        "visibility": 0.0
-      }
     }
   },
   "recent_paths": [
-    "res://objects/items/upgrades/",
-    "res://objects/items/types/",
-    "res://objects/items/types/research/"
+    "res://objects/items/types/research/",
+    "res://objects/items/types/research::costs/",
+    "res://objects/items/types/research/research_items/"
   ],
   "table_functions": {
     "filter": [

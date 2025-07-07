@@ -4,26 +4,30 @@ extends PanelContainer
 var unlocked := false
 
 
+@onready var EventCard = %EventCard
 @onready var LogContainer = %LogContainer
 
 
 func _ready() -> void:
-	Events.trigger_event.connect( _on_new_event )
+	#Events.trigger_event.connect( _on_new_event )
+	#Events.message_logged.connect( _on_message_logged )
+	EventManager.new_message_event.connect( _on_new_message_event )
+	EventManager.new_interaction_event.connect( _on_new_interaction_event )
 	pass
 
 
-func _on_new_event(event):
-	#match event.get_script().get_global_name():
-	if event is EventMessage:
-		_new_message(event)
-		return
-	if event is Event:
-		_set_event_card(event)
-		return
+
+#func _on_message_logged(event):
+	#var message = preload("res://objects/events/types/message_event_node.tscn").instantiate()
+	#message.event = event
+	#message.text = event.text
+	#LogContainer.add_child(message)
+	#LogContainer.move_child(message, 0)
+	#pass
 
 
-func _new_message(event):
-	var message = preload("res://objects/events/types/event_message_node.tscn").instantiate()
+func _on_new_message_event(event: MessageEvent):
+	var message = preload("res://objects/events/types/message_event_node.tscn").instantiate()
 	message.event = event
 	message.text = event.text
 	LogContainer.add_child(message)
@@ -31,7 +35,8 @@ func _new_message(event):
 	pass
 
 
-func _set_event_card(event):
+func _on_new_interaction_event(event: InteractionEvent):
+	EventCard.show()
 	#print(event)
 	%Icon.texture = event.icon
 	%Text.text = event.text
@@ -43,14 +48,14 @@ func unlock():
 	unlocked = true
 
 
-func toggle_expand(expanded: bool):
+func _toggle_expand(expanded: bool):
 	if expanded:
 		pass
 	else:
 		pass
 
 
-func toggle_visibilty(visible: bool):
+func _toggle_visibilty(visible: bool):
 	if visible and unlocked:
 		self.show()
 		# play slide in effect

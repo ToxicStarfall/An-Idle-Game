@@ -1,5 +1,6 @@
-class_name EventPopup
+class_name PopupEvent
 extends Event
+## Event class for quick mini event popups that may randomly happen
 
 
 func _init(message: String, tooltip_data: Resource = null, duration := 0.0) -> void:

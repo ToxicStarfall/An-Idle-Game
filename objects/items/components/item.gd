@@ -3,7 +3,7 @@ class_name Item
 
 
 signal update_state(state)
-signal update_content
+#signal update_content
 
 #@export_category("Debug")
 @export var disabled = false  ## For debug purposes
@@ -34,9 +34,8 @@ var raw_name # plain file name
 # resource_path.split("/")[-1].split(".")[0]
 
 enum Tags { WEAPONS, UPGRADE }
-#enum InternalTags {}
 enum State { LOCKED, UNLOCKED, OWNED }
-#enum { LOCKED, UNLOCKED, OWNED }
+#enum InternalTags {}
 
 
 func _init() -> void:
@@ -85,11 +84,11 @@ func buy():
 			_apply_effects()
 			# tween pop/unlock effect,
 			# remove node and move to database
-			EventMessage.new("Item bought [url]%s[/url]" % [self.name], self).call_event()
+			MessageEvent.new("Item bought [url]%s[/url]" % [self.name], self).call_event()
 			#print("Bought \"%s\" for %s" % [self.name, get_costs()])
 		else:
-			#Events.trigger_event.emit( EventMessage.new("Item bought [url]%s[/url]" % [self.name], self) )
-			EventMessage.new("Cannot buy %s." % [self.name], self, 3.0).call_event()
+			#Events.trigger_event.emit( MessageEvent.new("Item bought [url]%s[/url]" % [self.name], self) )
+			MessageEvent.new("Cannot buy %s." % [self.name], self, 3.0).call_event()
 			#print("Cannot buy. \"%s\" requires %s" % [self.name, get_costs()])
 
 
@@ -104,19 +103,29 @@ func _apply_effects():
 		pass
 
 
-# Returns costs as "current/total" in a Array format.
+## Returns costs as "current/total" in a Array format.
 func get_costs():
-	var array = []
-	for requirement in costs:
-		var string = "%s/%s %s" % [Game.get_property(requirement.currency), requirement.value, requirement.currency]
-		array.append( string )
-
+	#var array = []
+	#for cost in costs:
+		#var string = "%s/%s %s" % [Game.get_property(cost.currency), cost.value, cost.currency]
+		#array.append( string )
+#
+	#if costs.is_empty():
+		#array.append("Free")
+	#return array
+	var string: String = ""
 	if costs.is_empty():
-		array.append("free")
-	return array
+		string += "Free"
+	else:
+		for cost in costs:
+			if cost.check():
+				string += "[color=green]%s %s[/color]\n" % [cost.value, cost.currency]
+			else:
+				string += "[color=red]%s %s[/color]\n" % [cost.value, cost.currency]
+	return string
 
 
-# Returns costs as "current/total" in a Array format.
+## Returns costs as "current/total" in a Array format.
 func _get_requirements():
 	var array = []
 	for requirement in requirements:
@@ -132,7 +141,7 @@ func _get_requirements():
 
 
 func get_tags():
-	var string: String
+	var string: String = ""
 	for tag in tags.internal_tags:
 		string += " [%s]" % [tag]
 	return string

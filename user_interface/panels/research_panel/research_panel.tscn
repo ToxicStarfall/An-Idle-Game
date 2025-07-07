@@ -9,7 +9,7 @@
 [ext_resource type="Resource" uid="uid://4op6qlvuxqim" path="res://objects/items/types/research/research_items/research_2.tres" id="6_toqle"]
 [ext_resource type="Resource" uid="uid://butp5q5yitdsa" path="res://objects/items/types/research/research_items/calm_mind.tres" id="7_7nsin"]
 [ext_resource type="Resource" uid="uid://b61kixvkybyg3" path="res://objects/items/types/research/research_items/research_3.tres" id="7_hj4q1"]
-[ext_resource type="Resource" uid="uid://ploxnb85g1yo" path="res://objects/items/types/research/research_items/meditation_2.tres" id="8_hj4q1"]
+[ext_resource type="Resource" uid="uid://ploxnb85g1yo" path="res://objects/items/types/research/research_items/meditation_2.tres" id="9_7nsin"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lvyhc"]
 bg_color = Color(0.1617, 0.22341, 0.33, 1)
@@ -131,7 +131,7 @@ offset_left = 512.0
 offset_top = 192.0
 offset_right = 564.0
 offset_bottom = 244.0
-item_resource = ExtResource("8_hj4q1")
+item_resource = ExtResource("9_7nsin")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 visible = false

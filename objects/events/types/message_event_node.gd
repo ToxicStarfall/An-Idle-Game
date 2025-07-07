@@ -1,4 +1,4 @@
-class_name EventMessageNode
+class_name MessageEventNode
 extends RichTextLabel
 
 
@@ -15,7 +15,9 @@ func _ready() -> void:
 		timer.timeout.connect( queue_free )
 
 
+
 func _on_meta_clicked(_meta):
+	# Open Database and find item
 	pass
 
 

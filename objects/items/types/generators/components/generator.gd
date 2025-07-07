@@ -45,10 +45,9 @@ func generate_currency():
 		generator_effect.apply( quantity )        # generate each for every [Generator] owned
 
 
-func _scale_cost(amount):
+func _scale_cost(_amount):
 	#Game.get_property("generator_cost_scale")
-	for i in costs:
-		i.value *= (GameData.generator_cost_scale ** (quantity - 1))
-		#print(i.value)
+	for cost in costs:
+		cost.value *= (GameData.generator_cost_scale ** (quantity - 1))
+		cost.value = snappedf(cost.value, 0.1)  # Round to nearest tenths
 		pass
-	pass

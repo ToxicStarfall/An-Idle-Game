@@ -1,6 +1,9 @@
 extends Control
 
 
+var hovered: bool = false
+
+
 @onready var Title = %TitleLabel
 @onready var State = %OwnedLabel
 @onready var Description = %DescriptionText
@@ -31,8 +34,8 @@ func _update_info(item):
 			Item.State.OWNED:
 				Title.text = item.name
 				Description.text = item.description
-				#State.text = ""
-				Costs.text = ""
+				State.text = ""
+				Costs.text = "OWNED"
 				Tags.text = item.get_tags()
 				Flair.text = item.flair
 				pass
@@ -40,14 +43,8 @@ func _update_info(item):
 				Title.text = item.name
 				Description.text = item.description
 				State.text = ""
-				#Costs.text = "" # reset
-				#var costs = item.get_costs()
-				#for req in costs:
-					#var color = "green"
-					#if req.check() == false:
-						#color = "red"
-					#Costs.text += "[color=%s]%s[/%s]" % [ color, costs.pop_front(), color ]
-				Costs.text = "[color=green]%s[/color]" % [item.get_costs()]
+				#Costs.text = "%s[/color]" % [item.get_costs()]
+				Costs.text = item.get_costs()
 				Tags.text = item.get_tags()
 				Flair.text = item.flair
 				pass
@@ -64,16 +61,23 @@ func _update_info(item):
 	if item is Research or item is Upgrade:
 		match item.state:
 			Item.State.OWNED:
-				State.text = "( Owned )"
+				#State.text = "( Owned )"
 				pass
 
 	# Sets generator specific info
 	if item is Generator:
 		match item.state:
 			Item.State.OWNED:
-				State.text = "( Owned :  %s )" % [item.quantity]
+				State.text = " [Owned :  %s]" % [item.quantity]
+				Costs.text = item.get_costs()
 				pass
-
+	#match item.get_script().get_global_name():
+		#"Item":
+			#pass
+		#"Upgrade", "Research":
+			#pass
+		#"Generator":
+			#pass
 	# Add more spcific control types for different ui buttons/parts
 	#if target_node is Button:
 		#pass

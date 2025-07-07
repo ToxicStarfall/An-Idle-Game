@@ -9,7 +9,7 @@ signal update_connector( researchNode: ResearchNode )
 
 func _init() -> void:
 	if Engine.is_editor_hint():
-		EditorInterface.get_inspector().property_edited.connect( _on_editor_property_edited )
+		EditorInterface.get_inspector().property_edited.connect( _on_inspector_property_edited )
 		#EditorInterface.get_selection().selection_changed.connect( _on_editor_selection_changed )
 	else:
 		super()
@@ -20,7 +20,7 @@ func _ready() -> void:
 		super()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	#if Engine.is_editor_hint():
 		#var viewport2d = EditorInterface.get_editor_viewport_2d()
 		#print(viewport2d.gui_is_dragging())
@@ -37,23 +37,30 @@ func _update_state(state: Item.State):
 func _on_editor_selection_changed():
 	for node in EditorInterface.get_selection().get_transformable_selected_nodes():
 		if node is ResearchNode && item_resource:
-			item_resource.raw_name = item_resource.resource_path.split("/")[-1].split(".")[0]
-			print(item_resource.raw_name)
+			#print(item_resource.get_property_list())
+			#item_resource.raw_name = item_resource.resource_path.split("/")[-1].split(".")[0]
+			#print(item_resource.raw_name)
 			#if !item_resource.raw_name:
 				#item_resource.raw_name = item_resource.resource_path.split("/")[-1].split(".")[0]
-			update_connector2()
+			#update_connector2()
+			pass
 
-func _on_editor_property_edited(property: String) -> void:
-	#if Engine.is_editor_hint():
+func _on_inspector_property_edited(property: String) -> void:
+	# Runs on every instance fpr some reason
+	var get_info = func():
+		if item_resource:
+			var raw_name = item_resource.resource_path.split("/")[-1].split(".")[0]
+			print(raw_name)
+			self.name = raw_name
 	#print(property)
-	match property:
-		#if property == "item_resource":
-		"item_resource":
-			if item_resource:
-				var raw_name = item_resource.resource_path.split("/")[-1].split(".")[0]
-				self.name = raw_name
-				print(item_resource.raw_name)
-				#self.item_resource.raw_name = raw_name
+	if property == "item_resource":  # Edited obj filter (ItemNode and children class only)
+		var edit_obj = EditorInterface.get_inspector().get_edited_object()
+		if edit_obj == self:
+			print(item_resource)
+			print("hi")
+		#get_info.call_deferred()
+
+	#match property:
 		#"position":  # This DOES NOT trigger from dragging nodes in the editor
 			#update_connector2()
 			#pass

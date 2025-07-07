@@ -31,10 +31,13 @@ signal update_knowledge_counters( knowledge, knowledgeE )
 signal update_power_counters( power, powerE )
 
 
-#signal new_event( event: Event )
+#region - - - Events - - - - #
 signal trigger_event( event: Event )
 signal message_logged( message: String, tooltip: Resource)
+signal a
 #signal event_option_selected()
+
+#endregion
 
 signal request_tooltip( node, visbility: bool )
 

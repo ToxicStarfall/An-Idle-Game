@@ -1,22 +1,26 @@
 extends Node
 
 
+signal new_message_event
+signal new_interaction_event
+
+signal event_option_selected(option)
+
+
 var current_event: Event
+var queued_events = []
 
 
 func _ready() -> void:
-	#Events.trigger_event.connect( _on_trigger_event )
+	Events.trigger_event.connect( _on_event_triggered )
 	pass
 
 
-func _on_trigger_event( event: Event ):
-	# If an event message exists, send to EventLog
-	if event.text:
-		#print("")
-		pass
+func _on_event_triggered( event: Event ):
+	if event is MessageEvent:
+		new_message_event.emit(event)
+		#Events.message_logged.emit( event )
 
-
-#func call_event():
-	#var a = load("res://objects/events/new_event.tres")
-	#a.call_event()
-	#pass
+	if event is InteractionEvent:
+		current_event = event
+		new_interaction_event.emit(event)

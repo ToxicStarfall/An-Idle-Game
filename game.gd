@@ -21,13 +21,19 @@ enum Currency { WeaponsPOWER }
 
 
 func _ready() -> void:
-	print("Loading game resources...")
-	await _initialize_game_resources()
-	await Game.load_game_data()
-	Game.save_game_data()
-
+	Events.user_interface_loaded.connect( _initialize_game )
+	Events.game_saved.connect( save_game_data )
+	Events.game_loaded.connect( load_game_data )
 	Events.function_unlocked.connect( _on_function_unlocked )
-	pass
+
+
+## Loads resources & saves.
+func _initialize_game():
+	print("Loading game resources...")
+	await _initialize_game_resources()  # Loads default resources
+	await Game.load_game_data()         # Loads save (loads edited resources)
+	#await Game.save_game_data()
+
 
 
 #region - - - HELPER FUNCTIONS - - - - #
@@ -78,7 +84,7 @@ func _on_function_unlocked(node_name):
 
 func _initialize_game_resources():
 	await _initialize_upgrades()
-	await _initialize_research()
+	#await _initialize_research()
 	await _initialize_research_tree()
 	await _initialize_generators()
 	print("Finished loading resources.\n")
@@ -93,12 +99,12 @@ func _initialize_upgrades():
 		push_error("An error occured while accessing folder \"%s\"" % [upgrades_folder_path])
 	else:
 		for file in upgrades_folder:
-			var item = ResourceLoader.load(upgrades_folder_path + file)
+			var item = ResourceLoader.load(upgrades_folder_path + file).duplicate()
 			var raw_name = file.split(".")[0]
 			item.raw_name = raw_name
 			item.resource_name = "upgrade:%s" % [raw_name]
 			item.tags.auto_tag(item)
-			GameData.upgrades[ raw_name ] = item
+			GameData.upgrades.set(raw_name, item)
 			#print(item.resource_name)
 
 			# Adds upgrade nodes to FlowContainer
@@ -117,13 +123,15 @@ func _initialize_research():
 		push_error("An error occured while accessing folder \"%s\"" % [research_folder_path])
 	else:
 		for file in research_folder:
-			var item = ResourceLoader.load(research_folder_path + file)
+			var item = ResourceLoader.load(research_folder_path + file).duplicate()
+			var raw_name = file.split(".")[0]
+			item.set_meta(name, "Research:%s" % [file.split(".")[0]])
 			# if file_name.ends_with(".remap"):  # TEMPROARY FIX FOR WEB EXPORT
 			# 	file_name = file_name.replace(".remap", "")
-			var raw_name = file.split(".")[0]
 			item.raw_name = raw_name
 			item.resource_name = "research:%s" % [raw_name]
-			GameData.research[ raw_name ] = item
+			#GameData.research.set(raw_name, item)
+			GameData.save_data.research.set(raw_name, item)
 			#print(item.resource_name)
 
 			#var item_node = preload("res://objects/items/types/research/research_components/research_node.tscn").instantiate()
@@ -131,7 +139,7 @@ func _initialize_research():
 			item.tags.auto_tag(item)
 			#ResearchPanel.get_node("%TechTreeContainer").add_child( item_node )
 		print("Research items loaded.")
-		#_initialize_research_tree()
+		_initialize_research_tree()
 	pass
 
 
@@ -140,6 +148,8 @@ func _initialize_research_tree():
 	var TechTree = ResearchPanel.get_node("%TechTreeContainer")
 
 	for research_node in TechTree.get_children():
+		#print(research_node.item_resource.raw_name)
+		#print(research_node.item_resource.resource_path)
 		#var reference_key = placeholder_node.name
 		#if GameData.research.has(reference_key) && placeholder_node is ResearchPlaceholder:
 			#var item = GameData.research.get(reference_key)
@@ -158,6 +168,7 @@ func _initialize_research_tree():
 			ResearchPanel.generate_connectors(research_node)
 		#else:
 			#print("Cannot find reference key for research node: \"%s\"" % [reference_key])
+		#pass
 	print("Research tree created.")
 
 
@@ -169,12 +180,12 @@ func _initialize_generators():
 		push_error("An error occured while accessing folder \"%s\"" % [generators_folder_path])
 	else:
 		for file in generators_folder:
-			var item = ResourceLoader.load( generators_folder_path + file)
+			var item = ResourceLoader.load( generators_folder_path + file).duplicate()
 			var raw_name = file.split(".")[0]
 			item.raw_name = raw_name
 			item.resource_name = "generator:%s" % [raw_name]
 			item.tags.auto_tag(item)
-			GameData.generators[ raw_name ] = item
+			GameData.generators.set(raw_name, item)
 			#print(item.resource_name)
 
 			#var item_node = preload("res://objects/items/types/generators/generator_node.tscn").instantiate()
@@ -209,14 +220,38 @@ func _initialize_generators():
 
 
 func save_game_data():
+	# GameData.save_data contains all updates and can be saved directly by ResourceLoader.
 	var save_data = GameData.save_data
-	for i in GameData.get_property_list():
-		if i.usage == 4102:#4102:
-			var key = i.name
-			var property = save_data.get(key)
-			save_data.set(key, property)
+	#print(GameData.research)
+	#for i in save_data.get_property_list():#GameData.get_property_list():
+		#if i.usage == 4102:
+			#var key = i.name
+			#var property = save_data.get(key)
+			#save_data.set(key, property)
+			#if property is Dictionary:
+				#print("DICT")
+				#for item in property:  # Loop dictionary
+					#print(property[item])
+					#property.item
+					#pass
+				#save_data.set(key, property)
+				#pass
 
-	ResourceSaver.save(save_data, "user://save_data.tres")
+	for i in GameData.get_property_list():
+		if i.type == TYPE_DICTIONARY:
+			var dict_name = i.name
+			var dict = GameData.get(dict_name)
+			#print(dict.get_typed_value_script())
+			var dict_value_class_name = dict.get_typed_value_script()
+			# Filter Dictionary which defines [Item] as a type for its values (stores Item).
+			if dict_value_class_name and dict_value_class_name.get_global_name() == "Item":
+				save_data.set(dict_name, dict)
+				#print(dict)
+	_save_items()
+	#print(GameData.research)
+	#save_data.research = GameData.research
+	ResourceSaver.save(save_data, "user://save_file.tres")
+	#print(ResourceLoader.load("user://save_file.tres").research)
 	pass
 
 #func load_GameData():
@@ -244,18 +279,52 @@ func save_game_data():
 				#pass
 
 func load_game_data():
-	var save_data = ResourceLoader.load("user://save_data.tres")
-	if !save_data:
-		save_data = GameData.save_data
+	var save_data = ResourceLoader.exists("user://save_file.tres")
+
+	# If there IS a file, load data over.
+	if save_data:
+		save_data = ResourceLoader.load("user://save_file.tres")
+		for i in save_data.get_property_list():
+			if i.usage == 4102:#4102:
+				var key = i.name
+				var property = save_data.get(key)
+				#GameData.save_data.set(key, property)  # Triggers setters to update
+				GameData.set(key, property)  # Triggers setters to update
+				GameData.update_items(key)  # Update items with linked tags when loading data
+				#print(GameData.save_data)
+				#if property is Dictionary:
+					#print(property)
+		#GameData.save_data = save_data
+
+	# If there is NO save file, make a new file.
+	elif !save_data:
+		GameData.save_data = SaveFile.new()
 		print("new_save_created")
 
-	for i in save_data.get_property_list():
-		if i.usage == 4102:#4102:
-			var key = i.name
-			var property = save_data.get(key)
-			save_data.set(key, property)
+
+func _save_items():
+	for dict_name in ["upgrades", "research", "generators"]:
+		var saved_dict = {}
+		var dict = GameData.get(dict_name)
+		#print(dict)
+
+		# Convert [dict] into {key: Item.State} format or similar.
+		for item_key in dict:
+			var item = dict.get(item_key)
+			match item.get_script().get_global_name():
+				"Generator":
+					pass
+				# [Research] and [Upgrades] are saved with [Item.State]
+				"Research", "Upgrade":
+					saved_dict.set(item_key, item.state)
+
+		#print(saved_dict)
+		GameData.save_data.set(dict_name, saved_dict)
+		#print(GameData.save_data.get(dict_name))
 
 
+func _load_items():
+	pass
 #endregion
 #
 #

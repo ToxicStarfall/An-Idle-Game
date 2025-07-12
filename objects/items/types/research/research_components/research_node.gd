@@ -1,4 +1,4 @@
-@tool
+#@tool
 extends ItemNode
 class_name ResearchNode
 
@@ -8,16 +8,23 @@ signal update_connector( researchNode: ResearchNode )
 
 
 func _init() -> void:
-	if Engine.is_editor_hint():
-		EditorInterface.get_inspector().property_edited.connect( _on_inspector_property_edited )
-		#EditorInterface.get_selection().selection_changed.connect( _on_editor_selection_changed )
-	else:
+	#if Engine.is_editor_hint():
+		#EditorInterface.get_inspector().property_edited.connect( _on_inspector_property_edited )
+		##EditorInterface.get_selection().selection_changed.connect( _on_editor_selection_changed )
+	#else:
 		super()
 
 
 func _ready() -> void:
-	if !Engine.is_editor_hint():
+	#if !Engine.is_editor_hint():
 		super()
+		#item_resource = item_resource.duplicate()  # Missing meta
+		item_resource.raw_name = item_resource.resource_path.split("/")[-1].split(".")[0]
+		item_resource.resource_name = item_resource.get_script().get_global_name() +":"+ item_resource.raw_name
+		item_resource.tags.auto_tag(item_resource)
+		GameData.research.set(item_resource.raw_name, item_resource) # Add to dict
+		#print("resource_path: ", item_resource.resource_path)
+		#print("resource_name: ", item_resource.resource_name)
 
 
 func _process(_delta: float) -> void:
@@ -28,37 +35,38 @@ func _process(_delta: float) -> void:
 
 
 func _update_state(state: Item.State):
-	if !Engine.is_editor_hint():
+	#if !Engine.is_editor_hint():
 		super(state)
 
 		update_connector.emit( self )
 
 
 func _on_editor_selection_changed():
-	for node in EditorInterface.get_selection().get_transformable_selected_nodes():
-		if node is ResearchNode && item_resource:
-			#print(item_resource.get_property_list())
-			#item_resource.raw_name = item_resource.resource_path.split("/")[-1].split(".")[0]
-			#print(item_resource.raw_name)
-			#if !item_resource.raw_name:
-				#item_resource.raw_name = item_resource.resource_path.split("/")[-1].split(".")[0]
-			#update_connector2()
+	#for node in EditorInterface.get_selection().get_transformable_selected_nodes():
+		#if node is ResearchNode && item_resource:
+			##print(item_resource.get_property_list())
+			##item_resource.raw_name = item_resource.resource_path.split("/")[-1].split(".")[0]
+			##print(item_resource.raw_name)
+			##if !item_resource.raw_name:
+				##item_resource.raw_name = item_resource.resource_path.split("/")[-1].split(".")[0]
+			##update_connector2()
 			pass
 
 func _on_inspector_property_edited(property: String) -> void:
 	# Runs on every instance fpr some reason
-	var get_info = func():
-		if item_resource:
-			var raw_name = item_resource.resource_path.split("/")[-1].split(".")[0]
-			print(raw_name)
-			self.name = raw_name
-	#print(property)
-	if property == "item_resource":  # Edited obj filter (ItemNode and children class only)
-		var edit_obj = EditorInterface.get_inspector().get_edited_object()
-		if edit_obj == self:
-			print(item_resource)
-			print("hi")
+	#var get_info = func():
+		#if item_resource:
+			#var raw_name = item_resource.resource_path.split("/")[-1].split(".")[0]
+			#print(raw_name)
+			#self.name = raw_name
+	##print(property)
+	#if property == "item_resource":  # Edited obj filter (ItemNode and children class only)
+		#var edit_obj = EditorInterface.get_inspector().get_edited_object()
+		#if edit_obj == self:
+			#print(item_resource)
+			#print("hi")
 		#get_info.call_deferred()
+	pass
 
 	#match property:
 		#"position":  # This DOES NOT trigger from dragging nodes in the editor

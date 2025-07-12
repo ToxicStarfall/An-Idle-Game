@@ -51,7 +51,7 @@ func _toggle_meditate(overide_state = null):
 
 
 func _on_update_knowledge_counters(knowledge, _knowledgeE):
-	KnowledgeLabel.text = "%s knowledge" %[str(knowledge)]
+	KnowledgeLabel.text = "%s knowledge" % [knowledge]
 
 
 func _on_update_power_counters(power, _powerE):

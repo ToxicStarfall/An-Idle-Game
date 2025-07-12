@@ -18,14 +18,6 @@ func _ready() -> void:
 	pass
 
 
-func _process(_delta: float) -> void:
-	#if is_dragging:
-		#drag_offset = drag_origin - get_local_mouse_position()
-		##print("origin:", drag_origin, "  offset", drag_offset)
-		#ViewportScroll.scroll_horizontal = scroll_pos.x + drag_offset.x
-		#ViewportScroll.scroll_vertical = scroll_pos.y + drag_offset.y
-	pass
-
 
 func _on_tech_tree_gui_input(event: InputEventMouse) -> void:
 	if event is InputEventMouseButton:
@@ -39,7 +31,7 @@ func _on_tech_tree_gui_input(event: InputEventMouse) -> void:
 		is_dragging = event.pressed  ## general mousebutton(1,2,or 3)  pressed state
 		if is_dragging:
 			drag_origin = get_local_mouse_position()
-			## The current scroll position
+			# Set the current scroll position
 			scroll_pos = Vector2( ViewportScroll.scroll_horizontal, ViewportScroll.scroll_vertical )
 			#%ViewportMargin.mouse_default_cursor_shape = CURSOR_POINTING_HAND
 		#else:
@@ -58,6 +50,9 @@ func generate_connectors(research_node):
 
 	for requirement in node_data.requirements:
 		if requirement is RequirementItem:
+			#print(requirement.item.name)
+			#print(requirement.item.resource_name)
+			#print(requirement.item.get("raw_name"))
 			var requirement_node = TechTree.get_node(requirement.item.raw_name)
 
 			#print(requirement_node.position, " - ", research_node.position)

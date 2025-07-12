@@ -41,9 +41,9 @@ enum State { LOCKED, UNLOCKED, OWNED }
 func _init() -> void:
 	if disabled:
 		pass
-	if name == null:  # use resource_name if a defualt is not present
-		name = resource_name.split(":")[1]
-		print(self, " has naming error")
+	#if name == null:  # use resource_name if a defualt is not present
+		#name = resource_name.split(":")[1]
+		#print(self, " has naming error")
 
 
 func unlock():
@@ -126,7 +126,7 @@ func get_costs():
 
 
 ## Returns costs as "current/total" in a Array format.
-func _get_requirements():
+func get_requirements():
 	var array = []
 	for requirement in requirements:
 		var string

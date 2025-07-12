@@ -31,9 +31,10 @@ config/icon="res://icon.svg"
 [autoload]
 
 Events="*res://events.gd"
-Game="*res://game.gd"
 GameData="*res://game_data.gd"
+Game="*res://game.gd"
 EventManager="*res://objects/events/event_manager.gd"
+Inputs="*res://inputs.gd"
 
 [display]
 

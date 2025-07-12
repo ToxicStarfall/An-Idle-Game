@@ -1,7 +1,7 @@
 extends Node
 
 
-var save_data = SaveData.new()
+var save_data = SaveFile.new()
 
 #region - - - Resources - - - - #
 
@@ -32,8 +32,6 @@ var save_data = SaveData.new()
 		#power = value
 		Events.update_power_counters.emit(power, powerE)
 	get: return _get_currency("power")
-	#set(value): _set_prop("power", value)
-	#get: return _get_prop("power")
 @export var powerE: float = 0.0 :          ## Total lifetime [Power] acumalated.
 	set(value): _set_prop("powerE", value)
 	get: return _get_prop("powerE")
@@ -62,7 +60,9 @@ var powerEarn: float = 0.0 :          ## Total [Power] earnt as part of [Thought
 		#knowledge = value
 		Events.update_knowledge_counters.emit( snappedf(knowledge, 1.0), snappedf(knowledgeE, 1.0))
 	get: return _get_currency("knowledge")
-@export var knowledgeE: float = 0
+@export var knowledgeE: float = 0 :
+	set(value): _set_prop("knowledgeE", value)
+	get: return _get_prop("knowledgeE")
 #@export var knowledgePS: float = 0 #: set = _set_knowledgePS
 #@export var knowledgeBasePS: int = 0
 
@@ -111,12 +111,12 @@ var powerEarn: float = 0.0 :          ## Total [Power] earnt as part of [Thought
 
 
 #region - - - Items - - - - #
-@export var upgrades = {} # Dict{ Item }
-@export var research = {}
+@export var upgrades: Dictionary[String, Item] = {} # Dict{ Item }
+@export var research: Dictionary[String, Item] = {}
 
 @export var generator_cost_scale = 1.12 # 1.15 is used by cookieclicker
-@export var generators = {}
-#endregion
+@export var generators: Dictionary[String, Item] = {}
+#endregions
 
 @export var ui = {
 	"MeditateButton": false,
@@ -128,14 +128,18 @@ var powerEarn: float = 0.0 :          ## Total [Power] earnt as part of [Thought
 #func _init() -> void:
 	#pass
 
-## Set the initial calculated values
+## Set the initial calculated values, Causes update signal to emit for values
 func initilize_values():
 	_get_thoughtPower()
 	_get_thoughtEarn()
+	print("thoughtEarn",thoughtEarn)
 	set("thoughtProgressReq", thoughtEarn)
 	#Events.ui_thought_progressed.emit()
 	#Events.thoughtProgressReq_changed.emit(thoughtProgressReq)
 	_get_powerEarn()
+	#Events.update_knowledge_counters.emit(knowledge, knowledgeE)
+	#print(Events.update_knowledge_counters.get_connections())
+	set("knowledge", knowledge)
 
 
 #region - - - SETTERS & GETTERS - - - - #
@@ -152,32 +156,43 @@ func initilize_values():
 	#return resource
 
 
-## Generic data setter
+#region  - - SETTERS & GETTERS - - - - #
+# - - - GENERIC SETTERS - - - - #
 func _set_prop(key, value):
 	save_data.set(key, value)
 
-## Generic data getter
+
 func _get_prop(key):
 	return save_data.get(key)
 
 
-# - - - CURRENCY SETTER - - - - #
-
-
+# - - - CURRENCY SETTERS - - - - #
 func _set_currency(currency: String, value):
 	# If new value is higher than current value, add to total earnt.
 	if value > get(currency):
 		var currencyE = currency + "E"
-		set(currencyE, get(currencyE) - get(currency))  # Add the difference
-		#powerE += (value - power)  # Add the difference
-		#power = value
+		var diff = value - get(currency)
+		set(currencyE, diff + get(currency))  # Add the difference
+		#print(diff, "  value",value, " - currency",get(currency))
+		#print("currencyE - ", currencyE, " - ", get(currencyE))
 	save_data.set(currency, value)
 	# Currency update signals are emitted after calling this function in "set(value):"
+	# Items are not being updated for some reason
 
 
 func _get_currency(key):
 	return save_data.get(key)
 
+
+# - - - ITEM SETTERS - - - - #
+func _set_item():
+	pass
+
+
+func _get_item():
+	pass
+
+#endregion
 
 
 #region - - - STAT CALCULATIONS - - - - #
@@ -237,8 +252,8 @@ func update_items(filter_tag):
 			#print(item.name)
 			var valid_filter
 			var tag = Tags.find_key(Tags.get(filter_tag))
-			if item.tags.internal_tags.has( tag ):#item.tags.Tags[filter_tag] ):
-				#print("matching item: ", item.name)
+			if item.tags.internal_tags.has(tag):
+				#print("  matching item: ", item.name)
 				valid_filter = true
 
 			if item.state == item.State.LOCKED and valid_filter:#item.tags.has(filter_tag):
@@ -272,7 +287,7 @@ func _on_thought_progressed(meditate_active := false):
 		Events.resource_added.emit("thoughtEarnBase", 1)  # grdually scale value
 
 		# Power yield per thought completed
-		Events.resource_added.emit("power", powerEarn) # add additional percent yield
+		#Events.resource_added.emit("power", powerEarn) # add additional percent yield
 		#print(powerEarn, "powerEarn")
 
 		var overflow_progress = thoughtProgress - thoughtProgressReq

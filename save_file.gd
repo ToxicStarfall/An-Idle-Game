@@ -1,5 +1,5 @@
 extends Resource
-class_name SaveData
+class_name SaveFile
 
 #region - - - Resources - - - - #
 #@export var weapons: int = 0

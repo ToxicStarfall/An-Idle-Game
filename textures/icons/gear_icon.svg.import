@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://do7rh1m3u7y75"
-path="res://.godot/imported/particle.png-c2ba3d91e96c62035d672392a1197218.ctex"
+uid="uid://drnrsk12k8gim"
+path="res://.godot/imported/gear_icon.svg-7e2dc5e53382c0ea6cf7adb8b94a18ea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://particle.png"
-dest_files=["res://.godot/imported/particle.png-c2ba3d91e96c62035d672392a1197218.ctex"]
+source_file="res://textures/icons/gear_icon.svg"
+dest_files=["res://.godot/imported/gear_icon.svg-7e2dc5e53382c0ea6cf7adb8b94a18ea.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

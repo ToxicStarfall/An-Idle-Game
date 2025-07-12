@@ -14,6 +14,8 @@ signal function_unlocked( node_name )
 signal game_saved
 signal game_loaded
 
+# - - - Initialization - - - - #
+signal user_interface_loaded
 
 # - - - USER INTERFACE - - - - #
 #signal weapon_power_changed
@@ -27,6 +29,7 @@ signal ui_thought_completed( new_progress )   # Completion visual effects
 signal thoughtProgressReq_changed( new_req )
 signal thoughtEarn_changed
 
+signal knowledge_changed(knowledge)
 signal update_knowledge_counters( knowledge, knowledgeE )
 signal update_power_counters( power, powerE )
 

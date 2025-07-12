@@ -3,14 +3,24 @@ class_name ItemTags
 
 
 #@export_flags("a", "b") var tags
-enum Tags { WEAPONS, WEAPONPOWER, WEAPONPOWERE, UPGRADE, RESEARCH, KNOWLEDGE }
-#enum { WEAPONSPOWER, WEAPONS, UPGRADE }
+enum Tags {
+	# Currencies
+	#WEAPONS, WEAPONPOWER, WEAPONPOWERE,
+	KNOWLEDGE, INSIGHT,
+	POWER,
+	# Items
+	UPGRADE, RESEARCH, GENERATOR,
+	# Misc
+}
 enum InternalTags {}
 
 ## Manually set tags for sorting & filtering.
 @export var taglist: Array[Tags] = []
 # Automatically filled tags for internal use.
 var internal_tags: Array = []
+
+## Tags to listen to for updates
+var update_tags = []
 
 
 func _init() -> void:
@@ -20,9 +30,10 @@ func _init() -> void:
 func auto_tag(item: Item):
 	#internal_tags.append(w
 		#item.get_script().get_global_name()
-	#)  # add item tags
+	# Adds tags for [RequirementCost]
 	for requirement in item.costs:
 		internal_tags.append ( requirement.currency )
+	# Adds tags for [Requirements]
 	for requirement in item.requirements:
 		if requirement is RequirementCurrency:
 			if !internal_tags.has( requirement.currency ):

@@ -5,6 +5,21 @@ class_name Item
 signal update_state(state)
 #signal update_content
 
+enum Type {
+	BASE,
+	UPGRADE,
+	RESEARCH,
+	GENERATOR
+}
+
+enum State {
+	LOCKED,
+	UNLOCKED,
+	OWNED
+}
+
+enum Tags { WEAPONS, UPGRADE }
+
 #@export_category("Debug")
 @export var disabled = false  ## For debug purposes
 
@@ -30,15 +45,15 @@ signal update_state(state)
 #@export var tags: Array[Tags] = []
 #@export_flags("a", "b") var tags
 
-var raw_name # plain file name
-# resource_path.split("/")[-1].split(".")[0]
+var raw_name  ## Plain item name
+var type := Type.BASE  ## Used for Match comparisons for different item types.
 
-enum Tags { WEAPONS, UPGRADE }
-enum State { LOCKED, UNLOCKED, OWNED }
+
 #enum InternalTags {}
 
 
-func _init() -> void:
+func _init(item_type: Type = Type.BASE) -> void:
+	self.type = item_type
 	if disabled:
 		pass
 	#if name == null:  # use resource_name if a defualt is not present
@@ -46,26 +61,29 @@ func _init() -> void:
 		#print(self, " has naming error")
 
 
+## Sets state to [State.UNLOCKED] if requirements are met.
 func unlock():
-	# if state != State.UNLOCKED and state != State.OWNED
-	if state < State.UNLOCKED: #!unlocked:
+	if state < State.UNLOCKED:  # Enum comparison, if this item is currently LOCKED(0)
 		var valid = true
 		for requirement in requirements:
-			# cancel purchase if a requirement is not met
+			# Cancel purchase if a requirement is not met
 			if requirement.check() == false:
 				valid = false
 
 		if valid:
-			_set_state( State.UNLOCKED )
+			set_state( State.UNLOCKED )
 			print("Item unlocked: \"%s\"" % [self.name])
 		else:
 			#print("Cannot unlock. \"%s\" requires %s" % [self.name, _get_requirements()])
 			pass
 
 
+## Set state to [State.OWNED] and applies costs, effects, vfx
+# InputEvent supplied for [MessageEvent] popups.
 func buy():
-	if state == State.LOCKED: print("This item is LOCKED.")
-	if state == State.OWNED: #owned:
+	if state == State.LOCKED:
+		print("This item is LOCKED.")
+	if state == State.OWNED:
 		print("You already own \"%s\"" % [self.name])
 	if state == State.UNLOCKED:  # If not alerady owned
 		var valid = true
@@ -79,12 +97,14 @@ func buy():
 				valid = false
 
 		if valid:
-			_set_state( State.OWNED )
+			set_state( State.OWNED )
 			_apply_costs()
 			_apply_effects()
 			# tween pop/unlock effect,
 			# remove node and move to database
-			MessageEvent.new("Item bought [url]%s[/url]" % [self.name], self).call_event()
+			MessageEvent.new("Item bought [url]%s[/url]" % [self.name], self)\
+				.popup()\
+				.call_event()
 			#print("Bought \"%s\" for %s" % [self.name, get_costs()])
 		else:
 			#Events.trigger_event.emit( MessageEvent.new("Item bought [url]%s[/url]" % [self.name], self) )
@@ -92,11 +112,13 @@ func buy():
 			#print("Cannot buy. \"%s\" requires %s" % [self.name, get_costs()])
 
 
+## Loops through costs[] and applies them.
 func _apply_costs():
 	for cost in costs:
 		cost.apply()
 
 
+## Loops through effects[] and applies them.
 func _apply_effects():
 	for effect in effects:
 		effect.apply()
@@ -105,14 +127,6 @@ func _apply_effects():
 
 ## Returns costs as "current/total" in a Array format.
 func get_costs():
-	#var array = []
-	#for cost in costs:
-		#var string = "%s/%s %s" % [Game.get_property(cost.currency), cost.value, cost.currency]
-		#array.append( string )
-#
-	#if costs.is_empty():
-		#array.append("Free")
-	#return array
 	var string: String = ""
 	if costs.is_empty():
 		string += "Free"
@@ -140,6 +154,7 @@ func get_requirements():
 	return array
 
 
+## Returns tags in "[TAG][TAG2]" format.
 func get_tags():
 	var string: String = ""
 	for tag in tags.internal_tags:
@@ -147,14 +162,16 @@ func get_tags():
 	return string
 
 
-func _set_state(new_state: Item.State):
+## Changes and sets new state, send update signals to [Game] & [ItemNode]
+func set_state(new_state: Item.State):
+	#print("newstate: ", new_state)
 	self.state = new_state
 	#print("state set to ", new_state)
 	update_state.emit( new_state )
-	#Game.update_items( get_script().get_global_name()) # clean this up later
-	Events.item_state_changed.emit( get_script().get_global_name() )
+	Events.item_state_changed.emit(get_script().get_global_name())
 	pass
 
 
+## Checks if this item missing any properties.  If true, disable this item.
 func _validate():
 	pass

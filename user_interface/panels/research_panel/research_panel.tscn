@@ -1,15 +1,15 @@
 [gd_scene load_steps=16 format=3 uid="uid://clmr7xi56pejk"]
 
 [ext_resource type="Script" uid="uid://ducwcague6iqa" path="res://user_interface/panels/research_panel/research_panel.gd" id="1_x6vd8"]
-[ext_resource type="PackedScene" uid="uid://b78igg016ah7d" path="res://objects/items/types/research/research_components/research_node.tscn" id="2_ph1so"]
-[ext_resource type="Resource" uid="uid://bw7jovi2amqn8" path="res://objects/items/types/research/research_items/origin.tres" id="3_1ppkc"]
+[ext_resource type="PackedScene" uid="uid://b78igg016ah7d" path="res://objects/items/types/research/components/research_node.tscn" id="2_ph1so"]
+[ext_resource type="Resource" uid="uid://bw7jovi2amqn8" path="res://objects/items/types/research/items/origin.tres" id="3_1ppkc"]
 [ext_resource type="Texture2D" uid="uid://cgu4gs0s0kk5y" path="res://icon.svg" id="3_hfmy7"]
-[ext_resource type="Resource" uid="uid://by4mif4i3xhga" path="res://objects/items/types/research/research_items/research_1.tres" id="4_2ypqr"]
-[ext_resource type="Resource" uid="uid://d0x4450m17lck" path="res://objects/items/types/research/research_items/meditation.tres" id="5_2s8ur"]
-[ext_resource type="Resource" uid="uid://4op6qlvuxqim" path="res://objects/items/types/research/research_items/research_2.tres" id="6_toqle"]
-[ext_resource type="Resource" uid="uid://butp5q5yitdsa" path="res://objects/items/types/research/research_items/calm_mind.tres" id="7_7nsin"]
-[ext_resource type="Resource" uid="uid://b61kixvkybyg3" path="res://objects/items/types/research/research_items/research_3.tres" id="7_hj4q1"]
-[ext_resource type="Resource" uid="uid://ploxnb85g1yo" path="res://objects/items/types/research/research_items/meditation_2.tres" id="9_7nsin"]
+[ext_resource type="Resource" uid="uid://by4mif4i3xhga" path="res://objects/items/types/research/items/research_1.tres" id="4_2ypqr"]
+[ext_resource type="Resource" uid="uid://d0x4450m17lck" path="res://objects/items/types/research/items/meditation.tres" id="5_2s8ur"]
+[ext_resource type="Resource" uid="uid://4op6qlvuxqim" path="res://objects/items/types/research/items/research_2.tres" id="6_toqle"]
+[ext_resource type="Resource" uid="uid://butp5q5yitdsa" path="res://objects/items/types/research/items/calm_mind.tres" id="7_7nsin"]
+[ext_resource type="Resource" uid="uid://b61kixvkybyg3" path="res://objects/items/types/research/items/research_3.tres" id="7_hj4q1"]
+[ext_resource type="Resource" uid="uid://ploxnb85g1yo" path="res://objects/items/types/research/items/meditation_2.tres" id="9_7nsin"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lvyhc"]
 bg_color = Color(0.1617, 0.22341, 0.33, 1)

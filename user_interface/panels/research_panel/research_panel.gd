@@ -56,7 +56,7 @@ func generate_connectors(research_node):
 			var requirement_node = TechTree.get_node(requirement.item.raw_name)
 
 			#print(requirement_node.position, " - ", research_node.position)
-			var connector_scene = preload("res://objects/items/types/research/research_components/connector.tscn")
+			var connector_scene = preload("res://objects/items/types/research/components/connector.tscn")
 			var Connector = connector_scene.instantiate()
 			Connector.name = "connector-%s" % [requirement_node.name]
 			Connector.points = [

@@ -237,6 +237,7 @@ func _ready() -> void:
 
 
 func update_items(filter_tag):
+	# All tags are CAPITALIZED
 	filter_tag = filter_tag.to_upper()
 	#print("Updating items with tag: ", filter_tag)
 	for type in [upgrades, research, generators]:

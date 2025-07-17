@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://cgu4gs0s0kk5y" path="res://icon.svg" id="3_6ijju"]
 [ext_resource type="Script" uid="uid://8doq8qqvdxbq" path="res://objects/items/components/effects/function_unlock.gd" id="3_h3now"]
 [ext_resource type="Script" uid="uid://caj5o56x4i7td" path="res://objects/items/components/requirements/requirement.gd" id="4_6lry2"]
-[ext_resource type="Script" uid="uid://cr5y4u1asoj50" path="res://objects/items/types/research/research_components/research.gd" id="5_h3now"]
-[ext_resource type="Resource" uid="uid://by4mif4i3xhga" path="res://objects/items/types/research/research_items/research_1.tres" id="6_hh3u1"]
+[ext_resource type="Script" uid="uid://cr5y4u1asoj50" path="res://objects/items/types/research/components/research.gd" id="5_h3now"]
+[ext_resource type="Resource" uid="uid://by4mif4i3xhga" path="res://objects/items/types/research/items/research_1.tres" id="6_hh3u1"]
 [ext_resource type="Script" uid="uid://qwq52mbhtqgk" path="res://objects/items/components/requirements/requirement_item.gd" id="7_gv53m"]
 [ext_resource type="Script" uid="uid://jrivr4k7xxyp" path="res://objects/items/components/item_tag.gd" id="9_vu7v0"]
 

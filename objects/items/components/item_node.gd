@@ -49,3 +49,4 @@ func _update_state(state: Item.State):
 			self.show()
 		State.OWNED:
 			self.modulate = Color(1, 1, 1)
+			self.show() # Make sure item is shown when init'd

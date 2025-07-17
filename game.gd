@@ -116,7 +116,7 @@ func _initialize_upgrades():
 
 
 func _initialize_research():
-	const research_folder_path = "res://objects/items/types/research/research_items/"
+	const research_folder_path = "res://objects/items/types/research/items/"
 	var research_folder = ResourceLoader.list_directory( research_folder_path )
 
 	if research_folder == null:
@@ -278,24 +278,32 @@ func save_game_data():
 				#GameData.get(section)[key] = key_value
 				#pass
 
+
 func load_game_data():
 	var save_data = ResourceLoader.exists("user://save_file.tres")
 
 	# If there IS a file, load data over.
 	if save_data:
 		save_data = ResourceLoader.load("user://save_file.tres")
+		_load_items(save_data)
 		for i in save_data.get_property_list():
 			if i.usage == 4102:#4102:
 				var key = i.name
 				var property = save_data.get(key)
-				#GameData.save_data.set(key, property)  # Triggers setters to update
-				GameData.set(key, property)  # Triggers setters to update
-				GameData.update_items(key)  # Update items with linked tags when loading data
-				#print(GameData.save_data)
-				#if property is Dictionary:
+				#print(key)
+				if property is not Dictionary:
+					#GeameData.save_data.set(key, property)  # Triggers setters to update
+					GameData.set(key, property)  # Triggers setters to update
+					GameData.update_items(key)  # Update items with linked tags when loading data
+				else:
 					#print(property)
+					#GameData.get(key).assign(property)
+					#GameData.set(key, property)
+					#print( GameData.get(key) )
 		#GameData.save_data = save_data
-
+		#GameData._set_item()
+					#_load_item_dict(key, property)  # Handles loading item dictionaries
+					pass
 	# If there is NO save file, make a new file.
 	elif !save_data:
 		GameData.save_data = SaveFile.new()
@@ -323,8 +331,53 @@ func _save_items():
 		#print(GameData.save_data.get(dict_name))
 
 
-func _load_items():
-	pass
+func _load_item_dict(dict_name, dict):
+	#print("Loading Items")
+		var save_data = GameData.save_data
+
+	#for dict_name in ["upgrades", "research", "generators"]:
+
+		const Type = Item.Type
+		#var dict = save_data.get(dict_name)
+		#print(dict_name)
+		print(dict)
+		#print(GameData.get(dict_name))
+
+		for item_key in dict:
+			var item = GameData.get(dict_name).get(item_key)
+			var item_state = dict.get(item_key)
+			print(item.raw_name, " state - ", item_state)
+			# Access each item and update its state individually
+			match item.type:
+				Type.GENERATOR:
+					pass
+				Type.RESEARCH, Type.UPGRADE:
+					#item.state = item_state
+					item.set_state(item.state)
+					pass
+
+		#print(saved_dict)
+		#GameData.save_data.set(dict_name, saved_dict)
+
+
+func _load_items(save_data):
+	#var save_data = GameData.save_data
+
+	for dict_name in ["upgrades", "research", "generators"]:
+		const Type = Item.Type
+		var dict = save_data.get(dict_name)
+		#print(dict)
+
+		for item_key in dict:
+			var item = GameData.get(dict_name).get(item_key)
+			var saved_item_state = dict.get(item_key)
+			# Access each item and update its state individually
+			match item.type:
+				Type.GENERATOR:
+					pass
+				Type.RESEARCH, Type.UPGRADE:
+					item.set_state(saved_item_state)
+					pass
 #endregion
 #
 #

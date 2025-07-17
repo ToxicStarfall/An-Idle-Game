@@ -7,5 +7,6 @@ class_name Upgrade
 
 
 
-func _ready() -> void:
+func _init() -> void:
+	super(Type.UPGRADE)
 	pass

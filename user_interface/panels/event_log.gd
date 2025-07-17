@@ -16,7 +16,7 @@ func _ready() -> void:
 
 
 func _on_new_message_event(event: MessageEvent):
-	var message = preload("res://objects/events/types/message_event_node.tscn").instantiate()
+	var message = preload("res://objects/events/types/message/message_event_node.tscn").instantiate()
 	message.event = event
 	message.text = event.text
 	LogContainer.add_child(message)

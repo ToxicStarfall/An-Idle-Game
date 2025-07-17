@@ -8,7 +8,7 @@ signal event_option_selected(option)
 
 
 var current_event: Event
-var queued_events = []
+#var queued_events = []
 
 
 func _ready() -> void:
@@ -20,6 +20,10 @@ func _on_event_triggered( event: Event ):
 	if event is MessageEvent:
 		new_message_event.emit(event)
 		#Events.message_logged.emit( event )
+		if event.is_popup:
+			print("I have popup")
+			# Create a popup message
+			pass
 
 	if event is InteractionEvent:
 		current_event = event

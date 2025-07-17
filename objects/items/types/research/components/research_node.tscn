@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b78igg016ah7d"]
 
-[ext_resource type="Script" uid="uid://bmimo4f4i7irm" path="res://objects/items/types/research/research_components/research_node.gd" id="1_fp105"]
+[ext_resource type="Script" uid="uid://bmimo4f4i7irm" path="res://objects/items/types/research/components/research_node.gd" id="1_fp105"]
 
 [node name="ResearchNode" type="Button"]
 z_index = 1

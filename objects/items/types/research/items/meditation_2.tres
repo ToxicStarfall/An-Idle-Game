@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://cqjg2ef8x7ix7" path="res://objects/items/components/item_effect.gd" id="2_7smx2"]
 [ext_resource type="Texture2D" uid="uid://cgu4gs0s0kk5y" path="res://icon.svg" id="3_0e5al"]
 [ext_resource type="Script" uid="uid://caj5o56x4i7td" path="res://objects/items/components/requirements/requirement.gd" id="4_t2h0p"]
-[ext_resource type="Resource" uid="uid://d0x4450m17lck" path="res://objects/items/types/research/research_items/meditation.tres" id="5_0e5al"]
-[ext_resource type="Script" uid="uid://cr5y4u1asoj50" path="res://objects/items/types/research/research_components/research.gd" id="5_hn8b2"]
+[ext_resource type="Resource" uid="uid://d0x4450m17lck" path="res://objects/items/types/research/items/meditation.tres" id="5_0e5al"]
+[ext_resource type="Script" uid="uid://cr5y4u1asoj50" path="res://objects/items/types/research/components/research.gd" id="5_hn8b2"]
 [ext_resource type="Script" uid="uid://qwq52mbhtqgk" path="res://objects/items/components/requirements/requirement_item.gd" id="6_t2h0p"]
 [ext_resource type="Script" uid="uid://jrivr4k7xxyp" path="res://objects/items/components/item_tag.gd" id="8_t2h0p"]
 

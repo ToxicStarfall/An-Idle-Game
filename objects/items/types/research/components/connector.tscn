@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cvov6i8wk8eqv"]
 
 [ext_resource type="Texture2D" uid="uid://plw6g782ewyy" path="res://textures/icons/arrow_filled.png" id="1_l2mxl"]
-[ext_resource type="Script" uid="uid://cdneywvxbqeet" path="res://objects/items/types/research/research_components/connector.gd" id="1_nrlqc"]
+[ext_resource type="Script" uid="uid://cdneywvxbqeet" path="res://objects/items/types/research/components/connector.gd" id="1_nrlqc"]
 
 [node name="Connector" type="Line2D"]
 z_as_relative = false

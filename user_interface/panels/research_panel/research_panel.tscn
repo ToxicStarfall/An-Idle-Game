@@ -1,12 +1,18 @@
-[gd_scene load_steps=9 format=3 uid="uid://clmr7xi56pejk"]
+[gd_scene load_steps=16 format=3 uid="uid://clmr7xi56pejk"]
 
 [ext_resource type="Script" uid="uid://ducwcague6iqa" path="res://user_interface/panels/research_panel/research_panel.gd" id="1_x6vd8"]
-[ext_resource type="PackedScene" uid="uid://tpjp1bn0frkv" path="res://objects/items/types/research/research_components/research_placeholder.tscn" id="2_r4vlp"]
+[ext_resource type="PackedScene" uid="uid://b78igg016ah7d" path="res://objects/items/types/research/components/research_node.tscn" id="2_ph1so"]
+[ext_resource type="Resource" uid="uid://bw7jovi2amqn8" path="res://objects/items/types/research/items/origin.tres" id="3_1ppkc"]
 [ext_resource type="Texture2D" uid="uid://cgu4gs0s0kk5y" path="res://icon.svg" id="3_hfmy7"]
+[ext_resource type="Resource" uid="uid://by4mif4i3xhga" path="res://objects/items/types/research/items/research_1.tres" id="4_2ypqr"]
+[ext_resource type="Resource" uid="uid://d0x4450m17lck" path="res://objects/items/types/research/items/meditation.tres" id="5_2s8ur"]
+[ext_resource type="Resource" uid="uid://4op6qlvuxqim" path="res://objects/items/types/research/items/research_2.tres" id="6_toqle"]
+[ext_resource type="Resource" uid="uid://butp5q5yitdsa" path="res://objects/items/types/research/items/calm_mind.tres" id="7_7nsin"]
+[ext_resource type="Resource" uid="uid://b61kixvkybyg3" path="res://objects/items/types/research/items/research_3.tres" id="7_hj4q1"]
+[ext_resource type="Resource" uid="uid://ploxnb85g1yo" path="res://objects/items/types/research/items/meditation_2.tres" id="9_7nsin"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lvyhc"]
 bg_color = Color(0.1617, 0.22341, 0.33, 1)
-border_width_top = 8
 border_color = Color(0.3234, 0.44682, 0.66, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r4vlp"]
@@ -35,38 +41,33 @@ script = ExtResource("1_x6vd8")
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-
-[node name="ViewportScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="ViewportScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer/HBoxContainer/ViewportScrollContainer"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer/ViewportScrollContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(1600, 1000)
+custom_minimum_size = Vector2(1500, 800)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="VBoxContainer/HBoxContainer/ViewportScrollContainer/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="VBoxContainer/ViewportScrollContainer/SubViewportContainer"]
 unique_name_in_owner = true
 disable_3d = true
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(1600, 1000)
+size = Vector2i(1500, 800)
 render_target_update_mode = 4
 
-[node name="ViewportMargin" type="MarginContainer" parent="VBoxContainer/HBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport"]
+[node name="ViewportMargin" type="MarginContainer" parent="VBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport"]
 unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -6.0
-offset_right = -106.0
-offset_bottom = -200.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -76,48 +77,67 @@ theme_override_constants/margin_top = 256
 theme_override_constants/margin_right = 256
 theme_override_constants/margin_bottom = 256
 
-[node name="ReferenceRect" type="ReferenceRect" parent="VBoxContainer/HBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin"]
+[node name="ReferenceRect" type="ReferenceRect" parent="VBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin"]
 layout_mode = 2
 mouse_filter = 2
 border_width = 2.0
 
-[node name="TechTreeContainer" type="Control" parent="VBoxContainer/HBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin"]
+[node name="TechTreeContainer" type="Control" parent="VBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
 
-[node name="origin" parent="VBoxContainer/HBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_r4vlp")]
+[node name="origin" parent="VBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_ph1so")]
 layout_mode = 0
-offset_left = -2.0
-offset_right = 50.0
-offset_bottom = 52.0
-icon_alignment = 1
-expand_icon = true
+item_resource = ExtResource("3_1ppkc")
 
-[node name="research_1" parent="VBoxContainer/HBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_r4vlp")]
-layout_mode = 2
-offset_left = 126.0
-offset_right = 178.0
-offset_bottom = 52.0
-
-[node name="research_2" parent="VBoxContainer/HBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_r4vlp")]
-layout_mode = 2
-offset_left = 254.0
-offset_right = 306.0
-offset_bottom = 52.0
-
-[node name="meditation" parent="VBoxContainer/HBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_r4vlp")]
+[node name="research_1" parent="VBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_ph1so")]
 layout_mode = 0
-offset_left = 254.0
+offset_left = 128.0
+offset_right = 180.0
+item_resource = ExtResource("4_2ypqr")
+
+[node name="research_2" parent="VBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_ph1so")]
+layout_mode = 0
+offset_left = 256.0
+offset_right = 308.0
+item_resource = ExtResource("6_toqle")
+
+[node name="research_3" parent="VBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_ph1so")]
+layout_mode = 0
+offset_left = 384.0
+offset_right = 436.0
+item_resource = ExtResource("7_hj4q1")
+
+[node name="calm_mind" parent="VBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_ph1so")]
+layout_mode = 0
+offset_left = 256.0
 offset_top = 128.0
-offset_right = 306.0
+offset_right = 308.0
 offset_bottom = 180.0
+item_resource = ExtResource("7_7nsin")
 
-[node name="research_3" parent="VBoxContainer/HBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_r4vlp")]
+[node name="meditation" parent="VBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_ph1so")]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 192.0
+offset_right = 436.0
+offset_bottom = 244.0
+item_resource = ExtResource("5_2s8ur")
+
+[node name="meditation_2" parent="VBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_ph1so")]
+layout_mode = 0
+offset_left = 512.0
+offset_top = 192.0
+offset_right = 564.0
+offset_bottom = 244.0
+item_resource = ExtResource("9_7nsin")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
-offset_left = 382.0
-offset_right = 434.0
-offset_bottom = 52.0
+size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="Panel" type="Panel" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
@@ -235,4 +255,4 @@ text = "Research All"
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
-[connection signal="gui_input" from="VBoxContainer/HBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" to="." method="_on_tech_tree_container_gui_input"]
+[connection signal="gui_input" from="VBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" to="." method="_on_tech_tree_container_gui_input"]

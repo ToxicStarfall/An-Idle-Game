@@ -4,8 +4,10 @@ class_name ItemEffect
 enum Modifier { ADD, SUBTRACT }
 
 @export var type: String
-@export var value: int
+@export var value: float
 @export var modifier: Modifier = Modifier.ADD
+
+var valid
 
 
 func _init() -> void:
@@ -13,8 +15,8 @@ func _init() -> void:
 
 
 func apply():  # generator passes quantity on each cycle  NEED FIXING
-	_custom_effect()
-	pass
+	if valid:
+		_custom_effect()
 
 
 func _custom_effect():
@@ -27,7 +29,12 @@ func _custom_effect():
 			Events.resource_removed.emit(type, value)
 
 
+func get_as_text():
+	pass
+
+
 func _validate():
 	if value != 0:  # if there is a specified value, then make sure "type" is a existing property.
 		if Game.get_property(type) == null:
+			valid = false
 			push_error("[WARNING] - Cannot find property \"%s\" in GameData." % [type])

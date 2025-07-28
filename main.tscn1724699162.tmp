@@ -593,7 +593,7 @@ layout_mode = 2
 texture = ExtResource("3_4c57u")
 expand_mode = 1
 
-[node name="EventCard" type="PanelContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/Left/VBoxContainer"]
+[node name="EventCard2" type="PanelContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/Left/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(300, 200)
@@ -601,22 +601,22 @@ layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_lswn8")
 
-[node name="MarginContainer" type="MarginContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/Left/VBoxContainer/EventCard"]
+[node name="MarginContainer" type="MarginContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/Left/VBoxContainer/EventCard2"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 24
 
-[node name="ScrollContainer" type="ScrollContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/Left/VBoxContainer/EventCard/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/Left/VBoxContainer/EventCard2/MarginContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/Left/VBoxContainer/EventCard/MarginContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/Left/VBoxContainer/EventCard2/MarginContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/Left/VBoxContainer/EventCard/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/Left/VBoxContainer/EventCard2/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 text = "Event details"
 

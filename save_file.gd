@@ -1,5 +1,5 @@
 extends Resource
-class_name SaveData
+class_name SaveFile
 
 #region - - - Resources - - - - #
 #@export var weapons: int = 0
@@ -58,3 +58,5 @@ class_name SaveData
 @export var generator_cost_scale = 1.12 # 1.15 is used by cookieclicker
 @export var generators = {}
 #endregion
+
+@export var ui_hint = {}

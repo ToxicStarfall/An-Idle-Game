@@ -1,11 +1,24 @@
-[gd_resource type="Resource" script_class="Research" load_steps=8 format=3 uid="uid://bw7jovi2amqn8"]
+[gd_resource type="Resource" script_class="Research" load_steps=11 format=3 uid="uid://bw7jovi2amqn8"]
 
 [ext_resource type="Script" uid="uid://ch31xejfebo7f" path="res://objects/items/components/requirements/cost_currency.gd" id="1_72waf"]
 [ext_resource type="Script" uid="uid://cqjg2ef8x7ix7" path="res://objects/items/components/item_effect.gd" id="2_qgy4a"]
 [ext_resource type="Texture2D" uid="uid://cgu4gs0s0kk5y" path="res://icon.svg" id="3_1ib48"]
 [ext_resource type="Script" uid="uid://caj5o56x4i7td" path="res://objects/items/components/requirements/requirement.gd" id="4_bp302"]
-[ext_resource type="Script" uid="uid://cr5y4u1asoj50" path="res://objects/items/types/research/research_components/research.gd" id="5_4ksb5"]
+[ext_resource type="Script" uid="uid://biidro61l5bon" path="res://objects/items/components/requirements/requirement_currency.gd" id="5_1ib48"]
+[ext_resource type="Script" uid="uid://cr5y4u1asoj50" path="res://objects/items/types/research/components/research.gd" id="5_4ksb5"]
 [ext_resource type="Script" uid="uid://jrivr4k7xxyp" path="res://objects/items/components/item_tag.gd" id="6_qgy4a"]
+
+[sub_resource type="Resource" id="Resource_bp302"]
+script = ExtResource("1_72waf")
+currency = "knowledge"
+value = 1
+metadata/_custom_type_script = "uid://ch31xejfebo7f"
+
+[sub_resource type="Resource" id="Resource_4ksb5"]
+script = ExtResource("5_1ib48")
+currency = "knowledge"
+value = 1
+metadata/_custom_type_script = "uid://biidro61l5bon"
 
 [sub_resource type="Resource" id="Resource_1ib48"]
 script = ExtResource("6_qgy4a")
@@ -19,12 +32,12 @@ position_overide = Vector2(0, 0)
 disabled = false
 icon = ExtResource("3_1ib48")
 name = "The Origin"
-description = "This is the beginning, where it all began."
-flair = "I am descriptive flair."
-costs = Array[ExtResource("1_72waf")]([])
-requirements = Array[ExtResource("4_bp302")]([])
+description = "Unlocks the [Tech Tree]."
+flair = "This is the beginning, where it all began."
+costs = Array[ExtResource("1_72waf")]([SubResource("Resource_bp302")])
+requirements = Array[ExtResource("4_bp302")]([SubResource("Resource_4ksb5")])
 unlockRequirements = Array[ExtResource("4_bp302")]([])
 effects = Array[ExtResource("2_qgy4a")]([])
-state = 2
+state = 0
 tags = SubResource("Resource_1ib48")
 metadata/_custom_type_script = "uid://cr5y4u1asoj50"

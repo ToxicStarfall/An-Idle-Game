@@ -1,8 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://dedl4ujvmq1ti"]
 
-[ext_resource type="Script" uid="uid://cvukkmwejs7iu" path="res://objects/events/types/event_message_node.gd" id="1_68e22"]
+[ext_resource type="Script" uid="uid://cvukkmwejs7iu" path="res://objects/events/types/message/message_event_node.gd" id="1_68e22"]
 
 [node name="EventMessage" type="RichTextLabel"]
+custom_minimum_size = Vector2(100, 0)
 offset_right = 1.0
 theme_override_font_sizes/bold_italics_font_size = 12
 theme_override_font_sizes/italics_font_size = 12

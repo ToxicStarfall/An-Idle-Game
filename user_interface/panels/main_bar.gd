@@ -15,7 +15,7 @@ var meditate_active = false
 func _ready() -> void:
 	ThoughtButton.pressed.connect( func():
 		Events.thought_progressed.emit()
-		#Events.trigger_event.emit( EventMessage.new("Somthing was clicked!") )
+		#Events.trigger_event.emit( MessageEvent.new("Somthing was clicked!") )
 		)
 	#%MeditateButton.pressed.connect( func(): meditate_active = !meditate_active ) # toggle meditate_active
 	%MeditateButton.pressed.connect( func(): _toggle_meditate(!meditate_active) ) # toggle meditate_active
@@ -40,8 +40,9 @@ func _toggle_meditate(overide_state = null):
 
 	if meditate_active:
 		%MeditateButton.text = "MEDITATE: ON"
-		await get_tree().create_timer(1.0).timeout
-		Events.thought_progressed.emit()
+		var time = GameData.meditateBaseSpeed / GameData.meditateSpeedPercentMult
+		await get_tree().create_timer(time).timeout
+		Events.thought_progressed.emit(true)
 		_toggle_meditate()  # Restart timer
 	else:
 		%MeditateButton.text = "MEDITATE: OFF"
@@ -50,7 +51,7 @@ func _toggle_meditate(overide_state = null):
 
 
 func _on_update_knowledge_counters(knowledge, _knowledgeE):
-	KnowledgeLabel.text = "%s knowledge" %[str(knowledge)]
+	KnowledgeLabel.text = "%s knowledge" % [knowledge]
 
 
 func _on_update_power_counters(power, _powerE):

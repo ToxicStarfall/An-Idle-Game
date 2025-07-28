@@ -13,6 +13,10 @@ class_name Generator
 #@onready var generate_timer = get_tree().create_timer(1)
 
 
+func _init() -> void:
+	super(Type.GENERATOR)
+
+
 func buy_generator(amount: int):
 	if state == State.LOCKED:  print("This item is LOCKED.")
 	if state == State.UNLOCKED or state == State.OWNED:
@@ -27,7 +31,7 @@ func buy_generator(amount: int):
 
 		if valid:
 			self.quantity += amount
-			_set_state( State.OWNED )
+			set_state( State.OWNED )
 			print("Bought \"%s\" for %s" % [self.name, get_costs()])
 			_apply_costs()
 			_apply_effects()
@@ -45,10 +49,9 @@ func generate_currency():
 		generator_effect.apply( quantity )        # generate each for every [Generator] owned
 
 
-func _scale_cost(amount):
+func _scale_cost(_amount):
 	#Game.get_property("generator_cost_scale")
-	for i in costs:
-		i.value *= (GameData.generator_cost_scale ** (quantity - 1))
-		#print(i.value)
+	for cost in costs:
+		cost.value *= (GameData.generator_cost_scale ** (quantity - 1))
+		cost.value = snappedf(cost.value, 0.1)  # Round to nearest tenths
 		pass
-	pass

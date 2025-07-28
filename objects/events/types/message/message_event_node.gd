@@ -1,7 +1,8 @@
-class_name EventMessageNode
+class_name MessageEventNode
 extends RichTextLabel
 
 
+const scene = "res://objects/events/types/message/message_event_node.tscn"
 var event: Event
 
 
@@ -15,7 +16,9 @@ func _ready() -> void:
 		timer.timeout.connect( queue_free )
 
 
+
 func _on_meta_clicked(_meta):
+	# Open Database and find item
 	pass
 
 

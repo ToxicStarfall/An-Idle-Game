@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://cgu4gs0s0kk5y" path="res://icon.svg" id="3_hjvue"]
 [ext_resource type="Resource" uid="uid://b0f1qiktus7x3" path="res://objects/events/new_event.tres" id="3_suteo"]
 [ext_resource type="Script" uid="uid://caj5o56x4i7td" path="res://objects/items/components/requirements/requirement.gd" id="3_vvar2"]
-[ext_resource type="Script" uid="uid://cr5y4u1asoj50" path="res://objects/items/types/research/research_components/research.gd" id="4_hjvue"]
-[ext_resource type="Resource" uid="uid://by4mif4i3xhga" path="res://objects/items/types/research/research_items/research_1.tres" id="4_vvar2"]
+[ext_resource type="Script" uid="uid://cr5y4u1asoj50" path="res://objects/items/types/research/components/research.gd" id="4_hjvue"]
+[ext_resource type="Resource" uid="uid://by4mif4i3xhga" path="res://objects/items/types/research/items/research_1.tres" id="4_vvar2"]
 [ext_resource type="Script" uid="uid://c5j000278rbt5" path="res://objects/items/components/effects/event_effect.gd" id="4_yc0bg"]
 [ext_resource type="Script" uid="uid://qwq52mbhtqgk" path="res://objects/items/components/requirements/requirement_item.gd" id="5_hjvue"]
 [ext_resource type="Script" uid="uid://jrivr4k7xxyp" path="res://objects/items/components/item_tag.gd" id="10_yc0bg"]
@@ -21,7 +21,7 @@ metadata/_custom_type_script = "uid://ch31xejfebo7f"
 script = ExtResource("4_yc0bg")
 event = ExtResource("3_suteo")
 type = ""
-value = 0
+value = 0.0
 modifier = 0
 metadata/_custom_type_script = "uid://c5j000278rbt5"
 

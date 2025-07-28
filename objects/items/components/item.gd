@@ -102,7 +102,8 @@ func buy():
 			_apply_effects()
 			# tween pop/unlock effect,
 			# remove node and move to database
-			MessageEvent.new("Item bought [url]%s[/url]" % [self.name], self)\
+			MessageEvent.new("Item bought [url]%s[/url]" % [self.name], self).call_event()
+			MessageEvent.new("Item bought!", null, 3.0)\
 				.popup()\
 				.call_event()
 			#print("Bought \"%s\" for %s" % [self.name, get_costs()])

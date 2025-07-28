@@ -2,6 +2,7 @@ class_name MessageEventNode
 extends RichTextLabel
 
 
+const scene = "res://objects/events/types/message/message_event_node.tscn"
 var event: Event
 
 

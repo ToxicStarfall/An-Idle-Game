@@ -3,8 +3,8 @@ extends Event
 
 
 @export_category("Event Config")
-## If true, make a little text popup at click position.
-@export var is_popup := false
+@export var is_ambient := false  ## If true, this message is just for flavour.
+@export var is_popup := false  ## If true, make a little text popup at click position.
 ## How long this event should last in seconds.  0 = Lasts forever.
 @export var duration := 0.0
 ## Whether or not this event can be dissmissed and removed.
@@ -30,4 +30,5 @@ func popup():
 	return self
 
 func ambient():
+	is_ambient = true;
 	return self

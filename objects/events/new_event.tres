@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="InteractionEvent" load_steps=10 format=3 uid="uid://b0f1qiktus7x3"]
 
-[ext_resource type="Script" uid="uid://ct6l0uaa65s48" path="res://objects/events/types/interaction_event.gd" id="1_whs4x"]
+[ext_resource type="Script" uid="uid://ct6l0uaa65s48" path="res://objects/events/types/interaction/interaction_event.gd" id="1_whs4x"]
 [ext_resource type="Texture2D" uid="uid://cgu4gs0s0kk5y" path="res://icon.svg" id="1_xbw7t"]
 [ext_resource type="Script" uid="uid://bknjsth4pem2q" path="res://objects/events/event_option.gd" id="2_6fw3w"]
 [ext_resource type="Script" uid="uid://ch31xejfebo7f" path="res://objects/items/components/requirements/cost_currency.gd" id="3_y3m20"]

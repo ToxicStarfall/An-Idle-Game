@@ -58,3 +58,5 @@ class_name SaveFile
 @export var generator_cost_scale = 1.12 # 1.15 is used by cookieclicker
 @export var generators = {}
 #endregion
+
+@export var ui_hint = {}

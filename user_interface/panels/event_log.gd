@@ -8,6 +8,7 @@ var unlocked := false
 @onready var LogContainer = %LogContainer
 
 
+
 func _ready() -> void:
 	EventManager.new_message_event.connect( _on_new_message_event )
 	EventManager.new_interaction_event.connect( _on_new_interaction_event )
@@ -28,9 +29,19 @@ func _on_new_interaction_event(event: InteractionEvent):
 	EventCard.show()
 	#print(event)
 	%Icon.texture = event.icon
-	%Text.text = event.text
-	pass
+	%Text.text = event.description
 
+	for option in event.options:
+		var Option = load("res://objects/events/types/interaction/interaction_option.tscn").instantiate()
+		Option.name = str(event.options.find(option))  # Button name is the index of the option in event.options
+		Option.text = option.name  # Display text is event.option's name
+		EventCard.get_node("%QuickActions").add_child( Option )
+		Option.pressed.connect( func():
+			# Resolve the event
+			MessageEvent.new("This currently does nothing.").call_event()
+			EventManager.event_option_selected.emit( Option.name )
+		)
+	pass
 
 
 func unlock():

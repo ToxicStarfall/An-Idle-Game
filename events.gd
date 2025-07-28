@@ -3,19 +3,20 @@ extends Node
 
 @warning_ignore_start("UNUSED_SIGNAL")
 
+# - - - Initialization - - - - #
+signal user_interface_loaded
+
 # - - - GENERIC DATA - - - - - #
 signal resource_added( resource_name: String, amount_added: float )
 signal resource_removed( resource_name: String, amount_removed: float )
 
-signal item_state_changed( tag_name, new_state )  # Updates items with tag
+signal item_state_changed( tag_name, new_state )  ## Updates items with tag
 #signal item_bought( item: Item, item_node: ItemNode )
-signal function_unlocked( node_name )
+signal function_unlocked( node_name )     ## Unlocks the specified UI node (makes visible).
+signal function_highlighted( node_name, stop_signal )  ## Highligts the specified UI node until clicked.
 
 signal game_saved
 signal game_loaded
-
-# - - - Initialization - - - - #
-signal user_interface_loaded
 
 # - - - USER INTERFACE - - - - #
 #signal weapon_power_changed
@@ -36,9 +37,6 @@ signal update_power_counters( power, powerE )
 
 #region - - - Events - - - - #
 signal trigger_event( event: Event )
-signal message_logged( message: String, tooltip: Resource)
-signal a
-#signal event_option_selected()
 
 #endregion
 

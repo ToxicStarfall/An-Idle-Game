@@ -25,6 +25,7 @@ func _ready() -> void:
 	Events.game_saved.connect( save_game_data )
 	Events.game_loaded.connect( load_game_data )
 	Events.function_unlocked.connect( _on_function_unlocked )
+	Events.function_highlighted.connect( _on_function_highlighted )
 
 
 ## Loads resources & saves.
@@ -76,7 +77,30 @@ func get_item( item_name, type ):
 #region
 func _on_function_unlocked(node_name):
 	get_tree().root.get_node("Main/%" + node_name).show()
-	pass
+
+
+## Creates a highlight guide on the specified node which stops after the stop_signal is emitted
+func _on_function_highlighted(node_name, stop_signal="pressed"):
+	var active = [true]
+	var node = get_tree().root.get_node("Main/%" + node_name)
+	#node.get_node("Button").pressed.connect( func():
+	var tween = get_tree().create_tween()
+	var disabled = func():
+		active[0] = false
+	var check_disabled = func():
+		if active[0] == false:
+			tween.kill()
+			node.get_node("Button").disconnect(stop_signal, disabled)
+			GameData.ui_hint[node_name] = false
+	node.get_node("Button").connect(stop_signal, disabled)
+	#node.get_node("Button").connect("pressed", disable_triggered)
+	tween.set_loops()
+	tween.tween_property(node, "modulate", Color(1,1,1, 0.5), 0.5).set_delay(0.1)
+	tween.tween_property(node, "modulate", Color(1,1,1, 1), 0.5)
+	tween.tween_callback( check_disabled )
+	#await tween.loop_finished
+
+
 #endregion
 
 
@@ -87,8 +111,9 @@ func _initialize_game_resources():
 	#await _initialize_research()
 	await _initialize_research_tree()
 	await _initialize_generators()
+	await _initialize_scripted_events()
 	print("Finished loading resources.\n")
-	GameData.initilize_values()
+	GameData.initialize_values()
 	pass
 
 
@@ -195,47 +220,32 @@ func _initialize_generators():
 		print("Generators loaded.")
 	pass
 
+
+func _initialize_scripted_events():
+	const folder_path = "res://objects/items/types/scripted_events/items/"
+	var folder = ResourceLoader.list_directory( folder_path )
+
+	if folder == null:
+		push_error("An error occured while accessing folder \"%s\"" % [folder_path])
+	else:
+		for file in folder:
+			var item = ResourceLoader.load( folder_path + file)#duplicate()
+			var raw_name = file.split(".")[0]
+			item.raw_name = raw_name
+			item.resource_name = "scripted_event:%s" % [raw_name]
+			item.tags.auto_tag(item)
+			GameData.scripted_events.set(raw_name, item)
+			#print(item.resource_name)
+		print("Scripted events loaded.")
+	pass
+
 #endregion
 
 
 #region - - - SAVE FILE - - - - #
-
-#func save_GameData():
-	#var save_file = ConfigFile.new()
-	#for property in GameData.get_property_list():
-		#match property.usage:
-			#135168:  # 135168( dictionary/array )
-				#print( "%s - %s" % [property.name, get_property(property.name)] )
-				#for item in get_property(property.name):
-					#print(item)
-					#save_file.set_value(property.name, item, get_property(property.name)[item])
-#
-			#4096:  #4096( normal variable types )
-				#save_file.set_value("", property.name, Game.get_property(property.name))
-				## print(property)
-#
-	#var err = save_file.save("user://save_data.cfg")
-	#if err != OK:  push_error("There was an error while saving the save file.")
-	#pass
-
-
 func save_game_data():
 	# GameData.save_data contains all updates and can be saved directly by ResourceLoader.
 	var save_data = GameData.save_data
-	#print(GameData.research)
-	#for i in save_data.get_property_list():#GameData.get_property_list():
-		#if i.usage == 4102:
-			#var key = i.name
-			#var property = save_data.get(key)
-			#save_data.set(key, property)
-			#if property is Dictionary:
-				#print("DICT")
-				#for item in property:  # Loop dictionary
-					#print(property[item])
-					#property.item
-					#pass
-				#save_data.set(key, property)
-				#pass
 
 	for i in GameData.get_property_list():
 		if i.type == TYPE_DICTIONARY:
@@ -247,36 +257,14 @@ func save_game_data():
 			if dict_value_class_name and dict_value_class_name.get_global_name() == "Item":
 				save_data.set(dict_name, dict)
 				#print(dict)
+			else:  # Normal Dicts
+				save_data.set(dict_name, dict)
 	_save_items()
 	#print(GameData.research)
 	#save_data.research = GameData.research
 	ResourceSaver.save(save_data, "user://save_file.tres")
 	#print(ResourceLoader.load("user://save_file.tres").research)
 	pass
-
-#func load_GameData():
-	#var disabled = ["weaponsPC","baseWeaponsPC","weaponsPS","baseWeaponsPS"]
-	#var save_file = ConfigFile.new()
-	#var err = save_file.load("user://save_data.cfg")
-	#if err != OK:  push_error("There was an error while loading the save file.")
-#
-	#for section in save_file.get_sections():  # for each section in save file
-		##print(section)
-		#for key in save_file.get_section_keys(section):  # for each entry in save file
-			##print(key)
-			#var key_value = save_file.get_value(section, key)
-#
-			## Load non-item save entries
-			#if section == "":  # if unspecified section
-				#if disabled.has(key):  # if "key" is marked as disabled
-					#continue  # then skip
-				#GameData.set(key, key_value)
-#
-			## Load item-based save entries here
-			#else:
-				##print(GameData.get(section)[key])
-				#GameData.get(section)[key] = key_value
-				#pass
 
 
 func load_game_data():
@@ -286,6 +274,7 @@ func load_game_data():
 	if save_data:
 		save_data = ResourceLoader.load("user://save_file.tres")
 		_load_items(save_data)
+		_load_data_dicts(save_data)
 		for i in save_data.get_property_list():
 			if i.usage == 4102:#4102:
 				var key = i.name
@@ -360,9 +349,8 @@ func _load_item_dict(dict_name, dict):
 		#GameData.save_data.set(dict_name, saved_dict)
 
 
-func _load_items(save_data):
+func _load_items(save_data): # save data instance required or causes update issues
 	#var save_data = GameData.save_data
-
 	for dict_name in ["upgrades", "research", "generators"]:
 		const Type = Item.Type
 		var dict = save_data.get(dict_name)
@@ -378,6 +366,19 @@ func _load_items(save_data):
 				Type.RESEARCH, Type.UPGRADE:
 					item.set_state(saved_item_state)
 					pass
+
+
+func _load_data_dicts(save_data):
+	for dict_name in ["ui_hint"]:
+		#const Type = Item.Type
+		var dict = save_data.get(dict_name)
+
+		print(dict)
+		print(GameData.get(dict_name))
+		for i in GameData.get(dict_name):
+			GameData.get(dict_name).set(i, dict[i])
+		#GameData.get(dict_name).set(dict_name, dict)
+		print(GameData.get(dict_name))
 #endregion
 #
 #

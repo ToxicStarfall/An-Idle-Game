@@ -1,5 +1,5 @@
-extends ItemEffect
 class_name FunctionUnlock
+extends ItemEffect
 
 
 #@export var requirements: Array[Requirement]

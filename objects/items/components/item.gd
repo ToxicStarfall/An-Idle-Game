@@ -34,14 +34,14 @@ enum Tags { WEAPONS, UPGRADE }
 ## Requirement(s) needed prior to obtaining this item.
 @export var requirements: Array[Requirement] = []
 ##
-@export var unlockRequirements: Array[Requirement] = []
+#@export var unlockRequirements: Array[Requirement] = []
 ## A list of effects modifying game stats (ie: clickPower).
 @export var effects: Array[ItemEffect] = []
 ##
 @export var state: State = State.LOCKED
 ## Tags for sorting and filters.  INCLUDES INTERNAL TAGS
 #@export var tags: ItemTags = ItemTags.new()
-@export var tags := ItemTags.new()
+@export var tags = ItemTags.new()
 #@export var tags: Array[Tags] = []
 #@export_flags("a", "b") var tags
 

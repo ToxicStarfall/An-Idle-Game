@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="63.999996"
+   height="63.999996"
+   viewBox="0 0 16.933332 16.933332"
+   version="1.1"
+   id="svg1"
+   inkscape:export-filename="bitmap.svg"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="true">
+    <inkscape:grid
+       id="grid1"
+       units="px"
+       originx="0"
+       originy="0"
+       spacingx="0.26458333"
+       spacingy="0.26458333"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="4"
+       dotted="false"
+       gridanglex="30"
+       gridanglez="30"
+       visible="true" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="path2-2"
+       style="display:inline;fill:#b2b2b2;fill-opacity:1;stroke-width:0.163702;paint-order:stroke fill markers"
+       d="M 12.7,12.7 9.2604172,10.583333 8.4666672,15.875 7.6729172,10.583333 4.2333332,12.7 l 2.645834,-3.4395835 -4.7625,-0.7937497 4.7625,-0.529167 -2.645834,-3.7041665 3.439584,2.1166666 0.79375,-5.2916666 0.79375,5.2916666 L 12.7,4.2333333 10.054167,7.9749664 14.816666,8.4666668 10.054167,9.372289 Z"
+       sodipodi:nodetypes="ccccccccccccccccc"
+       inkscape:transform-center-x="-4.5807341"
+       inkscape:transform-center-y="-0.22075827" />
+    <path
+       id="path3"
+       style="display:inline;fill:#ffffff;stroke-width:0.163702;paint-order:stroke fill markers"
+       d="m 9.2604172,10.583333 -0.79375,5.291667 -0.79375,-5.291667 -0.79375,-1.3229165 -4.7625,-0.7937497 4.7625,-0.529167 0.79375,-1.5874999 0.79375,-5.2916666 0.79375,5.2916666 0.7937498,1.6249665 4.762499,0.4917004 -4.762499,0.9056222 z"
+       sodipodi:nodetypes="ccccccccccccc"
+       inkscape:transform-center-x="-4.5807341"
+       inkscape:transform-center-y="-0.22075827" />
+  </g>
+</svg>

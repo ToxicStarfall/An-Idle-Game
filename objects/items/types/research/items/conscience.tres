@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Research" load_steps=8 format=3 uid="uid://bttp42ccyeaco"]
+
+[ext_resource type="Script" uid="uid://ch31xejfebo7f" path="res://objects/items/components/requirements/cost_currency.gd" id="1_pn611"]
+[ext_resource type="Script" uid="uid://cqjg2ef8x7ix7" path="res://objects/items/components/item_effect.gd" id="2_xq3ll"]
+[ext_resource type="Texture2D" uid="uid://cgu4gs0s0kk5y" path="res://icon.svg" id="3_gx13s"]
+[ext_resource type="Script" uid="uid://caj5o56x4i7td" path="res://objects/items/components/requirements/requirement.gd" id="4_sb5og"]
+[ext_resource type="Script" uid="uid://cr5y4u1asoj50" path="res://objects/items/types/research/components/research.gd" id="5_hic6j"]
+[ext_resource type="Script" uid="uid://jrivr4k7xxyp" path="res://objects/items/components/item_tag.gd" id="6_xq3ll"]
+
+[sub_resource type="Resource" id="Resource_gx13s"]
+script = ExtResource("6_xq3ll")
+taglist = Array[int]([])
+metadata/_custom_type_script = "uid://jrivr4k7xxyp"
+
+[resource]
+script = ExtResource("5_hic6j")
+time = 0
+position_overide = Vector2(0, 0)
+disabled = false
+icon = ExtResource("3_gx13s")
+name = "Conscience"
+description = "I am a description."
+flair = "I am descriptive flair."
+costs = Array[ExtResource("1_pn611")]([])
+requirements = Array[ExtResource("4_sb5og")]([])
+effects = Array[ExtResource("2_xq3ll")]([])
+state = 0
+tags = SubResource("Resource_gx13s")
+metadata/_custom_type_script = "uid://cr5y4u1asoj50"

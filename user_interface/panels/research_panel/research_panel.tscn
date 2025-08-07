@@ -1,15 +1,17 @@
-[gd_scene load_steps=16 format=3 uid="uid://clmr7xi56pejk"]
+[gd_scene load_steps=18 format=3 uid="uid://clmr7xi56pejk"]
 
 [ext_resource type="Script" uid="uid://ducwcague6iqa" path="res://user_interface/panels/research_panel/research_panel.gd" id="1_x6vd8"]
 [ext_resource type="PackedScene" uid="uid://b78igg016ah7d" path="res://objects/items/types/research/components/research_node.tscn" id="2_ph1so"]
 [ext_resource type="Resource" uid="uid://bw7jovi2amqn8" path="res://objects/items/types/research/items/origin.tres" id="3_1ppkc"]
 [ext_resource type="Texture2D" uid="uid://cgu4gs0s0kk5y" path="res://icon.svg" id="3_hfmy7"]
-[ext_resource type="Resource" uid="uid://by4mif4i3xhga" path="res://objects/items/types/research/items/research_1.tres" id="4_2ypqr"]
+[ext_resource type="Resource" uid="uid://by4mif4i3xhga" path="res://objects/items/types/research/items/mind.tres" id="4_2ypqr"]
 [ext_resource type="Resource" uid="uid://d0x4450m17lck" path="res://objects/items/types/research/items/meditation.tres" id="5_2s8ur"]
 [ext_resource type="Resource" uid="uid://4op6qlvuxqim" path="res://objects/items/types/research/items/research_2.tres" id="6_toqle"]
 [ext_resource type="Resource" uid="uid://butp5q5yitdsa" path="res://objects/items/types/research/items/calm_mind.tres" id="7_7nsin"]
 [ext_resource type="Resource" uid="uid://b61kixvkybyg3" path="res://objects/items/types/research/items/research_3.tres" id="7_hj4q1"]
 [ext_resource type="Resource" uid="uid://ploxnb85g1yo" path="res://objects/items/types/research/items/meditation_2.tres" id="9_7nsin"]
+[ext_resource type="Resource" uid="uid://bttp42ccyeaco" path="res://objects/items/types/research/items/conscience.tres" id="10_knge3"]
+[ext_resource type="Resource" uid="uid://ftkyo8ufr0ie" path="res://objects/items/types/research/items/coalescence.tres" id="11_hnfqf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lvyhc"]
 bg_color = Color(0.1617, 0.22341, 0.33, 1)
@@ -91,23 +93,17 @@ mouse_filter = 2
 layout_mode = 0
 item_resource = ExtResource("3_1ppkc")
 
-[node name="research_1" parent="VBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_ph1so")]
+[node name="mind" parent="VBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_ph1so")]
 layout_mode = 0
 offset_left = 128.0
 offset_right = 180.0
 item_resource = ExtResource("4_2ypqr")
 
-[node name="research_2" parent="VBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_ph1so")]
+[node name="coalescence" parent="VBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_ph1so")]
 layout_mode = 0
 offset_left = 256.0
 offset_right = 308.0
-item_resource = ExtResource("6_toqle")
-
-[node name="research_3" parent="VBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_ph1so")]
-layout_mode = 0
-offset_left = 384.0
-offset_right = 436.0
-item_resource = ExtResource("7_hj4q1")
+item_resource = ExtResource("11_hnfqf")
 
 [node name="calm_mind" parent="VBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_ph1so")]
 layout_mode = 0
@@ -117,6 +113,12 @@ offset_right = 308.0
 offset_bottom = 180.0
 item_resource = ExtResource("7_7nsin")
 
+[node name="research_2" parent="VBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_ph1so")]
+layout_mode = 0
+offset_left = 384.0
+offset_right = 436.0
+item_resource = ExtResource("6_toqle")
+
 [node name="meditation" parent="VBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_ph1so")]
 layout_mode = 0
 offset_left = 384.0
@@ -125,6 +127,12 @@ offset_right = 436.0
 offset_bottom = 244.0
 item_resource = ExtResource("5_2s8ur")
 
+[node name="research_3" parent="VBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_ph1so")]
+layout_mode = 0
+offset_left = 512.0
+offset_right = 564.0
+item_resource = ExtResource("7_hj4q1")
+
 [node name="meditation_2" parent="VBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_ph1so")]
 layout_mode = 0
 offset_left = 512.0
@@ -132,6 +140,12 @@ offset_top = 192.0
 offset_right = 564.0
 offset_bottom = 244.0
 item_resource = ExtResource("9_7nsin")
+
+[node name="conscience" parent="VBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_ph1so")]
+layout_mode = 0
+offset_left = 768.0
+offset_right = 820.0
+item_resource = ExtResource("10_knge3")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 visible = false

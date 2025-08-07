@@ -2,6 +2,9 @@ extends Node
 
 
 enum Currency { WeaponsPOWER }
+#var Features = {
+	#MEDITATION
+#}
 
 #region - - - VARIABLES - - - - #
 @onready var UpgradesPanel = $/root/Main/%UpgradesPanel

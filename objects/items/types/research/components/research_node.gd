@@ -6,6 +6,13 @@ class_name ResearchNode
 signal update_connector( researchNode: ResearchNode )
 
 
+enum NodeTypes {
+	KEY,
+	NOTABLE,
+	NORMAL,
+}
+var NodeType = NodeTypes.NORMAL
+
 
 func _init() -> void:
 	#if Engine.is_editor_hint():
@@ -122,3 +129,8 @@ func update_connector2():
 				Item.State.LOCKED:
 					Connector.hide()
 					pass
+
+
+func set_node_type():
+	# change Node's box style to match NodeType
+	pass

@@ -12,7 +12,7 @@
 [sub_resource type="Resource" id="Resource_jxm28"]
 script = ExtResource("1_jxm28")
 currency = "knowledge"
-value = 250
+value = 500
 metadata/_custom_type_script = "uid://ch31xejfebo7f"
 
 [sub_resource type="Resource" id="Resource_hn8b2"]
@@ -44,7 +44,6 @@ description = "I am a description."
 flair = "I am descriptive flair."
 costs = Array[ExtResource("1_jxm28")]([SubResource("Resource_jxm28")])
 requirements = Array[ExtResource("4_t2h0p")]([SubResource("Resource_bww8u")])
-unlockRequirements = Array[ExtResource("4_t2h0p")]([])
 effects = Array[ExtResource("2_7smx2")]([SubResource("Resource_hn8b2")])
 state = 0
 tags = SubResource("Resource_3pvwl")

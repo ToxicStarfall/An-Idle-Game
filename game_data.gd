@@ -5,47 +5,28 @@ var save_data = SaveFile.new()
 
 #region - - - Resources - - - - #
 
-#@export var weapons: int = 0  ## number of weapons produced
 #@export var weapons = Weapons.new()
-#@export var weaponsE: int = 0  ## highest number of weapons produced
 #@export var weaponPower: float = 0.0 : #set = _get_weaponsPC
 	#set(value):
 		#if value>weaponPower: weaponPowerE += (value-weaponPower)
 		##print("weaponPowerE: ",weaponPowerE)
 		#weaponPower = value
-#@export var weaponPowerE: float = 0.0
-#@export var weaponsPC: float = 0.0 #: get = _get_weaponsPC
-#@export var weaponsPS: float = 0
-#@export var weaponsBasePC: int = 1 : #set = _get_weaponsPC
-	#set(value):
-		#weaponsBasePC = value
-		#_get_weaponsPC()
-#@export var weaponsBasePS: int = 0 #: set = _set_weaponsPS
-
 
 #region Currency - Power
 @export var power: float = 0.0 :           ## Total [Power] acumalated.
 	set(value):
-		_set_currency("power", value)
 		# If new value is higher than current value, add to total earnt.
-		#if value>power: powerE += (value-power)
-		#power = value
+		if (value > power): powerE += (value - power)
+		power = value
 		Events.update_power_counters.emit(power, powerE)
-	get: return _get_currency("power")
-@export var powerE: float = 0.0 :          ## Total lifetime [Power] acumalated.
-	set(value): _set_prop("powerE", value)
-	get: return _get_prop("powerE")
+@export var powerE: float = 0.0          ## Total lifetime [Power] acumalated.
 #var powerPC: float = 0.0
 #@export var powerPCBase: float = 0.0
 #@export var powerPCMult: float = 0.
 var powerEarn: float = 0.0 :          ## Total [Power] earnt as part of [Thought] completion.
 	get: return _get_powerEarn()
-@export var powerEarnBase: int = 1 :         ## Base [Power] earnt per [Thought]
-	set(value): _set_prop("powerEarnBase", value)
-	get: return _get_prop("powerEarnBase")
-@export var powerEarnBasePct: float = 0.2 :  ## [Power] earnt as a % of [Knowledge] from [Thought].
-	set(value): _set_prop("powerEarnBasePct", value)
-	get: return _get_prop("powerEarnBasePct")
+@export var powerEarnBase: int = 1         ## Base [Power] earnt per [Thought]
+@export var powerEarnBasePct: float = 0.2  ## [Power] earnt as a % of [Knowledge] from [Thought].
 #endregion
 
 
@@ -53,26 +34,17 @@ var powerEarn: float = 0.0 :          ## Total [Power] earnt as part of [Thought
 @export var insight: int = 0   # High level research resource used to unlock core technologies
 @export var knowledge: float = 0 :
 	set(value):
-		_set_currency("knowledge", value)
 		# If new value is higher than current value, add to total earnt.
-		#if value>knowledge: knowledgeE += (value-knowledge)
-		#print("knowledgeE: ",knowledge)
-		#knowledge = value
+		if (value > knowledge): knowledgeE += (value - knowledge)
+		knowledge = value
 		Events.update_knowledge_counters.emit( snappedf(knowledge, 1.0), snappedf(knowledgeE, 1.0))
-	get: return _get_currency("knowledge")
-@export var knowledgeE: float = 0 :
-	set(value): _set_prop("knowledgeE", value)
-	get: return _get_prop("knowledgeE")
+@export var knowledgeE: float = 0
 #@export var knowledgePS: float = 0 #: set = _set_knowledgePS
 #@export var knowledgeBasePS: int = 0
 
 ## Completing [Thoughts] grants [Knowledge].
-@export var thoughtE: int = 0 :          ## Number of [Thoughts] completed.
-	set(value): _set_prop("thoughtE", value)
-	get: return _get_prop("thoughtE")
-@export var thoughtProgress: int = 0 :   ## Current completion progress of [Thought].
-	set(value): _set_prop("thoughtProgress", value)
-	get: return _get_prop("thoughtProgress")
+@export var thoughtE: int = 0          ## Number of [Thoughts] completed.
+@export var thoughtProgress: int = 0   ## Current completion progress of [Thought].
 @export var thoughtProgressReq: int = 0 :
 	set(value):
 		thoughtProgressReq = thoughtEarn
@@ -83,25 +55,20 @@ var powerEarn: float = 0.0 :          ## Total [Power] earnt as part of [Thought
 #@export var thoughtPower: float = 0 :        ## Thought fill amount.
 var thoughtPower: float = 0 :        ## Thought fill amount.
 	get = _get_thoughtPower
-@export var thoughtPowerBase: int = 1:
-	set(value): _set_prop("thoughtPowerBase", value)
-	get: return _get_prop("thoughtPowerBase")
+@export var thoughtPowerBase: int = 1
 #@export var thoughtPowerMult: float = 1
 #@export var thoughtPowerRand: float = 0.25  # Randomness of thought fill amount.
 
 ## Amount of earnt knowledge per Thought completed.
-@export var thoughtEarn: float = 0:
-#var thoughtEarn: float = 0:
+#@export var thoughtEarn: float = 0:
+var thoughtEarn: float = 0:
 	set(value):
 		thoughtEarn = value
 		Events.thoughtEarn_changed.emit(value)
-	#get: return _get_prop("thoughtEarnBase")
-@export var thoughtEarnBase: int = 3:
-	set(value):
-		thoughtEarnBase = value
-		_get_thoughtEarn()
-	#set(value): _set_prop("thoughtEarnBase", value)
-	#get: return _get_prop("thoughtEarnBase")
+@export var thoughtEarnBase: int = 3
+	#set(value):
+		#thoughtEarnBase = value
+		#_get_thoughtEarn()
 #@export var thoughtEarnMult: float = 1 #: set = _get_thoughtEarn
 #@export var thoughtEarnRand: float = -0.25   # Randomness of earnt knowledge earnt per Thought
 #@export var thoughtEarnRandMax: float = 0.1  # Randomness maximum
@@ -138,8 +105,6 @@ var thoughtPower: float = 0 :        ## Thought fill amount.
 @export var scripted_events: Dictionary = {}
 
 
-#func _init() -> void:
-	#pass
 
 ## Set the initial calculated values, Causes update signal to emit for values
 func initialize_values():
@@ -151,20 +116,8 @@ func initialize_values():
 	#Events.thoughtProgressReq_changed.emit(thoughtProgressReq)
 	_get_powerEarn()
 	#Events.update_knowledge_counters.emit(knowledge, knowledgeE)
-	#print(Events.update_knowledge_counters.get_connections())
 	set("knowledge", knowledge)
 
-
-# Setter for subresources.  (UNUSED currently)
-#func _set_resourcePC(resource_type):
-	#var resource = Game.get_property(resource_type)
-	#if resource:
-		#var a = resource_type.slice(0,1)
-		#resource_type.erase(0,1)
-		#a.to_upper()
-		#a += resource_type
-		#resource = Game.get_property("base%s" % [resource_type])
-	#return resource
 
 #region  - - SETTERS & GETTERS - - - - #
 # - - - GENERIC SETTERS - - - - #
@@ -205,7 +158,7 @@ func _get_item():
 #endregion
 
 
-#region - - - STAT CALCULATIONS - - - - #
+#region - - - CALCULATED STAT VALUES - - - - #
 ## Calculates [powerEarn] and returns the value.
 func _get_powerEarn() -> float:
 	#powerEarn = powerEarnBase
@@ -214,6 +167,7 @@ func _get_powerEarn() -> float:
 	return calculated_value#powerEarn
 
 
+## Calculates tje amount of thought progress fill
 func _get_thoughtPower():
 	thoughtPower = thoughtPowerBase
 	#thoughtPower *= thoughtPowerMult
@@ -222,16 +176,14 @@ func _get_thoughtPower():
 	return thoughtPower
 
 
-func _get_thoughtEarn(_value=0):
+func _get_thoughtEarn():
 	#thoughtEarnBase = value
 	thoughtEarn = thoughtEarnBase
-	#thoughtEarn += (thoughtEarnBase * randf_range(thoughtEarnRand, thoughtEarnRandMax))
+	#thoughtEarn += (thoughtEarnBase * randf_range(thoughtEarnRand, thoughtEarnRandMax))  # randomizer for amount earned
 	#thoughtEarn = float( int(thoughtEarn * 10) ) / 10  # Rounds to hundreths place
 	#print("thoughtEarn pudated - ", str(thoughtEarnBase))
 	Events.thoughtEarn_changed.emit(thoughtEarn)
-	#return thoughtEarn
-	return _value
-
+	return thoughtEarn
 #endregion
 
 

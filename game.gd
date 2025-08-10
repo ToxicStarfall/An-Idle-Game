@@ -24,6 +24,7 @@ enum Currency { WeaponsPOWER }
 
 
 func _ready() -> void:
+	## Connect Signals
 	Events.user_interface_loaded.connect( _initialize_game )
 	Events.game_saved.connect( save_game_data )
 	Events.game_loaded.connect( load_game_data )
@@ -31,7 +32,7 @@ func _ready() -> void:
 	Events.function_highlighted.connect( _on_function_highlighted )
 
 
-## Loads resources & saves.
+## Loads game resources & saves.
 func _initialize_game():
 	print("Loading game resources...")
 	await _initialize_game_resources()  # Loads default resources
@@ -41,10 +42,7 @@ func _initialize_game():
 
 
 #region - - - HELPER FUNCTIONS - - - - #
-func get_property( property_name ):
-	#if property_name.contains("."):
-		#return _get_resource(property_name)
-	#else:
+func get_property(property_name):
 		var property = GameData.get(property_name)
 		if property == null:
 			push_error("cannot find a property of name \"%s\"" % [property_name])
@@ -53,24 +51,10 @@ func get_property( property_name ):
 			return property
 
 
-# returns Resource.value  if property is a Resource
-#func get_resource( fullname ):
-	#fullname = fullname.split(".")
-	#print(fullname)
-	#var base_name = fullname[0]
-	#var property_name = fullname[1]
-	#var property = game_data.get(base_name)
-	#print(property)
-	#property = property.get(property_name)
-	#return property
-
-
-func get_item( item_name, type ):
-	var item = GameData.get(type).get(item_name)
-	#item = game_data.upgrades.get( item_name ) # .get() returns value since upgrades is a Dictionary
-
+func get_item(item_key: String, item_dict_name):
+	var item = GameData.get(item_dict_name).get(item_key)
 	if item == null:
-		push_error("cannot find a item of name \"%s\"" % [item_name])
+		push_error("cannot find a item of name \"%s\"" % [item_key])
 		return null
 	else:
 		return item
@@ -103,7 +87,6 @@ func _on_function_highlighted(node_name, stop_signal="pressed"):
 	tween.tween_callback( check_disabled )
 	#await tween.loop_finished
 
-
 #endregion
 
 
@@ -131,7 +114,7 @@ func _initialize_upgrades():
 			var raw_name = file.split(".")[0]
 			item.raw_name = raw_name
 			item.resource_name = "upgrade:%s" % [raw_name]
-			item.tags.auto_tag(item)
+			item.tags.generate(item)
 			GameData.upgrades.set(raw_name, item)
 			#print(item.resource_name)
 
@@ -164,7 +147,7 @@ func _initialize_research():
 
 			#var item_node = preload("res://objects/items/types/research/research_components/research_node.tscn").instantiate()
 			#item_node.item_resource = item
-			item.tags.auto_tag(item)
+			item.tags.generate(item)
 			#ResearchPanel.get_node("%TechTreeContainer").add_child( item_node )
 		print("Research items loaded.")
 		_initialize_research_tree()
@@ -212,7 +195,7 @@ func _initialize_generators():
 			var raw_name = file.split(".")[0]
 			item.raw_name = raw_name
 			item.resource_name = "generator:%s" % [raw_name]
-			item.tags.auto_tag(item)
+			item.tags.generate(item)
 			GameData.generators.set(raw_name, item)
 			#print(item.resource_name)
 
@@ -236,7 +219,7 @@ func _initialize_scripted_events():
 			var raw_name = file.split(".")[0]
 			item.raw_name = raw_name
 			item.resource_name = "scripted_event:%s" % [raw_name]
-			item.tags.auto_tag(item)
+			item.tags.generate(item)
 			GameData.scripted_events.set(raw_name, item)
 			#print(item.resource_name)
 		print("Scripted events loaded.")

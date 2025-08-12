@@ -9,7 +9,9 @@ enum Type {
 	BASE,
 	UPGRADE,
 	RESEARCH,
-	GENERATOR
+	GENERATOR,
+	ACHIEVMENT,
+	SCRIPTED
 }
 
 enum State {
@@ -52,8 +54,8 @@ var type := Type.BASE  ## Used for Match comparisons for different item types.
 #enum InternalTags {}
 
 
-func _init(item_type: Type = Type.BASE) -> void:
-	self.type = item_type
+func _init() -> void:
+	self.type = Type.BASE
 	if disabled:
 		pass
 	#if name == null:  # use resource_name if a defualt is not present
@@ -167,7 +169,7 @@ func get_tags():
 func set_state(new_state: Item.State):
 	#print("newstate: ", new_state)
 	self.state = new_state
-	#print("state set to ", new_state)
+	#print(self.raw_name, " state set to ", new_state)
 	update_state.emit( new_state )
 	Events.item_state_changed.emit(get_script().get_global_name())
 	pass

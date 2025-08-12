@@ -143,8 +143,8 @@ item_resource = ExtResource("9_7nsin")
 
 [node name="conscience" parent="VBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_ph1so")]
 layout_mode = 0
-offset_left = 768.0
-offset_right = 820.0
+offset_left = 896.0
+offset_right = 948.0
 item_resource = ExtResource("10_knge3")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]

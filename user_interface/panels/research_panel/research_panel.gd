@@ -43,19 +43,19 @@ func _on_tech_tree_gui_input(event: InputEventMouse) -> void:
 		ViewportScroll.scroll_vertical = scroll_pos.y + drag_offset.y
 
 
+func apply_node_requirements():
+	pass
+
+
 func generate_connectors(research_node):
 	var TechTree = get_node("%TechTreeContainer")
 	var node_data = research_node.item_resource
-	#print("updateing connector for node ", node_data.resource_name)
+	#print("creating connector for node ", node_data.resource_name)
 
 	for requirement in node_data.requirements:
 		if requirement is RequirementItem:
-			#print(requirement.item.name)
-			#print(requirement.item.resource_name)
-			#print(requirement.item.get("raw_name"))
 			var requirement_node = TechTree.get_node(requirement.item.raw_name)
 
-			#print(requirement_node.position, " - ", research_node.position)
 			var connector_scene = preload("res://objects/items/types/research/components/connector.tscn")
 			var Connector = connector_scene.instantiate()
 			Connector.name = "connector-%s" % [requirement_node.name]
@@ -64,6 +64,7 @@ func generate_connectors(research_node):
 				requirement_node.position - research_node.position + (requirement_node.size/2)
 			]
 			research_node.add_child(Connector)
+
 			# Add an arrow pointing in direction of progression.
 			#var arrow = Connector.get_node("TextureRect")
 			#arrow.position = (Connector.points[1] - Connector.points[0]) /2 + arrow.size/2
@@ -72,16 +73,24 @@ func generate_connectors(research_node):
 
 func update_connector(research_node):
 	var TechTree = get_node("%TechTreeContainer")
-	var node_data = research_node.item_resource
+	var research = research_node.item_resource
 
-	for requirement in node_data.requirements:
+	for requirement in research.requirements:
 		if requirement is RequirementItem:
 			var requirement_node = TechTree.get_node(requirement.item.raw_name)
+			var requirement_item = requirement_node.item_resource
 			var Connector = research_node.get_node( "connector-%s" % [requirement_node.name] )
+			print(research.raw_name, ": ", research.state)
+			print("- ", requirement_item.raw_name, ": ", requirement_item.state)
+
+			# TODO
+			# LOAD ORDER OF reserahcnodes effects connectors.
+			# "mind" loads before "origin", it doesnt detect as owned.
+
 			#TODO Check if requirement node is unlocked to show connectors otherwise dont.
 			match requirement_node.item_resource.state:
 				pass
-			match node_data.state:
+			match research.state:
 				Item.State.OWNED:
 					Connector.default_color = Color(1,1,1)
 				Item.State.UNLOCKED:

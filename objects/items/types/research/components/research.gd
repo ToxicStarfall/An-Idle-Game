@@ -8,8 +8,7 @@ class_name Research
 
 
 func _init() -> void:
-	# See [ResearchNode] for resource_name and raw_name initialization.
-	super(Type.RESEARCH)
+	self.type = Type.RESEARCH
 
 
 #func _set_state(new_state: Item.State):

@@ -27,9 +27,8 @@ func _init() -> void:
 
 func _ready() -> void:
 	#if !Engine.is_editor_hint():
-		#super()
-		#item_resource = item_resource.duplicate()  # Missing meta
-		for req_node in item_resource.requirement_nodes:
+		super() # IMPORTANT dont remove. General init for ItemNodes
+		for req_node in requirement_nodes:  ## use ResearchNodes for easy requirement linking
 			var item = req_node.item_resource
 			item_resource.requirements.append( RequirementItem.new().setup(item) )
 
@@ -51,7 +50,7 @@ func _process(_delta: float) -> void:
 func _update_state(state: Item.State):
 	#if !Engine.is_editor_hint():
 		super(state)
-
+		#print("research: state updated")
 		update_connector.emit( self )
 
 

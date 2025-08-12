@@ -8,5 +8,5 @@ class_name Upgrade
 
 
 func _init() -> void:
-	super(Type.UPGRADE)
+	self.type = Type.UPGRADE
 	pass

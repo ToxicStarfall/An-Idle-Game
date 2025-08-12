@@ -65,10 +65,8 @@ var thoughtEarn: float = 0:
 	set(value):
 		thoughtEarn = value
 		Events.thoughtEarn_changed.emit(value)
+	get: return _get_thoughtEarn()
 @export var thoughtEarnBase: int = 3
-	#set(value):
-		#thoughtEarnBase = value
-		#_get_thoughtEarn()
 #@export var thoughtEarnMult: float = 1 #: set = _get_thoughtEarn
 #@export var thoughtEarnRand: float = -0.25   # Randomness of earnt knowledge earnt per Thought
 #@export var thoughtEarnRandMax: float = 0.1  # Randomness maximum
@@ -163,8 +161,8 @@ func _get_item():
 func _get_powerEarn() -> float:
 	#powerEarn = powerEarnBase
 	#powerEarn = powerEarnBasePct
-	var calculated_value  = powerEarnBase
-	return calculated_value#powerEarn
+	var powerEarn = powerEarnBase
+	return powerEarn
 
 
 ## Calculates tje amount of thought progress fill
@@ -177,8 +175,7 @@ func _get_thoughtPower():
 
 
 func _get_thoughtEarn():
-	#thoughtEarnBase = value
-	thoughtEarn = thoughtEarnBase
+	var thoughtEarn = thoughtEarnBase
 	#thoughtEarn += (thoughtEarnBase * randf_range(thoughtEarnRand, thoughtEarnRandMax))  # randomizer for amount earned
 	#thoughtEarn = float( int(thoughtEarn * 10) ) / 10  # Rounds to hundreths place
 	#print("thoughtEarn pudated - ", str(thoughtEarnBase))
@@ -204,12 +201,6 @@ func update_items(filter_tag):
 	#print("Updating items with tag: ", filter_tag)
 	for type in [upgrades, research, generators]:
 		for i in type:
-			# UI Unlocks
-			#if i is Control:
-				#if item.
-				#item.unlock()
-				#pass
-
 			var valid_filter
 			var item = type[i]
 			#print(item.name)
@@ -218,7 +209,7 @@ func update_items(filter_tag):
 				#print("  matching item: ", item.name)
 				valid_filter = true
 
-			if item.state == item.State.LOCKED and valid_filter:#item.tags.has(filter_tag):
+			if item.state == item.State.LOCKED and valid_filter:
 				item.unlock()
 	# Update scripted events seperately.
 	for i in scripted_events:

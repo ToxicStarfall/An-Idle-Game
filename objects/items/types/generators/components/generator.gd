@@ -14,7 +14,7 @@ class_name Generator
 
 
 func _init() -> void:
-	super(Type.GENERATOR)
+	self.type = Type.GENERATOR
 
 
 func buy_generator(amount: int):

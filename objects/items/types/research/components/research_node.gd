@@ -1,51 +1,53 @@
 #@tool
-extends ItemNode
 class_name ResearchNode
+extends ItemNode
 
 
 signal update_connector( researchNode: ResearchNode )
 
-
 enum NodeTypes {
-	KEY,
-	NOTABLE,
-	NORMAL,
+	KEY,  ## A node which significantly impacts gameplay
+	NOTABLE,  ## A node which can noticably impact gameplay
+	NORMAL,  ## A normal node
 }
 var NodeType = NodeTypes.NORMAL
 
+@export var requirement_nodes: Array[ResearchNode] = []
+#@export var soft_requirement_nodes: Array[ResearchNode] = []
+
 
 func _init() -> void:
-	#if Engine.is_editor_hint():
-		#EditorInterface.get_inspector().property_edited.connect( _on_inspector_property_edited )
-		##EditorInterface.get_selection().selection_changed.connect( _on_editor_selection_changed )
-	#else:
-		super()
+	super()
 
 
 func _ready() -> void:
-	#if !Engine.is_editor_hint():
-		super()
-		#item_resource = item_resource.duplicate()  # Missing meta
-		item_resource.raw_name = item_resource.resource_path.split("/")[-1].split(".")[0]
-		item_resource.resource_name = item_resource.get_script().get_global_name() +":"+ item_resource.raw_name
-		item_resource.tags.auto_tag(item_resource)
-		GameData.research.set(item_resource.raw_name, item_resource) # Add to dict
-		#print("resource_path: ", item_resource.resource_path)
-		#print("resource_name: ", item_resource.resource_name)
+	super() # IMPORTANT dont remove. General init for ItemNodes
+	for req_node in requirement_nodes:  ## use ResearchNodes for easy requirement linking
+		var item = req_node.item_resource
+		#print(req_node)
+		#item_resource.requirements.append( RequirementItem.new().setup(item) )
+
+	#item_resource = item_resource.duplicate()  # Missing meta
+	item_resource.raw_name = item_resource.resource_path.split("/")[-1].split(".")[0]
+	item_resource.resource_name = item_resource.get_script().get_global_name() +":"+ item_resource.raw_name
+	item_resource.tags.generate(item_resource)
+	GameData.research.set(item_resource.raw_name, item_resource) # Add to dict
+	#print("resource_path: ", item_resource.resource_path)
 
 
 func _process(_delta: float) -> void:
-	#if Engine.is_editor_hint():
-		#var viewport2d = EditorInterface.get_editor_viewport_2d()
-		#print(viewport2d.gui_is_dragging())
 	pass
 
 
-func _update_state(state: Item.State):
-	#if !Engine.is_editor_hint():
-		super(state)
+func _draw() -> void:
+	# Draw connectors here
+	pass
 
-		update_connector.emit( self )
+
+func _on_state_updated(state: Item.State):
+	super(state)
+	#print("research: state updated")
+	update_connector.emit( self )
 
 
 func _on_editor_selection_changed():
@@ -75,11 +77,6 @@ func _on_inspector_property_edited(property: String) -> void:
 		#get_info.call_deferred()
 	pass
 
-	#match property:
-		#"position":  # This DOES NOT trigger from dragging nodes in the editor
-			#update_connector2()
-			#pass
-
 
 func generate_connectors():
 	var TechTree = self.get_parent()
@@ -106,29 +103,29 @@ func generate_connectors():
 				#arrow.rotation = rotate
 
 
-func update_connector2():
-	print("updated connector")
-	var TechTree = self.get_parent()
-	var node_data = self.item_resource
-
-	for requirement in node_data.requirements:
-		if requirement is RequirementItem:
-			#var requirement_node = TechTree.get_node_or_null(requirement.item.raw_name)
-			var requirement_node = TechTree.find_child(requirement.item.raw_name, false)
-			var Connector = self.get_node( "connector-%s" % [requirement_node.name] )
-			if !requirement_node:  continue  # Ignore connector if x node does not yet exist
-			if !Connector:
-				generate_connectors()
-
-			match node_data.state:
-				Item.State.OWNED:
-					Connector.default_color = Color(1,1,1)
-				Item.State.UNLOCKED:
-					Connector.default_color = Color(0.5,0.5,0.5)
-					Connector.show()
-				Item.State.LOCKED:
-					Connector.hide()
-					pass
+#func update_connector2():
+	#print("updated connector")
+	#var TechTree = self.get_parent()
+	#var node_data = self.item_resource
+#
+	#for requirement in node_data.requirements:
+		#if requirement is RequirementItem:
+			##var requirement_node = TechTree.get_node_or_null(requirement.item.raw_name)
+			#var requirement_node = TechTree.find_child(requirement.item.raw_name, false)
+			#var Connector = self.get_node( "connector-%s" % [requirement_node.name] )
+			#if !requirement_node:  continue  # Ignore connector if x node does not yet exist
+			#if !Connector:
+				#generate_connectors()
+#
+			#match node_data.state:
+				#Item.State.OWNED:
+					#Connector.default_color = Color(1,1,1)
+				#Item.State.UNLOCKED:
+					#Connector.default_color = Color(0.5,0.5,0.5)
+					#Connector.show()
+				#Item.State.LOCKED:
+					#Connector.hide()
+					#pass
 
 
 func set_node_type():

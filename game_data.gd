@@ -37,7 +37,8 @@ var powerEarn: float = 0.0 :          ## Total [Power] earnt as part of [Thought
 		# If new value is higher than current value, add to total earnt.
 		if (value > knowledge): knowledgeE += (value - knowledge)
 		knowledge = value
-		Events.update_knowledge_counters.emit( snappedf(knowledge, 1.0), snappedf(knowledgeE, 1.0))
+		#Events.update_knowledge_counters.emit( snappedf(knowledge, 1.0), snappedf(knowledgeE, 1.0))
+		Events.update_knowledge_counters.emit( knowledge, snappedf(knowledgeE, 1.0))
 @export var knowledgeE: float = 0
 #@export var knowledgePS: float = 0 #: set = _set_knowledgePS
 #@export var knowledgeBasePS: int = 0
@@ -65,10 +66,8 @@ var thoughtEarn: float = 0:
 	set(value):
 		thoughtEarn = value
 		Events.thoughtEarn_changed.emit(value)
+	get: return _get_thoughtEarn()
 @export var thoughtEarnBase: int = 3
-	#set(value):
-		#thoughtEarnBase = value
-		#_get_thoughtEarn()
 #@export var thoughtEarnMult: float = 1 #: set = _get_thoughtEarn
 #@export var thoughtEarnRand: float = -0.25   # Randomness of earnt knowledge earnt per Thought
 #@export var thoughtEarnRandMax: float = 0.1  # Randomness maximum
@@ -104,10 +103,13 @@ var thoughtEarn: float = 0:
 }
 @export var scripted_events: Dictionary = {}
 
+@export var settings = Settings.new()
 
 
 ## Set the initial calculated values, Causes update signal to emit for values
 func initialize_values():
+	#print(format_short(100231))
+	#print(format_short(10123.231))
 	_get_thoughtPower()
 	_get_thoughtEarn()
 	print("thoughtEarn",thoughtEarn)
@@ -163,8 +165,8 @@ func _get_item():
 func _get_powerEarn() -> float:
 	#powerEarn = powerEarnBase
 	#powerEarn = powerEarnBasePct
-	var calculated_value  = powerEarnBase
-	return calculated_value#powerEarn
+	var powerEarn = powerEarnBase
+	return powerEarn
 
 
 ## Calculates tje amount of thought progress fill
@@ -177,8 +179,7 @@ func _get_thoughtPower():
 
 
 func _get_thoughtEarn():
-	#thoughtEarnBase = value
-	thoughtEarn = thoughtEarnBase
+	var thoughtEarn = thoughtEarnBase
 	#thoughtEarn += (thoughtEarnBase * randf_range(thoughtEarnRand, thoughtEarnRandMax))  # randomizer for amount earned
 	#thoughtEarn = float( int(thoughtEarn * 10) ) / 10  # Rounds to hundreths place
 	#print("thoughtEarn pudated - ", str(thoughtEarnBase))
@@ -204,12 +205,6 @@ func update_items(filter_tag):
 	#print("Updating items with tag: ", filter_tag)
 	for type in [upgrades, research, generators]:
 		for i in type:
-			# UI Unlocks
-			#if i is Control:
-				#if item.
-				#item.unlock()
-				#pass
-
 			var valid_filter
 			var item = type[i]
 			#print(item.name)
@@ -218,7 +213,7 @@ func update_items(filter_tag):
 				#print("  matching item: ", item.name)
 				valid_filter = true
 
-			if item.state == item.State.LOCKED and valid_filter:#item.tags.has(filter_tag):
+			if item.state == item.State.LOCKED and valid_filter:
 				item.unlock()
 	# Update scripted events seperately.
 	for i in scripted_events:
@@ -266,3 +261,35 @@ func _on_thought_progressed(meditate_active := false):
 		thoughtProgress = overflow_progress
 		thoughtProgressReq = thoughtEarn  # Setter update
 		Events.ui_thought_completed.emit(thoughtProgress)
+
+
+func _on_settings_changed(setting, value):
+	if settings.has(setting):
+		settings.set(setting, value)
+	else:
+		push_error("Unable to find setting: \"%s\"" % [setting])
+
+
+var place_values = ["thousand", "million", "billion", "trillion", "quadrillion",
+	"quintillion", "sextillion", "septillion", "octillion", "nonillion", "decillion",
+];
+func format_short(value):
+	#var place = (str(value).length() % 3) -  1
+	#print("%s %s" % [value, place_values[place]])
+
+	var str = str(int(round(value)))
+	var length = str.length()
+	var whole
+	# Gets number of starting digits("1"365000)
+	# if num length/3 has remainder then = remainder
+	if (length % 3) != 0: whole = length % 3
+	# else if does not then = 3
+	elif (length % 3) == 0: whole = 3
+
+	var groups = floor(str.substr(whole, length).length() / 3)
+	var decimal = str.substr(whole, whole + 3) # gets 1st 3 digits after the starting number(1"365"000)
+	whole = str.substr(0, whole);
+
+	var output = "%s.%s"%[whole, decimal]
+	if length >= 4: return "%s %s" % [output, place_values[groups - 1]]
+	else: return str

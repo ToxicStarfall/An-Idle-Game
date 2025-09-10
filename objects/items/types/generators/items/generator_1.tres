@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://caj5o56x4i7td" path="res://objects/items/components/requirements/requirement.gd" id="3_m677j"]
 [ext_resource type="Script" uid="uid://btb6n7ooepo2o" path="res://objects/items/components/effects/generator_effect.gd" id="3_xwy58"]
 [ext_resource type="Script" uid="uid://r4isqaddmp4v" path="res://objects/items/types/generators/components/generator.gd" id="6_m677j"]
-[ext_resource type="Script" uid="uid://jrivr4k7xxyp" path="res://objects/items/components/item_tag.gd" id="8_xwy58"]
+[ext_resource type="Script" uid="uid://jrivr4k7xxyp" path="res://objects/items/components/item_tags.gd" id="8_xwy58"]
 
 [sub_resource type="Resource" id="Resource_m677j"]
 script = ExtResource("1_7rwve")

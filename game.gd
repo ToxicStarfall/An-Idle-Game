@@ -32,15 +32,6 @@ func _ready() -> void:
 	Events.function_highlighted.connect( _on_function_highlighted )
 
 
-## Loads game resources & saves.
-func _initialize_game():
-	print("Loading game resources...")
-	await _initialize_game_resources()  # Loads default resources
-	await Game.load_game_data()         # Loads save (loads edited resources)
-	#await Game.save_game_data()
-
-
-
 #region - - - HELPER FUNCTIONS - - - - #
 func get_property(property_name):
 		var property = GameData.get(property_name)
@@ -91,6 +82,13 @@ func _on_function_highlighted(node_name, stop_signal="pressed"):
 
 
 #region - - - INITIALIZATION - - - - #
+## Loads game resources & saves.
+func _initialize_game():
+	print("Loading game resources...")
+	await Game.load_game_data()         # Loads save (loads edited resources)
+	await _initialize_game_resources()  # Loads default resources
+	#await Game.save_game_data()
+
 
 func _initialize_game_resources():
 	await _initialize_upgrades()
@@ -161,25 +159,22 @@ func _initialize_research_tree():
 	for research_node in TechTree.get_children():
 		#print(research_node.item_resource.raw_name)
 		#print(research_node.item_resource.resource_path)
-		#var reference_key = placeholder_node.name
-		#if GameData.research.has(reference_key) && placeholder_node is ResearchPlaceholder:
 			#var item = GameData.research.get(reference_key)
 
 			#var research_node = preload(research_node_scene_path).instantiate()
 			#research_node.name = reference_key
 			#research_node.item_resource = item
-			research_node.update_connector.connect(ResearchPanel.update_connector)
-			#reserach_node.update_state
+		research_node.update_connector.connect(ResearchPanel.update_connector)
+			#reserach_node.state_updated
 
 			#research_node.position = placeholder_node.position
-			#TechTree.remove_child(placeholder_node)  # Remove placeholder
-			#placeholder_node.queue_free()            # Delete placholder
 			#TechTree.add_child(research_node)        # Add research node
-
-			ResearchPanel.generate_connectors(research_node)
 		#else:
 			#print("Cannot find reference key for research node: \"%s\"" % [reference_key])
 		#pass
+
+		ResearchPanel.generate_connectors(research_node)
+		research_node.update_connector.emit(research_node)
 	print("Research tree created.")
 
 
@@ -234,23 +229,25 @@ func save_game_data():
 	var save_data = GameData.save_data
 
 	for i in GameData.get_property_list():
-		if i.type == TYPE_DICTIONARY:
-			var dict_name = i.name
-			var dict = GameData.get(dict_name)
-			#print(dict.get_typed_value_script())
-			var dict_value_class_name = dict.get_typed_value_script()
-			# Filter Dictionary which defines [Item] as a type for its values (stores Item).
-			if dict_value_class_name and dict_value_class_name.get_global_name() == "Item":
-				save_data.set(dict_name, dict)
-				#print(dict)
-			else:  # Normal Dicts
-				save_data.set(dict_name, dict)
+		if i.usage == 4102:
+			var property = i.name
+			var value = GameData.get(property)
+			#print(property, value)
+			if i.type is not Dictionary:
+				save_data.set(property, value)
+			else: #if i.type == TYPE_DICTIONARY:
+				var dict_name = property
+				var dict = GameData.get(property)
+				var dict_value_class_name = dict.get_typed_value_script()
+				#print(dict_value_class_name)
+				# Filter dictionaries which define [Item] as a type for its values (stores Item).
+				if dict_value_class_name and dict_value_class_name.get_global_name() == "Item":
+					#save_data.set(dict_name, dict)
+					pass
+				else:  # Normal Dicts
+					save_data.set(dict_name, dict)
 	_save_items()
-	#print(GameData.research)
-	#save_data.research = GameData.research
 	ResourceSaver.save(save_data, "user://save_file.tres")
-	#print(ResourceLoader.load("user://save_file.tres").research)
-	pass
 
 
 func load_game_data():
@@ -259,25 +256,20 @@ func load_game_data():
 	# If there IS a file, load data over.
 	if save_data:
 		save_data = ResourceLoader.load("user://save_file.tres")
-		_load_items(save_data)
+		_load_items(save_data) # Load items first. Settings stats automatically updates them afterwards.
 		_load_data_dicts(save_data)
 		for i in save_data.get_property_list():
-			if i.usage == 4102:#4102:
-				var key = i.name
-				var property = save_data.get(key)
-				#print(key)
-				if property is not Dictionary:
-					#GeameData.save_data.set(key, property)  # Triggers setters to update
-					GameData.set(key, property)  # Triggers setters to update
-					GameData.update_items(key)  # Update items with linked tags when loading data
+			if i.usage == 4102:
+				var property = i.name
+				var value = save_data.get(property)
+				#print(property, value)
+				if value is not Dictionary:
+					GameData.set(property, value)  # Triggers setters to update
+					GameData.update_items(property)  # Update items with linked tags when loading data
 				else:
-					#print(property)
-					#GameData.get(key).assign(property)
-					#GameData.set(key, property)
-					#print( GameData.get(key) )
-		#GameData.save_data = save_data
-		#GameData._set_item()
-					#_load_item_dict(key, property)  # Handles loading item dictionaries
+					#GameData.get(property).assign(value)
+					#GameData.set(property, value)
+					#print( GameData.get(property) )
 					pass
 	# If there is NO save file, make a new file.
 	elif !save_data:
@@ -306,38 +298,10 @@ func _save_items():
 		#print(GameData.save_data.get(dict_name))
 
 
-func _load_item_dict(dict_name, dict):
-	#print("Loading Items")
-		var save_data = GameData.save_data
-
-	#for dict_name in ["upgrades", "research", "generators"]:
-
-		const Type = Item.Type
-		#var dict = save_data.get(dict_name)
-		#print(dict_name)
-		print(dict)
-		#print(GameData.get(dict_name))
-
-		for item_key in dict:
-			var item = GameData.get(dict_name).get(item_key)
-			var item_state = dict.get(item_key)
-			print(item.raw_name, " state - ", item_state)
-			# Access each item and update its state individually
-			match item.type:
-				Type.GENERATOR:
-					pass
-				Type.RESEARCH, Type.UPGRADE:
-					#item.state = item_state
-					item.set_state(item.state)
-					pass
-
-		#print(saved_dict)
-		#GameData.save_data.set(dict_name, saved_dict)
-
-
 func _load_items(save_data): # save data instance required or causes update issues
 	#var save_data = GameData.save_data
-	for dict_name in ["upgrades", "research", "generators"]:
+	#for dict_name in ["upgrades", "research", "generators"]:  # WARNING loading upgrades is broken.
+	for dict_name in ["research", "generators"]:
 		const Type = Item.Type
 		var dict = save_data.get(dict_name)
 		#print(dict)
@@ -354,15 +318,16 @@ func _load_items(save_data): # save data instance required or causes update issu
 					pass
 
 
-func _load_data_dicts(save_data):
+func _load_data_dicts(save_data):  # Loads dicts for feature unlock flags
 	for dict_name in ["ui_hint"]:
 		#const Type = Item.Type
 		var dict = save_data.get(dict_name)
 
-		print(dict)
+		#print(dict)
 		print(GameData.get(dict_name))
-		for i in GameData.get(dict_name):
-			GameData.get(dict_name).set(i, dict[i])
+		GameData.set(dict_name, dict)
+		#for i in GameData.get(dict_name):
+			#GameData.get(dict_name).set(i, dict[i])
 		#GameData.get(dict_name).set(dict_name, dict)
 		print(GameData.get(dict_name))
 #endregion

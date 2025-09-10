@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://n1eqbx75kvwo"
-path="res://.godot/imported/border-corner-4px.png-26cff94233e096b5389fbaca504cac25.ctex"
+uid="uid://big3qifsbuog0"
+path="res://.godot/imported/black_texture_1.jpg-23f54647383d1d9ac8a1b79b301e4a46.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/border-corner-4px.png"
-dest_files=["res://.godot/imported/border-corner-4px.png-26cff94233e096b5389fbaca504cac25.ctex"]
+source_file="res://textures/backgrounds/black_texture_1.jpg"
+dest_files=["res://.godot/imported/black_texture_1.jpg-23f54647383d1d9ac8a1b79b301e4a46.ctex"]
 
 [params]
 

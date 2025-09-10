@@ -11,10 +11,10 @@ func _ready() -> void:
 		print("skipped initializtion on generator node, hiding node.")
 		self.hide()
 	else:  # OVERIDE
-		item_resource.update_state.connect( _update_state )
+		item_resource.state_updated.connect( _on_state_updated )
 		%NameLabel.text = item_resource.name
 		%Timer.timeout.connect( _generate_complete )
-		_update_state( item_resource.state )  # updates state to the default state set within this item's resource
+		_on_state_updated( item_resource.state )  # updates state to the default state set within this item's resource
 	pass
 
 
@@ -27,7 +27,7 @@ func _on_pressed():  # OVERIDE
 	item_resource.buy_generator(1)
 
 
-func _update_state(state: Item.State):
+func _on_state_updated(state: Item.State):
 	const State = Item.State
 	super(state)  # Applies trasnparency/visibility
 	match state: #item_resource.state:

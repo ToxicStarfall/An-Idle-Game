@@ -1,5 +1,5 @@
 class_name AmbientMessage
-extends Node
+extends RichTextLabel
 
 
 var dict = {

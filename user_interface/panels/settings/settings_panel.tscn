@@ -1,0 +1,167 @@
+[gd_scene load_steps=10 format=3 uid="uid://h8uk0677gb0y"]
+
+[ext_resource type="Script" uid="uid://debayqitljcdp" path="res://user_interface/panels/settings/settings_panel.gd" id="1_wtsj5"]
+[ext_resource type="ButtonGroup" uid="uid://cur6f4rda82ny" path="res://user_interface/panels/settings/number_display_buttons.tres" id="2_actll"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gimri"]
+bg_color = Color(0.15, 0.15, 0.15, 1)
+
+[sub_resource type="Gradient" id="Gradient_eexyo"]
+offsets = PackedFloat32Array(0, 0.3, 0.7, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wtsj5"]
+gradient = SubResource("Gradient_eexyo")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ujyr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_actll"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_liap4"]
+bg_color = Color(0.14, 0.14, 0.14, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gw05r"]
+bg_color = Color(0.14, 0.14, 0.14, 1)
+
+[node name="SettingsPanel" type="PanelContainer"]
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gimri")
+script = ExtResource("1_wtsj5")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "SETTINGS"
+horizontal_alignment = 1
+
+[node name="Divider" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = SubResource("GradientTexture1D_wtsj5")
+
+[node name="HFlowContainer" type="HFlowContainer" parent="MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="FlowContainer" type="FlowContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="CheckButton" type="CheckButton" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/FlowContainer"]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/FlowContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/FlowContainer/HBoxContainer"]
+layout_mode = 2
+text = "Number Display:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/FlowContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="ShortestButton" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/FlowContainer/HBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2ujyr")
+theme_override_styles/hover = SubResource("StyleBoxFlat_actll")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_liap4")
+theme_override_styles/normal = SubResource("StyleBoxFlat_gw05r")
+toggle_mode = true
+button_group = ExtResource("2_actll")
+text = "SHORTEST"
+
+[node name="ShortButton" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/FlowContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2ujyr")
+theme_override_styles/hover = SubResource("StyleBoxFlat_actll")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_liap4")
+theme_override_styles/normal = SubResource("StyleBoxFlat_gw05r")
+toggle_mode = true
+button_group = ExtResource("2_actll")
+text = "SHORT"
+
+[node name="NormalButton" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/FlowContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2ujyr")
+theme_override_styles/hover = SubResource("StyleBoxFlat_actll")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_liap4")
+theme_override_styles/normal = SubResource("StyleBoxFlat_gw05r")
+toggle_mode = true
+button_group = ExtResource("2_actll")
+text = "NORMAL"
+
+[node name="LongButton" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/FlowContainer/HBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2ujyr")
+theme_override_styles/hover = SubResource("StyleBoxFlat_actll")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_liap4")
+theme_override_styles/normal = SubResource("StyleBoxFlat_gw05r")
+toggle_mode = true
+button_group = ExtResource("2_actll")
+text = "SHORT"
+
+[node name="PreviewLabel" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/FlowContainer/HBoxContainer"]
+layout_mode = 2
+text = "Peview:"
+
+[node name="Divider2" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = SubResource("GradientTexture1D_wtsj5")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="SaveButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "SAVE"
+
+[node name="SaveExitButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "SAVE & EXIT"
+
+[node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "EXIT"

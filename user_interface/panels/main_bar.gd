@@ -19,6 +19,7 @@ func _ready() -> void:
 		)
 	#%MeditateButton.pressed.connect( func(): meditate_active = !meditate_active ) # toggle meditate_active
 	%MeditateButton.pressed.connect( func(): _toggle_meditate(!meditate_active) ) # toggle meditate_active
+	%SettingsButton.pressed.connect( func(): %SettingsPanel.show() )
 
 	Events.update_knowledge_counters.connect( _on_update_knowledge_counters )
 	Events.update_power_counters.connect( _on_update_power_counters )
@@ -26,7 +27,6 @@ func _ready() -> void:
 	Events.ui_thought_progressed.connect( _on_ui_thought_progressed )
 	Events.ui_thought_completed.connect( _on_ui_thought_completed )
 	Events.thoughtProgressReq_changed.connect( _on_thoughtProgressReq_changed )
-	pass
 
 
 func _process(_delta: float) -> void:
@@ -49,8 +49,13 @@ func _toggle_meditate(overide_state = null):
 		pass
 
 
+func _toggle_settings_panel():
+	pass
+
 
 func _on_update_knowledge_counters(knowledge, _knowledgeE):
+	if GameData.settings.number_display == Settings.NumberDisplay.SHORT:
+		knowledge = GameData.format_short(knowledge)
 	KnowledgeLabel.text = "%s knowledge" % [knowledge]
 
 

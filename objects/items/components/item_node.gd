@@ -16,12 +16,12 @@ func _init() -> void: #_on_ready():
 
 
 func _ready() -> void:
-	item_resource.update_state.connect( _update_state )
+	item_resource.state_updated.connect( _on_state_updated )
 
 	if self is Button:  self.icon = item_resource.icon
 	#self.name = item_resource.raw_name  # Already set when loading resources( Game.initialize_game_resources() ).
 	#self.text = item_resource.name
-	_update_state( item_resource.state )  # updates state to the default state set within this item's resource
+	_on_state_updated( item_resource.state )  # updates state to the default state set within this item's resource
 	pass
 
 
@@ -33,12 +33,13 @@ func _on_mouse_entered():
 	hovered = true
 	Events.request_tooltip.emit( self, item_resource, true )
 
+
 func _on_mouse_exited():
 	hovered = false
 	Events.request_tooltip.emit( self, item_resource, false )
 
 
-func _update_state(state: Item.State):
+func _on_state_updated(state: Item.State):
 	const State = Item.State
 	match state:
 		State.LOCKED:

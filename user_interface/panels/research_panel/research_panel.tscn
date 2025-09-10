@@ -141,10 +141,13 @@ offset_right = 564.0
 offset_bottom = 244.0
 item_resource = ExtResource("9_7nsin")
 
-[node name="conscience" parent="VBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" instance=ExtResource("2_ph1so")]
+[node name="conscience" parent="VBoxContainer/ViewportScrollContainer/SubViewportContainer/SubViewport/ViewportMargin/TechTreeContainer" node_paths=PackedStringArray("requirement_nodes") instance=ExtResource("2_ph1so")]
 layout_mode = 0
-offset_left = 896.0
-offset_right = 948.0
+offset_left = 704.0
+offset_top = -192.0
+offset_right = 756.0
+offset_bottom = -140.0
+requirement_nodes = [NodePath("../coalescence")]
 item_resource = ExtResource("10_knge3")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]

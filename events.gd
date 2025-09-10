@@ -18,6 +18,9 @@ signal function_highlighted( node_name, stop_signal )  ## Highligts the specifie
 signal game_saved
 signal game_loaded
 
+signal setting_changed(setting: String, value)
+
+
 # - - - USER INTERFACE - - - - #
 #signal weapon_power_changed
 

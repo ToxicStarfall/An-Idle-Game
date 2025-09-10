@@ -38,7 +38,6 @@ description = "I am a description."
 flair = "I am descriptive flair."
 costs = Array[ExtResource("1_bb2cc")]([])
 requirements = Array[ExtResource("5_uk7d4")]([SubResource("Resource_vws3j")])
-unlockRequirements = Array[ExtResource("5_uk7d4")]([])
 effects = Array[ExtResource("2_cbjwl")]([SubResource("Resource_cse2g")])
 state = 0
 tags = SubResource("Resource_pyiik")

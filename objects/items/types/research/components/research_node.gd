@@ -1,15 +1,14 @@
 #@tool
-extends ItemNode
 class_name ResearchNode
+extends ItemNode
 
 
 signal update_connector( researchNode: ResearchNode )
 
-
 enum NodeTypes {
-	KEY,  # A node which significantly impacts gameplay
-	NOTABLE,  # A node which can noticably impact gameplay
-	NORMAL,  # A normal node
+	KEY,  ## A node which significantly impacts gameplay
+	NOTABLE,  ## A node which can noticably impact gameplay
+	NORMAL,  ## A normal node
 }
 var NodeType = NodeTypes.NORMAL
 
@@ -18,40 +17,37 @@ var NodeType = NodeTypes.NORMAL
 
 
 func _init() -> void:
-	#if Engine.is_editor_hint():
-		#EditorInterface.get_inspector().property_edited.connect( _on_inspector_property_edited )
-		##EditorInterface.get_selection().selection_changed.connect( _on_editor_selection_changed )
-	#else:
-		super()
+	super()
 
 
 func _ready() -> void:
-	#if !Engine.is_editor_hint():
-		super() # IMPORTANT dont remove. General init for ItemNodes
-		for req_node in requirement_nodes:  ## use ResearchNodes for easy requirement linking
-			var item = req_node.item_resource
-			item_resource.requirements.append( RequirementItem.new().setup(item) )
+	super() # IMPORTANT dont remove. General init for ItemNodes
+	for req_node in requirement_nodes:  ## use ResearchNodes for easy requirement linking
+		var item = req_node.item_resource
+		#print(req_node)
+		#item_resource.requirements.append( RequirementItem.new().setup(item) )
 
-		#item_resource = item_resource.duplicate()  # Missing meta
-		item_resource.raw_name = item_resource.resource_path.split("/")[-1].split(".")[0]
-		item_resource.resource_name = item_resource.get_script().get_global_name() +":"+ item_resource.raw_name
-		item_resource.tags.generate(item_resource)
-		GameData.research.set(item_resource.raw_name, item_resource) # Add to dict
-		#print("resource_path: ", item_resource.resource_path)
+	#item_resource = item_resource.duplicate()  # Missing meta
+	item_resource.raw_name = item_resource.resource_path.split("/")[-1].split(".")[0]
+	item_resource.resource_name = item_resource.get_script().get_global_name() +":"+ item_resource.raw_name
+	item_resource.tags.generate(item_resource)
+	GameData.research.set(item_resource.raw_name, item_resource) # Add to dict
+	#print("resource_path: ", item_resource.resource_path)
 
 
 func _process(_delta: float) -> void:
-	#if Engine.is_editor_hint():
-		#var viewport2d = EditorInterface.get_editor_viewport_2d()
-		#print(viewport2d.gui_is_dragging())
 	pass
 
 
-func _update_state(state: Item.State):
-	#if !Engine.is_editor_hint():
-		super(state)
-		#print("research: state updated")
-		update_connector.emit( self )
+func _draw() -> void:
+	# Draw connectors here
+	pass
+
+
+func _on_state_updated(state: Item.State):
+	super(state)
+	#print("research: state updated")
+	update_connector.emit( self )
 
 
 func _on_editor_selection_changed():
@@ -80,11 +76,6 @@ func _on_inspector_property_edited(property: String) -> void:
 			#print("hi")
 		#get_info.call_deferred()
 	pass
-
-	#match property:
-		#"position":  # This DOES NOT trigger from dragging nodes in the editor
-			#update_connector2()
-			#pass
 
 
 func generate_connectors():

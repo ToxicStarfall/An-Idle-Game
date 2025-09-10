@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://t5uopevp7250"]
 
-[sub_resource type="Gradient" id="Gradient_eexyo"]
+[sub_resource type="Gradient" id="Gradient_h3235"]
 offsets = PackedFloat32Array(0, 0.3, 0.7, 1)
 colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
 metadata/_snap_enabled = true
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_6qofw"]
-gradient = SubResource("Gradient_eexyo")
+gradient = SubResource("Gradient_h3235")
 
 [node name="DatabasePanel" type="PanelContainer"]
 anchors_preset = 15

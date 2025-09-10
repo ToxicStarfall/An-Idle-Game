@@ -80,12 +80,8 @@ func update_connector(research_node):
 			var requirement_node = TechTree.get_node(requirement.item.raw_name)
 			var requirement_item = requirement_node.item_resource
 			var Connector = research_node.get_node( "connector-%s" % [requirement_node.name] )
-			print(research.raw_name, ": ", research.state)
-			print("- ", requirement_item.raw_name, ": ", requirement_item.state)
-
-			# TODO
-			# LOAD ORDER OF reserahcnodes effects connectors.
-			# "mind" loads before "origin", it doesnt detect as owned.
+			#print(research.raw_name, ": ", research.state)
+			#print("- ", requirement_item.raw_name, ": ", requirement_item.state)
 
 			#TODO Check if requirement node is unlocked to show connectors otherwise dont.
 			match requirement_node.item_resource.state:

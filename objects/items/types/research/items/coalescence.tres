@@ -35,7 +35,7 @@ metadata/_custom_type_script = "uid://jrivr4k7xxyp"
 
 [resource]
 script = ExtResource("7_vjyu7")
-time = 0
+research_time = 0.0
 position_overide = Vector2(0, 0)
 disabled = false
 icon = ExtResource("3_kfh6u")

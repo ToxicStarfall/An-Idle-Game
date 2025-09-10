@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ch31xejfebo7f" path="res://objects/items/components/requirements/cost_currency.gd" id="1_u20us"]
 [ext_resource type="Script" uid="uid://cqjg2ef8x7ix7" path="res://objects/items/components/item_effect.gd" id="2_1vc3w"]
-[ext_resource type="Texture2D" uid="uid://cgu4gs0s0kk5y" path="res://icon.svg" id="3_u20us"]
+[ext_resource type="Texture2D" uid="uid://cd7jid8kfcyov" path="res://textures/items/research/the_mind.svg" id="3_ah26w"]
 [ext_resource type="Script" uid="uid://caj5o56x4i7td" path="res://objects/items/components/requirements/requirement.gd" id="3_u26l2"]
 [ext_resource type="Script" uid="uid://qwq52mbhtqgk" path="res://objects/items/components/requirements/requirement_item.gd" id="5_frer7"]
 [ext_resource type="Resource" uid="uid://bw7jovi2amqn8" path="res://objects/items/types/research/items/origin.tres" id="5_u20us"]
@@ -35,10 +35,10 @@ metadata/_custom_type_script = "uid://jrivr4k7xxyp"
 
 [resource]
 script = ExtResource("7_lpnfa")
-time = 0
+research_time = 0.0
 position_overide = Vector2(0, 0)
 disabled = false
-icon = ExtResource("3_u20us")
+icon = ExtResource("3_ah26w")
 name = "The Mind"
 description = "I am a description."
 flair = "From mind comes thought and will."

@@ -165,7 +165,7 @@ func _initialize_research_tree():
 			#research_node.name = reference_key
 			#research_node.item_resource = item
 		research_node.update_connector.connect(ResearchPanel.update_connector)
-			#reserach_node.update_state
+			#reserach_node.state_updated
 
 			#research_node.position = placeholder_node.position
 			#TechTree.add_child(research_node)        # Add research node

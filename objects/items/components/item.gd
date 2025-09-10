@@ -1,8 +1,8 @@
-extends Resource
 class_name Item
+extends Resource
 
 
-signal update_state(state)
+signal state_updated(state)
 #signal update_content
 
 enum Type {
@@ -170,7 +170,7 @@ func set_state(new_state: Item.State):
 	#print("newstate: ", new_state)
 	self.state = new_state
 	#print(self.raw_name, " state set to ", new_state)
-	update_state.emit( new_state )
+	state_updated.emit( new_state )
 	Events.item_state_changed.emit(get_script().get_global_name())
 	pass
 

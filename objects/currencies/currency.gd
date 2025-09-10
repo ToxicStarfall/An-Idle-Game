@@ -5,9 +5,9 @@ class_name Currency
 enum Types {
 	weaponPower,
 	researchPower,
-	organic,
-	stone,
-	metal,
+	#organic,
+	#stone,
+	#metal,
 }
 @export var quantity: int = 0
 
@@ -20,8 +20,7 @@ enum Types {
 
 func add(value):
 	quantity += value
-	pass
+
 
 func subtract(value):
 	quantity -= value
-	pass

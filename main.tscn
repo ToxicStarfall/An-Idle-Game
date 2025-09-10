@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://637nae12nn2l"]
+[gd_scene load_steps=83 format=3 uid="uid://637nae12nn2l"]
 
 [ext_resource type="Script" uid="uid://dws7sgjrhbcom" path="res://user_interface/user_interface.gd" id="2_y7cka"]
 [ext_resource type="Script" uid="uid://de766355n883h" path="res://user_interface/panels/main_panel.gd" id="3_0cofv"]
@@ -7,15 +7,17 @@
 [ext_resource type="Shader" uid="uid://dv3k1tx45d2rk" path="res://vfx/Vortex.gdshader" id="4_2cqfq"]
 [ext_resource type="Script" uid="uid://d13npokqdssnk" path="res://user_interface/panels/main_bar.gd" id="4_272bh"]
 [ext_resource type="PackedScene" uid="uid://clmr7xi56pejk" path="res://user_interface/panels/research_panel/research_panel.tscn" id="4_jdleu"]
-[ext_resource type="Texture2D" uid="uid://big3qifsbuog0" path="res://textures/black_texture_1.jpg" id="4_w48qg"]
+[ext_resource type="Texture2D" uid="uid://big3qifsbuog0" path="res://textures/backgrounds/black_texture_1.jpg" id="4_w48qg"]
 [ext_resource type="Shader" uid="uid://c8hxi1qe822sj" path="res://vfx/new_shader.gdshader" id="4_yaehf"]
 [ext_resource type="Script" uid="uid://bqxhkr6sbatew" path="res://user_interface/panels/upgrades_panel/upgrades_panel.gd" id="5_5vw27"]
 [ext_resource type="PackedScene" uid="uid://b4tmstps088mq" path="res://user_interface/panels/event_log.tscn" id="5_dg77c"]
-[ext_resource type="Texture2D" uid="uid://bmyat2qjelag7" path="res://textures/border-4px.png" id="5_efxa6"]
+[ext_resource type="Texture2D" uid="uid://bmyat2qjelag7" path="res://textures/containers/border-4px.png" id="5_efxa6"]
 [ext_resource type="Texture2D" uid="uid://d0m0hkawl82e1" path="res://textures/icons/sample spritesheet.png" id="5_lquwl"]
 [ext_resource type="PackedScene" uid="uid://cma38yo78x0do" path="res://user_interface/panels/generator_panel/generator_panel.tscn" id="5_ycdy4"]
 [ext_resource type="Shader" uid="uid://cdj0mlx4bajiw" path="res://vfx/background_2.tres" id="6_vivmo"]
 [ext_resource type="PackedScene" uid="uid://t5uopevp7250" path="res://user_interface/panels/database_panel.tscn" id="7_kek77"]
+[ext_resource type="Texture2D" uid="uid://drnrsk12k8gim" path="res://textures/icons/gear_icon.svg" id="12_cegan"]
+[ext_resource type="PackedScene" uid="uid://h8uk0677gb0y" path="res://user_interface/panels/settings/settings_panel.tscn" id="13_82xsv"]
 [ext_resource type="PackedScene" uid="uid://desdwvbur1ukf" path="res://user_interface/panels/tooltip_panel.tscn" id="15_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://do7rh1m3u7y75" path="res://textures/particle.png" id="18_074og"]
 
@@ -24,28 +26,6 @@ shader = ExtResource("4_yaehf")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2cqfq"]
 shader = ExtResource("6_vivmo")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w48qg"]
-bg_color = Color(0.111197, 0.111197, 0.111197, 1)
-border_width_right = 8
-border_color = Color(0.286275, 0.203922, 0.137255, 1)
-
-[sub_resource type="Gradient" id="Gradient_272bh"]
-offsets = PackedFloat32Array(0, 0.295359, 0.400844, 0.50211, 0.708861, 1)
-colors = PackedColorArray(0.521569, 0.364706, 0, 1, 0.639216, 0.447059, 0, 1, 0.698039, 0.490196, 0, 1, 0.681892, 0.478354, 0, 1, 0.639216, 0.447059, 0, 1, 0.521569, 0.364706, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_5vw27"]
-gradient = SubResource("Gradient_272bh")
-width = 3
-fill_to = Vector2(0, 1)
-
-[sub_resource type="Gradient" id="Gradient_lquwl"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0.290196, 0.203922, 0.141176, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_7mycd"]
-gradient = SubResource("Gradient_lquwl")
-width = 16
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7mycd"]
 
@@ -208,20 +188,32 @@ border_width_top = 6
 corner_radius_top_left = 50
 corner_detail = 1
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w48qg"]
+bg_color = Color(0.111197, 0.111197, 0.111197, 1)
+border_width_right = 8
+border_color = Color(0.286275, 0.203922, 0.137255, 1)
+
+[sub_resource type="Gradient" id="Gradient_272bh"]
+offsets = PackedFloat32Array(0, 0.295359, 0.400844, 0.50211, 0.708861, 1)
+colors = PackedColorArray(0.521569, 0.364706, 0, 1, 0.639216, 0.447059, 0, 1, 0.698039, 0.490196, 0, 1, 0.681892, 0.478354, 0, 1, 0.639216, 0.447059, 0, 1, 0.521569, 0.364706, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5vw27"]
+gradient = SubResource("Gradient_272bh")
+width = 3
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_lquwl"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.290196, 0.203922, 0.141176, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7mycd"]
+gradient = SubResource("Gradient_lquwl")
+width = 16
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lquwl"]
 bg_color = Color(0.16674, 0.1566, 0.18, 1)
 border_width_left = 16
 border_color = Color(0.29, 0.203725, 0.1421, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_272bh"]
-bg_color = Color(0.23, 0.23, 0.23, 1)
-border_width_left = 12
-border_width_top = 12
-border_color = Color(0.4, 0.4, 0.4, 1)
-corner_radius_top_left = 40
-expand_margin_left = 8.0
-expand_margin_top = 4.0
-anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
 bg_color = Color(0.2156, 0.24304, 0.49, 1)
@@ -392,16 +384,6 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("3_0cofv")
 
-[node name="ColorRect" type="ColorRect" parent="UserInterface/MainPanel"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.209, 0.214867, 0.22, 1)
-
 [node name="BackgroundTexture" type="TextureRect" parent="UserInterface/MainPanel"]
 self_modulate = Color(1, 1, 1, 0.5)
 layout_mode = 1
@@ -413,7 +395,7 @@ grow_vertical = 2
 texture = ExtResource("4_w48qg")
 expand_mode = 1
 
-[node name="TextureRect2" type="TextureRect" parent="UserInterface/MainPanel"]
+[node name="TextureRect2" type="TextureRect" parent="UserInterface/MainPanel/BackgroundTexture"]
 visible = false
 material = SubResource("ShaderMaterial_074og")
 custom_minimum_size = Vector2(128, 128)
@@ -426,7 +408,7 @@ texture = ExtResource("3_4c57u")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="TextureRect3" type="TextureRect" parent="UserInterface/MainPanel"]
+[node name="TextureRect3" type="TextureRect" parent="UserInterface/MainPanel/BackgroundTexture"]
 visible = false
 material = SubResource("ShaderMaterial_2cqfq")
 custom_minimum_size = Vector2(128, 128)
@@ -446,7 +428,448 @@ texture = ExtResource("3_4c57u")
 expand_mode = 1
 stretch_mode = 4
 
+[node name="MiddleContainer" type="PanelContainer" parent="UserInterface/MainPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.65
+theme_override_styles/panel = SubResource("StyleBoxEmpty_7mycd")
+
+[node name="Left" type="Panel" parent="UserInterface/MainPanel/MiddleContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/MainPanel/MiddleContainer/Left"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 350.0
+grow_vertical = 2
+size_flags_horizontal = 0
+alignment = 2
+
+[node name="GeneratorsPanel" parent="UserInterface/MainPanel/MiddleContainer/Left/VBoxContainer" instance=ExtResource("5_ycdy4")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+
+[node name="RelationsPanel" type="PanelContainer" parent="UserInterface/MainPanel/MiddleContainer/Left/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_lswn8")
+
+[node name="MarginContainer" type="MarginContainer" parent="UserInterface/MainPanel/MiddleContainer/Left/VBoxContainer/RelationsPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 24
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UserInterface/MainPanel/MiddleContainer/Left/VBoxContainer/RelationsPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/MainPanel/MiddleContainer/Left/VBoxContainer/RelationsPanel/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="UserInterface/MainPanel/MiddleContainer/Left/VBoxContainer/RelationsPanel/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Relations"
+
+[node name="HFlowContainer" type="HFlowContainer" parent="UserInterface/MainPanel/MiddleContainer/Left/VBoxContainer/RelationsPanel/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+
+[node name="TextureRect" type="TextureRect" parent="UserInterface/MainPanel/MiddleContainer/Left/VBoxContainer/RelationsPanel/MarginContainer/ScrollContainer/VBoxContainer/HFlowContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("3_4c57u")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="UserInterface/MainPanel/MiddleContainer/Left/VBoxContainer/RelationsPanel/MarginContainer/ScrollContainer/VBoxContainer/HFlowContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("3_4c57u")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="UserInterface/MainPanel/MiddleContainer/Left/VBoxContainer/RelationsPanel/MarginContainer/ScrollContainer/VBoxContainer/HFlowContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("3_4c57u")
+expand_mode = 1
+
+[node name="EventCard" type="PanelContainer" parent="UserInterface/MainPanel/MiddleContainer/Left/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_lswn8")
+
+[node name="MarginContainer" type="MarginContainer" parent="UserInterface/MainPanel/MiddleContainer/Left/VBoxContainer/EventCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 24
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UserInterface/MainPanel/MiddleContainer/Left/VBoxContainer/EventCard/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/MainPanel/MiddleContainer/Left/VBoxContainer/EventCard/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="UserInterface/MainPanel/MiddleContainer/Left/VBoxContainer/EventCard/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Event details"
+
+[node name="EventLog" parent="UserInterface/MainPanel/MiddleContainer/Left/VBoxContainer" instance=ExtResource("5_dg77c")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="CornerPanel" type="Panel" parent="UserInterface/MainPanel/MiddleContainer/Left"]
+custom_minimum_size = Vector2(50, 160)
+layout_mode = 2
+offset_right = 50.0
+offset_bottom = 160.0
+size_flags_horizontal = 0
+size_flags_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kq58d")
+
+[node name="BottomBar" type="Panel" parent="UserInterface/MainPanel/MiddleContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_efxa6")
+script = ExtResource("4_272bh")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/MainPanel/MiddleContainer/BottomBar"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -150.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="HSpacer" type="Control" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ReputationPanel" type="Panel" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ycdy4")
+
+[node name="MarginContainer" type="MarginContainer" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer/ReputationPanel"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -35.0
+offset_right = 300.0
+grow_vertical = 0
+size_flags_vertical = 8
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="ProgressBar" type="ProgressBar" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer/ReputationPanel/MarginContainer"]
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_xuqvo")
+theme_override_styles/fill = SubResource("StyleBoxFlat_qsp4k")
+
+[node name="Label" type="Label" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer/ReputationPanel/MarginContainer/ProgressBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Reputation"
+
+[node name="ConversionPanel" type="NinePatchRect" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(250, 200)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+texture = ExtResource("5_efxa6")
+region_rect = Rect2(8, 0, 56, 56)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="ColorRect" type="ColorRect" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer/ConversionPanel"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.145098, 0.145098, 0.14902, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer/ConversionPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer/ConversionPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="WeaponPowerLabel" type="Label" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer/ConversionPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "0 weapons"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer/ConversionPanel/MarginContainer/VBoxContainer/WeaponPowerLabel"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "i"
+expand_icon = true
+
+[node name="WeaponPowerButton" type="Button" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer/ConversionPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "+1 weapon power"
+
+[node name="PowerLabel" type="Label" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer/ConversionPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0 power"
+horizontal_alignment = 1
+
+[node name="PowerButton" type="Button" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer/ConversionPanel/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_vivmo")
+text = "Concentrate Knowledge"
+
+[node name="BottomBarLeft" type="Panel" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer"]
+custom_minimum_size = Vector2(160, 46)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_074og")
+
+[node name="MarginContainer" type="MarginContainer" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer/BottomBarLeft"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="MeditateButton" type="Button" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer/BottomBarLeft/MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dg77c")
+theme_override_styles/hover = SubResource("StyleBoxFlat_82xsv")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ryguw")
+theme_override_styles/normal = SubResource("StyleBoxFlat_getpj")
+text = "MEDITATE: OFF↻"
+
+[node name="Timer" type="Timer" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer/BottomBarLeft/MarginContainer/MeditateButton"]
+
+[node name="BottomeBarMiddle" type="Panel" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+size_flags_stretch_ratio = 3.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_d13ii")
+
+[node name="MarginContainer2" type="MarginContainer" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -306.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 24
+
+[node name="CenterContainer" type="CenterContainer" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle/MarginContainer2"]
+layout_mode = 2
+
+[node name="PortalTexture" type="TextureRect" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle/MarginContainer2/CenterContainer"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_vivmo")
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+texture = ExtResource("3_4c57u")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ThoughtButton2" type="Button" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle/MarginContainer2/CenterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(196, 196)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/hover = SubResource("StyleBoxFlat_0odxb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0odxb")
+theme_override_styles/normal = SubResource("StyleBoxFlat_0odxb")
+
+[node name="label" type="Label" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle/MarginContainer2/CenterContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Click Me!"
+
+[node name="MarginContainer" type="MarginContainer" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -57.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme_override_constants/margin_bottom = 32
+
+[node name="ThoughtProgressBar" type="ProgressBar" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 25)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxFlat_yaehf")
+theme_override_styles/fill = SubResource("StyleBoxFlat_cegan")
+max_value = 5.0
+allow_greater = true
+show_percentage = false
+
+[node name="ThoughtButton" type="Button" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle/MarginContainer/ThoughtProgressBar"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_left = 280.0
+offset_top = -60.0
+offset_right = 310.0
+offset_bottom = -30.0
+mouse_default_cursor_shape = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kek77")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_ycdy4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_dg77c")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ycdy4")
+theme_override_styles/normal = SubResource("StyleBoxFlat_2cqfq")
+text = "clicker
+"
+
+[node name="KnowledgeLabel" type="Label" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle/MarginContainer/ThoughtProgressBar"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = -0.75
+anchor_right = 0.5
+anchor_bottom = 0.195
+offset_left = -234.0
+offset_right = 234.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 4
+theme_override_font_sizes/font_size = 20
+text = "0 knowledge"
+horizontal_alignment = 1
+
+[node name="ThoughtEarnLabel" type="Label" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle/MarginContainer/ThoughtProgressBar"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.74978, 0.74978, 0.74978, 1)
+horizontal_alignment = 2
+
+[node name="BottomBarRight" type="Panel" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer"]
+custom_minimum_size = Vector2(200, 46)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_1u8w0")
+
+[node name="RightCorner" type="PanelContainer" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(50, 150)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_efxa6")
+
+[node name="MarginContainer" type="MarginContainer" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer/RightCorner"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="SettingsButton" type="Button" parent="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer/RightCorner/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+icon = ExtResource("12_cegan")
+expand_icon = true
+
+[node name="SettingsPanel" parent="UserInterface/MainPanel/MiddleContainer" instance=ExtResource("13_82xsv")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
 [node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/MainPanel"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -454,12 +877,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
-
-[node name="TabBar" type="TabBar" parent="UserInterface/MainPanel/HBoxContainer"]
-visible = false
-layout_mode = 2
-current_tab = 0
-tab_count = 1
 
 [node name="LeftSidebar" type="Panel" parent="UserInterface/MainPanel/HBoxContainer"]
 visible = false
@@ -517,421 +934,6 @@ layout_mode = 2
 size_flags_horizontal = 0
 icon = ExtResource("3_4c57u")
 expand_icon = true
-
-[node name="MiddleContainer" type="PanelContainer" parent="UserInterface/MainPanel/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.65
-theme_override_styles/panel = SubResource("StyleBoxEmpty_7mycd")
-
-[node name="Left" type="Panel" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/Left"]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 350.0
-grow_vertical = 2
-size_flags_horizontal = 0
-alignment = 2
-
-[node name="GeneratorsPanel" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/Left/VBoxContainer" instance=ExtResource("5_ycdy4")]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(350, 0)
-layout_mode = 2
-
-[node name="RelationsPanel" type="PanelContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/Left/VBoxContainer"]
-unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(300, 200)
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_lswn8")
-
-[node name="MarginContainer" type="MarginContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/Left/VBoxContainer/RelationsPanel"]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 24
-
-[node name="ScrollContainer" type="ScrollContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/Left/VBoxContainer/RelationsPanel/MarginContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/Left/VBoxContainer/RelationsPanel/MarginContainer/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/Left/VBoxContainer/RelationsPanel/MarginContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-text = "Relations"
-
-[node name="HFlowContainer" type="HFlowContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/Left/VBoxContainer/RelationsPanel/MarginContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/h_separation = 12
-theme_override_constants/v_separation = 12
-
-[node name="TextureRect" type="TextureRect" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/Left/VBoxContainer/RelationsPanel/MarginContainer/ScrollContainer/VBoxContainer/HFlowContainer"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-texture = ExtResource("3_4c57u")
-expand_mode = 1
-
-[node name="TextureRect2" type="TextureRect" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/Left/VBoxContainer/RelationsPanel/MarginContainer/ScrollContainer/VBoxContainer/HFlowContainer"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-texture = ExtResource("3_4c57u")
-expand_mode = 1
-
-[node name="TextureRect3" type="TextureRect" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/Left/VBoxContainer/RelationsPanel/MarginContainer/ScrollContainer/VBoxContainer/HFlowContainer"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-texture = ExtResource("3_4c57u")
-expand_mode = 1
-
-[node name="EventCard" type="PanelContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/Left/VBoxContainer"]
-unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(300, 200)
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_lswn8")
-
-[node name="MarginContainer" type="MarginContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/Left/VBoxContainer/EventCard"]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 24
-
-[node name="ScrollContainer" type="ScrollContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/Left/VBoxContainer/EventCard/MarginContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/Left/VBoxContainer/EventCard/MarginContainer/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/Left/VBoxContainer/EventCard/MarginContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-text = "Event details"
-
-[node name="EventLog" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/Left/VBoxContainer" instance=ExtResource("5_dg77c")]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="CornerPanel" type="Panel" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/Left"]
-custom_minimum_size = Vector2(50, 160)
-layout_mode = 2
-offset_right = 50.0
-offset_bottom = 160.0
-size_flags_horizontal = 0
-size_flags_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_kq58d")
-
-[node name="BottomBar" type="Panel" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer"]
-layout_mode = 2
-size_flags_vertical = 8
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_efxa6")
-script = ExtResource("4_272bh")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -150.0
-grow_horizontal = 2
-grow_vertical = 0
-mouse_filter = 2
-
-[node name="HSpacer" type="Control" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer"]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="ReputationPanel" type="Panel" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ycdy4")
-
-[node name="MarginContainer" type="MarginContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/ReputationPanel"]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -35.0
-offset_right = 300.0
-grow_vertical = 0
-size_flags_vertical = 8
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_bottom = 12
-
-[node name="ProgressBar" type="ProgressBar" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/ReputationPanel/MarginContainer"]
-layout_mode = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_xuqvo")
-theme_override_styles/fill = SubResource("StyleBoxFlat_qsp4k")
-
-[node name="Label" type="Label" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/ReputationPanel/MarginContainer/ProgressBar"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Reputation"
-
-[node name="ConversionPanel" type="NinePatchRect" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(250, 200)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-texture = ExtResource("5_efxa6")
-region_rect = Rect2(8, 0, 56, 56)
-patch_margin_left = 8
-patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 8
-
-[node name="ColorRect" type="ColorRect" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/ConversionPanel"]
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.145098, 0.145098, 0.14902, 1)
-
-[node name="MarginContainer" type="MarginContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/ConversionPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 8
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/ConversionPanel/MarginContainer"]
-layout_mode = 2
-
-[node name="WeaponPowerLabel" type="Label" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/ConversionPanel/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-text = "0 weapons"
-horizontal_alignment = 1
-
-[node name="Button" type="Button" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/ConversionPanel/MarginContainer/VBoxContainer/WeaponPowerLabel"]
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -8.0
-grow_horizontal = 0
-grow_vertical = 2
-text = "i"
-expand_icon = true
-
-[node name="WeaponPowerButton" type="Button" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/ConversionPanel/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-text = "+1 weapon power"
-
-[node name="PowerLabel" type="Label" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/ConversionPanel/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "0 power"
-horizontal_alignment = 1
-
-[node name="PowerButton" type="Button" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/ConversionPanel/MarginContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = SubResource("StyleBoxFlat_vivmo")
-text = "Concentrate Knowledge"
-
-[node name="BottomBarLeft" type="Panel" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer"]
-custom_minimum_size = Vector2(160, 46)
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_styles/panel = SubResource("StyleBoxFlat_074og")
-
-[node name="MarginContainer" type="MarginContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/BottomBarLeft"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 64
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
-
-[node name="MeditateButton" type="Button" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/BottomBarLeft/MarginContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-theme_override_styles/focus = SubResource("StyleBoxEmpty_dg77c")
-theme_override_styles/hover = SubResource("StyleBoxFlat_82xsv")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_ryguw")
-theme_override_styles/normal = SubResource("StyleBoxFlat_getpj")
-text = "MEDITATE: OFF↻"
-
-[node name="Timer" type="Timer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/BottomBarLeft/MarginContainer/MeditateButton"]
-
-[node name="BottomeBarMiddle" type="Panel" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer"]
-custom_minimum_size = Vector2(0, 42)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-size_flags_stretch_ratio = 3.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_d13ii")
-
-[node name="MarginContainer2" type="MarginContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -306.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/margin_bottom = 24
-
-[node name="CenterContainer" type="CenterContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle/MarginContainer2"]
-layout_mode = 2
-
-[node name="PortalTexture" type="TextureRect" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle/MarginContainer2/CenterContainer"]
-unique_name_in_owner = true
-material = SubResource("ShaderMaterial_vivmo")
-custom_minimum_size = Vector2(256, 256)
-layout_mode = 2
-texture = ExtResource("3_4c57u")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="ThoughtButton2" type="Button" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle/MarginContainer2/CenterContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(196, 196)
-layout_mode = 2
-mouse_default_cursor_shape = 2
-theme_override_styles/hover = SubResource("StyleBoxFlat_0odxb")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_0odxb")
-theme_override_styles/normal = SubResource("StyleBoxFlat_0odxb")
-
-[node name="label" type="Label" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle/MarginContainer2/CenterContainer"]
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-mouse_default_cursor_shape = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-text = "Click Me!"
-
-[node name="MarginContainer" type="MarginContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -57.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
-theme_override_constants/margin_bottom = 32
-
-[node name="ThoughtProgressBar" type="ProgressBar" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle/MarginContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(400, 25)
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_styles/background = SubResource("StyleBoxFlat_yaehf")
-theme_override_styles/fill = SubResource("StyleBoxFlat_cegan")
-max_value = 5.0
-allow_greater = true
-show_percentage = false
-
-[node name="ThoughtButton" type="Button" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle/MarginContainer/ThoughtProgressBar"]
-unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 1
-offset_left = 280.0
-offset_top = -60.0
-offset_right = 310.0
-offset_bottom = -30.0
-mouse_default_cursor_shape = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_kek77")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_ycdy4")
-theme_override_styles/hover = SubResource("StyleBoxFlat_dg77c")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_ycdy4")
-theme_override_styles/normal = SubResource("StyleBoxFlat_2cqfq")
-text = "clicker
-"
-
-[node name="KnowledgeLabel" type="Label" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle/MarginContainer/ThoughtProgressBar"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = -0.75
-anchor_right = 0.5
-anchor_bottom = 0.195
-offset_left = -234.0
-offset_right = 234.0
-offset_bottom = 23.0
-grow_horizontal = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_y = 4
-theme_override_font_sizes/font_size = 20
-text = "0 knowledge"
-horizontal_alignment = 1
-
-[node name="ThoughtEarnLabel" type="Label" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/BottomeBarMiddle/MarginContainer/ThoughtProgressBar"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -1.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.74978, 0.74978, 0.74978, 1)
-horizontal_alignment = 2
-
-[node name="BottomBarRight" type="Panel" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer"]
-custom_minimum_size = Vector2(200, 46)
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_styles/panel = SubResource("StyleBoxFlat_1u8w0")
-
-[node name="RightCorner" type="PanelContainer" parent="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer"]
-custom_minimum_size = Vector2(50, 150)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-theme_override_styles/panel = SubResource("StyleBoxFlat_efxa6")
 
 [node name="RightPanel" type="Panel" parent="UserInterface/MainPanel/HBoxContainer"]
 visible = false
@@ -1003,22 +1005,6 @@ layout_mode = 2
 [node name="HSpacer" type="Control" parent="UserInterface/MainPanel/HBoxContainer/RightPanel/BorderMargins/HBoxContainer"]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
-
-[node name="SettingsButton" type="Button" parent="UserInterface/MainPanel"]
-visible = false
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -8.0
-offset_top = -8.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_styles/normal = SubResource("StyleBoxFlat_272bh")
-text = "Settings"
 
 [node name="ResearchPanelWrapper" type="HBoxContainer" parent="UserInterface/MainPanel"]
 layout_mode = 1
@@ -1096,6 +1082,7 @@ layout_mode = 1
 visible = false
 material = SubResource("CanvasItemMaterial_7mycd")
 position = Vector2(336, 392)
+emitting = false
 texture = ExtResource("5_lquwl")
 lifetime = 2.5
 direction = Vector2(0, -1)
@@ -1142,6 +1129,7 @@ process_material = SubResource("ParticleProcessMaterial_272bh")
 [node name="knowledge" type="GPUParticles2D" parent="."]
 visible = false
 position = Vector2(592, 640)
+emitting = false
 amount = 4
 lifetime = 4.0
 process_material = SubResource("ParticleProcessMaterial_w48qg")
@@ -1194,5 +1182,5 @@ texture = ExtResource("18_074og")
 lifetime = 5.0
 process_material = SubResource("ParticleProcessMaterial_a6jrf")
 
-[connection signal="pressed" from="UserInterface/MainPanel/HBoxContainer/MiddleContainer/BottomBar/HBoxContainer/ConversionPanel/MarginContainer/VBoxContainer/WeaponPowerButton" to="UserInterface/MainPanel" method="_on_button_pressed"]
+[connection signal="pressed" from="UserInterface/MainPanel/MiddleContainer/BottomBar/HBoxContainer/ConversionPanel/MarginContainer/VBoxContainer/WeaponPowerButton" to="UserInterface/MainPanel" method="_on_button_pressed"]
 [connection signal="tab_changed" from="UserInterface/MainPanel/HBoxContainer/RightPanel/BorderMargins/HBoxContainer/VBoxContainer/TabBar" to="UserInterface/MainPanel" method="_on_tab_bar_tab_changed"]

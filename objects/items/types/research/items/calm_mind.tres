@@ -19,7 +19,7 @@ metadata/_custom_type_script = "uid://ch31xejfebo7f"
 [sub_resource type="Resource" id="Resource_qdhk7"]
 script = ExtResource("3_itl7p")
 unlocked = false
-node_name = ""
+node_name = "MeditateButton"
 type = ""
 value = 0.0
 modifier = 0
@@ -38,7 +38,7 @@ metadata/_custom_type_script = "uid://jrivr4k7xxyp"
 
 [resource]
 script = ExtResource("5_h3now")
-time = 0
+research_time = 0.0
 position_overide = Vector2(0, 0)
 disabled = false
 icon = ExtResource("3_6ijju")
